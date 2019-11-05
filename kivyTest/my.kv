@@ -1,0 +1,64 @@
+<Button>
+    background_color: .6, .8, 1, 1
+<MyGrid>
+
+    saf: start_and_finish
+    upld: upload
+
+    GridLayout:
+        cols:1
+        rows:2
+        size: root.width, root.height
+
+        GridLayout:
+            size_hint_y: None
+            height: self.parent.height * 0.1
+            cols:3
+            Button:
+                text: "top left"
+            Button:
+                text: "Game Board Training Dashboard"
+            Label:
+                text: "" if root.connection is None else "Connected to %s"%(root.connection)
+
+
+        GridLayout:
+            cols:3
+            Button:
+                size_hint_x: None
+                width: self.parent.height * 0.2
+                text: "bottom left"
+            GridLayout:
+                cols:3
+                Button:
+                    size_hint_x: None
+                    width: self.parent.height * 0.2
+                    text: "bm left"
+                GridLayout:
+                    rows:7
+                    Button:
+                        id: start_and_finish
+                        text: "Start Training"
+                        on_press: root.start_finish_training()
+                    Label:
+                        text: "1. Press 'Start Training'"
+                    Label:
+                        text: "2. Play a card on each area in alphabetical order"
+                    Label:
+                        text: "3. Play a card on the Oracle"
+                    Label:
+                        text: "4. Press 'Finish Training'"
+                    Label:
+                        text: "5. Press 'Upload to Board'"
+                    Button:
+                        id: upload
+                        text: "Upload to Board"
+                        on_press: root.upload()
+                Button:
+                    size_hint_x: None
+                    width: self.parent.height * 0.2
+                    text: "bm right"
+            Button:
+                size_hint_x: None
+                width: self.parent.height * 0.2
+                text: "bottom right"
