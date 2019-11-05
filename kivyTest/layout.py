@@ -25,6 +25,8 @@ def serial_ports():
         if element.product is not None: # Filter out non-applicable ports with no product description (non-connected)
             name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
             res.append(name)
+    if len(res) == 0:
+        res.append('No devices found')
     return res
 
 
