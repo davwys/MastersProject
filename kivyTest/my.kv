@@ -16,11 +16,18 @@
             cols:3
             Button:
                 text: "top left"
-            Button:
-                text: "Game Board Training Dashboard"
             Label:
-                text: "" if root.connection is None else "Connected to %s"%(root.connection)
-
+                text: "Game Board Training Dashboard"
+            #Label:
+            #   text: "" if root.connection is None else "Connected to %s"%(root.connection)
+            Spinner:
+                id: port_dropdown
+                size_hint: None, None
+                size: self.parent.width * 0.25, self.parent.height
+                pos_hint: {'center': (.5, .5)}
+                text: 'Select Port'
+                on_press: root.update_ports()
+                #on_value: print('new val: ' + str(self.value))
 
         GridLayout:
             cols:3
