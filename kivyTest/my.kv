@@ -1,7 +1,9 @@
 <Button>
-    background_color: .6, .8, 1, 1
-<MyGrid>
+    background_normal: ''
+    background_down: ''
+    background_color: .05, .5, 1, 1
 
+<MyGrid>
     saf: start_and_finish
     upld: upload
 
@@ -11,61 +13,66 @@
         size: root.width, root.height
 
         GridLayout:
+
+            canvas.before:
+                Color:
+                    rgba: .25, .25, .25, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+
             size_hint_y: None
             height: self.parent.height * 0.1
             cols:3
-            Button:
-                text: "top left"
+            Image:
+                size_hint_x: None
+                width: 250
+                source: 'assets/empa_logo.png'
+
             Label:
                 text: "Game Board Training Dashboard"
-            #Label:
-            #   text: "" if root.connection is None else "Connected to %s"%(root.connection)
             Spinner:
                 id: port_dropdown
                 size_hint: None, None
-                size: self.parent.width * 0.25, self.parent.height
+                width: 250
+                height: self.parent.height
                 pos_hint: {'center': (.5, .5)}
-                text: 'Select Port'
+                text: 'Select port'
                 on_press: root.update_ports()
-                #on_value: print('new val: ' + str(self.value))
+                on_text: root.select_port(self.text)
 
         GridLayout:
-            cols:3
-            Button:
-                size_hint_x: None
-                width: self.parent.height * 0.2
-                text: "bottom left"
-            GridLayout:
-                cols:3
+            rows:8
+            RelativeLayout:
                 Button:
-                    size_hint_x: None
-                    width: self.parent.height * 0.2
-                    text: "bm left"
-                GridLayout:
-                    rows:7
-                    Button:
-                        id: start_and_finish
-                        text: "Start Training"
-                        on_press: root.start_finish_training()
-                    Label:
-                        text: "1. Press 'Start Training'"
-                    Label:
-                        text: "2. Play a card on each area in alphabetical order"
-                    Label:
-                        text: "3. Play a card on the Oracle"
-                    Label:
-                        text: "4. Press 'Finish Training'"
-                    Label:
-                        text: "5. Press 'Upload to Board'"
-                    Button:
-                        id: upload
-                        text: "Upload to Board"
-                        on_press: root.upload()
+                    height: 100
+                    size_hint: .5, None
+                    pos_hint: {'x': .25}
+                    disabled: True
+                    id: start_and_finish
+                    text: "Start Training"
+                    on_press: root.start_finish_training()
+            Label:
+                text: "1. Select the correct Port in the top right"
+            Label:
+                text: "2. Press 'Start Training'"
+            Label:
+                text: "3. Play a card on each area in alphabetical order"
+            Label:
+                text: "4. Play a card on the Oracle"
+            Label:
+                text: "5. Press 'Finish Training'"
+            Label:
+                text: "6. Press 'Upload to Board'"
+            #Upload button
+
+            RelativeLayout:
                 Button:
-                    size_hint_x: None
-                    width: self.parent.height * 0.2
-                    text: "bm right"
-            Button:
-                size_hint_x: None
-                width: self.parent.height * 0.2
-                text: "bottom right"
+                    height: 100
+                    size_hint: .5, None
+                    pos_hint: {'x': .25, 'y': .25}
+                    disabled: True
+                    id: upload
+                    text: "Upload to Board"
+                    on_press: root.upload()

@@ -7,11 +7,16 @@ from kivy.uix.button import Button
 from kivy.uix.spinner import Spinner
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
+from kivy.core.window import Window
+
+Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 
 class MyGrid(Widget):
-    connection = 'Your laptop'
+
+    connected = False
     ports = ['COM1', 'COM2', 'COM3']
+    selectedPort = None
 
     def btn(self):
         print("Pressed")
@@ -24,14 +29,26 @@ class MyGrid(Widget):
     def start_finish_training(self):
         if self.saf.text == 'Start Training':
             self.saf.text = 'Finish Training'
+            # Disable upload btn until finished
+            self.ids.upload.disabled = True
+
         else:
             self.saf.text = 'Start Training'
+            # Enable upload button after finishing training
+            self.ids.upload.disabled = False
 
     def upload(self):
-        print("upload")
+        if self.selectedPort is not None:
+            print("upload to port " + str(self.selectedPort))
+        else:
+            print("can't upload")
 
+    # Selects a given port to connect to
     def select_port(self, port):
         print("Port selected: " + str(port))
+        self.selectedPort = port
+        # enable start button
+        self.ids.start_and_finish.disabled = False
 
 
 # Main App definition
