@@ -8,14 +8,33 @@ from kivy.uix.spinner import Spinner
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 from kivy.core.window import Window
+import sys
+import glob
+import serial
+import serial.tools.list_ports
+
 
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
+
+
+# Get a list of available serial ports TODO check on windows
+def serial_ports():
+    res = []
+    comlist = serial.tools.list_ports.comports()
+    connected = []
+    for element in comlist: # TODO: possibly filter out NA's for second field here (check with print(element)
+        connected.append(element.device)
+        name = str(element.device).replace('/dev/cu.', '')
+        res.append(name)
+    return res
+
+
 
 
 class MyGrid(Widget):
 
     connected = False
-    ports = ['COM1', 'COM2', 'COM3']
+    ports = ['None']
     selectedPort = None
 
     def btn(self):
@@ -23,7 +42,8 @@ class MyGrid(Widget):
 
     # Update the list of available ports
     def update_ports(self):
-        print('update ports...')
+        print('updating ports...')
+        self.ports = serial_ports()
         self.ids.port_dropdown.values = self.ports
 
     def start_finish_training(self):

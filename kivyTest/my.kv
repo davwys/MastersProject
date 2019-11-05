@@ -34,11 +34,11 @@
                 text: "Game Board Training Dashboard"
             Spinner:
                 size_hint_x: None
-                width: 250
+                width: 400
                 id: port_dropdown
                 height: self.parent.height
                 pos_hint: {'center': (.5, .5)}
-                text: 'Select port'
+                text: 'Select device'
                 on_press: root.update_ports()
                 on_text: root.select_port(self.text)
 
