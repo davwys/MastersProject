@@ -21,14 +21,11 @@ Window.clearcolor = (0.8, 0.8, 0.8, 1)
 def serial_ports():
     res = []
     comlist = serial.tools.list_ports.comports()
-    connected = []
-    for element in comlist: # TODO: possibly filter out NA's for second field here (check with print(element)
-        connected.append(element.device)
-        name = str(element.device).replace('/dev/cu.', '')
-        res.append(name)
+    for element in comlist:
+        if element.product is not None: # Filter out non-applicable ports with no product description (non-connected)
+            name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
+            res.append(name)
     return res
-
-
 
 
 class MyGrid(Widget):
@@ -37,12 +34,8 @@ class MyGrid(Widget):
     ports = ['None']
     selectedPort = None
 
-    def btn(self):
-        print("Pressed")
-
     # Update the list of available ports
     def update_ports(self):
-        print('updating ports...')
         self.ports = serial_ports()
         self.ids.port_dropdown.values = self.ports
 
