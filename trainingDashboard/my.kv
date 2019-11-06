@@ -95,9 +95,10 @@
 
             GridLayout:
                 rows: 2
+                # Show/Hide Log checkbox
                 CheckBox:
                     id: chk
-                    on_press: root.log_checkbox(self.active)
+                    on_press: root.toggle_log(self.active)
 
                 Label:
                     height: 0

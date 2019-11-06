@@ -37,6 +37,7 @@ def serial_ports():
 
 class MyGrid(Widget):
     log = ''
+    ser = serial.Serial(None)
     connected = False
     ports = ['No Devices Found']
     descriptions = ['-']
@@ -51,6 +52,7 @@ class MyGrid(Widget):
         self.descriptions = info[1]
         self.ids.port_dropdown.values = self.ports
 
+    # Start or finish the training process
     def start_finish_training(self):
         if self.saf.text == 'Start Training':
             self.update_log('Started Training!')
@@ -65,7 +67,8 @@ class MyGrid(Widget):
             # Enable upload button after finishing training
             self.ids.upload.disabled = False
 
-    def log_checkbox(self, value):
+    # Toggle Log visibility
+    def toggle_log(self, value):
         if not value:
             self.ids.log.height = 0
             self.ids.log.size_hint_y = None
@@ -75,32 +78,41 @@ class MyGrid(Widget):
             self.ids.log.size_hint_y = 1
             self.ids.log.text = 'Log:\n' + self.log
 
-
+    # Upload new training data
     def upload(self):
         if self.selectedPort is not None:
             self.update_log("Connecting to port {}...".format(self.selectedPort))
-
             try:
-                ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
-                self.update_log('Connected to port\n{}, uploading...'.format(ser.name))  # check which port was used
-                ser.write(b'test')  # write a string write(b'test)
-                ser.close()  # close port
+                self.update_log('Connected to port\n{}, uploading...'.format(self.ser.name))
+                self.ser.write(b'test') #write data as bytes
+                # self.ser.close()  # close port TODO check need
             except OSError:
                 self.update_log('Error occurred')  # TODO Error handling
 
     # Selects a given port to connect to
     def select_port(self, port):
+
         if str(port) == 'No Devices Found':
             return
-        self.update_log("Port selected: {}".format(port))
-        self.selectedPort = port
-        idx = self.ports.index(port)
-        self.selectedPortDescription = self.descriptions[idx]
-        # enable start button
-        self.ids.start_and_finish.disabled = False
+
+        try:
+            self.update_log("Port selected: {}".format(port))
+            self.selectedPort = port
+            idx = self.ports.index(port)
+            self.selectedPortDescription = self.descriptions[idx]
+
+            # Enable serial port
+            self.ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
+
+            # Enable start button
+            self.ids.start_and_finish.disabled = False
+        except OSError:
+            self.update_log('Error: Could not open port')
+            self.toggle_log(True)
 
     # Update the integrated log
     def update_log(self, text):
+        print(text)
         self.log += (text + '\n')
 
         # Update Log text only if visible
