@@ -19,26 +19,35 @@ Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 # Get a list of available serial ports TODO check on windows
 def serial_ports():
-    res = []
+    names = []
+    descriptions = []
     comlist = serial.tools.list_ports.comports()
     for element in comlist:
         if element.product is not None: # Filter out non-applicable ports with no product description (non-connected)
             name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
-            res.append(name)
-    if len(res) == 0:
-        res.append('No devices found')
-    return res
+            names.append(name)
+            descriptions.append(element.description)
+    if len(names) == 0:
+        names.append('No Devices Found')
+        descriptions.append('-')
+
+    result = [names, descriptions]
+    return result
 
 
 class MyGrid(Widget):
 
     connected = False
-    ports = ['None']
+    ports = ['No Devices Found']
+    descriptions = ['-']
     selectedPort = None
+    selectedPortDescription = None
 
     # Update the list of available ports
     def update_ports(self):
-        self.ports = serial_ports()
+        info = serial_ports()
+        self.ports = info[0]
+        self.descriptions = info[1]
         self.ids.port_dropdown.values = self.ports
 
     def start_finish_training(self):
@@ -54,17 +63,29 @@ class MyGrid(Widget):
 
     def upload(self):
         if self.selectedPort is not None:
-            print("upload to port " + str(self.selectedPort))
+            print("Connecting to port {}...".format(self.selectedPort))
+
+            try:
+                ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
+                print('Connected to port {}, uploading...'.format(ser.name))  # check which port was really used
+                ser.write(b'test')  # write a string write(b'test)
+                ser.close()  # close port
+            except OSError:
+                print('Error occurred')  # TODO Error handling
+
         else:
-            print("can't upload")
+            print("can't upload")  # TODO this should never happen anyways
 
     # Selects a given port to connect to
     def select_port(self, port):
+        if str(port) == 'No Devices Found':
+            return
         print("Port selected: " + str(port))
         self.selectedPort = port
+        idx = self.ports.index(port)
+        self.selectedPortDescription = self.descriptions[idx]
         # enable start button
         self.ids.start_and_finish.disabled = False
-
 
 # Main App definition
 class MyApp(App):

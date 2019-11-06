@@ -44,6 +44,8 @@
 
 
         GridLayout:
+            height: self.parent.height * 0.9
+            size_hint_y: None
             rows: 8
             RelativeLayout:
                 Button:
@@ -55,7 +57,7 @@
                     text: "Start Training"
                     on_press: root.start_finish_training()
             Label:
-                text: "1. Select the correct Port in the top right"
+                text: "1. Select the correct device in the top right"
                 color: (0, 0, 0, 1)
             Label:
                 text: "2. Press 'Start Training'"
