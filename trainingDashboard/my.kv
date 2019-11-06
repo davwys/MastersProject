@@ -44,45 +44,69 @@
 
 
         GridLayout:
-            height: self.parent.height * 0.9
-            size_hint_y: None
-            rows: 8
-            RelativeLayout:
-                Button:
-                    height: 100
-                    size_hint: .5, None
-                    pos_hint: {'x': .25}
-                    disabled: True
-                    id: start_and_finish
-                    text: "Start Training"
-                    on_press: root.start_finish_training()
-            Label:
-                text: "1. Select the correct device in the top right"
-                color: (0, 0, 0, 1)
-            Label:
-                text: "2. Press 'Start Training'"
-                color: (0, 0, 0, 1)
+            cols: 3
 
             Label:
-                text: "3. Play a card on each area in alphabetical order"
-                color: (0, 0, 0, 1)
-            Label:
-                text: "4. Play a card on the Oracle"
-                color: (0, 0, 0, 1)
-            Label:
-                text: "5. Press 'Finish Training'"
-                color: (0, 0, 0, 1)
-            Label:
-                text: "6. Press 'Upload to Board'"
-                color: (0, 0, 0, 1)
-            #Upload button
+                # placeholder
 
-            RelativeLayout:
-                Button:
-                    height: 100
-                    size_hint: .5, None
-                    pos_hint: {'x': .25, 'y': .25}
-                    disabled: True
-                    id: upload
-                    text: "Upload to Board"
-                    on_press: root.upload()
+            GridLayout:
+                height: self.parent.height * 0.9
+                size_hint_y: None
+                rows: 8
+                RelativeLayout:
+                    Button:
+                        height: 100
+                        size_hint: .5, None
+                        pos_hint: {'x': .25}
+                        disabled: True
+                        id: start_and_finish
+                        text: "Start Training"
+                        on_press: root.start_finish_training()
+                Label:
+                    text: "1. Select the correct device in the top right"
+                    color: (0, 0, 0, 1)
+                Label:
+                    text: "2. Press 'Start Training'"
+                    color: (0, 0, 0, 1)
+
+                Label:
+                    text: "3. Play a card on each area in alphabetical order"
+                    color: (0, 0, 0, 1)
+                Label:
+                    text: "4. Play a card on the Oracle"
+                    color: (0, 0, 0, 1)
+                Label:
+                    text: "5. Press 'Finish Training'"
+                    color: (0, 0, 0, 1)
+                Label:
+                    text: "6. Press 'Upload to Board'"
+                    color: (0, 0, 0, 1)
+                #Upload button
+
+                RelativeLayout:
+                    Button:
+                        height: 100
+                        size_hint: .5, None
+                        pos_hint: {'x': .25, 'y': .25}
+                        disabled: True
+                        id: upload
+                        text: "Upload to Board"
+                        on_press: root.upload()
+
+            GridLayout:
+                rows: 2
+                CheckBox:
+                    id: chk
+                    on_press: root.log_checkbox(self.active)
+
+                Label:
+                    height: 0
+                    size_hint_y: None
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 0.8
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    id: log
+                    text: 'Log:'

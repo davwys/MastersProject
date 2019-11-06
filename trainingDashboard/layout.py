@@ -36,7 +36,7 @@ def serial_ports():
 
 
 class MyGrid(Widget):
-
+    log = ''
     connected = False
     ports = ['No Devices Found']
     descriptions = ['-']
@@ -45,6 +45,7 @@ class MyGrid(Widget):
 
     # Update the list of available ports
     def update_ports(self):
+        self.update_log('Getting device list...')
         info = serial_ports()
         self.ports = info[0]
         self.descriptions = info[1]
@@ -52,42 +53,65 @@ class MyGrid(Widget):
 
     def start_finish_training(self):
         if self.saf.text == 'Start Training':
+            self.update_log('Started Training!')
             self.saf.text = 'Finish Training'
             # Disable upload btn until finished
             self.ids.upload.disabled = True
 
         else:
             self.saf.text = 'Start Training'
+
+            self.update_log('Finished Training!')
             # Enable upload button after finishing training
             self.ids.upload.disabled = False
 
+    def log_checkbox(self, value):
+        if not value:
+            self.ids.log.height = 0
+            self.ids.log.size_hint_y = None
+            self.ids.log.text = ''
+        else:
+            self.ids.log.height = 100
+            self.ids.log.size_hint_y = 1
+            self.ids.log.text = 'Log:\n' + self.log
+
+
     def upload(self):
         if self.selectedPort is not None:
-            print("Connecting to port {}...".format(self.selectedPort))
+            self.update_log("Connecting to port {}...".format(self.selectedPort))
 
             try:
                 ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
-                print('Connected to port {}, uploading...'.format(ser.name))  # check which port was really used
+                self.update_log('Connected to port\n{}, uploading...'.format(ser.name))  # check which port was used
                 ser.write(b'test')  # write a string write(b'test)
                 ser.close()  # close port
             except OSError:
-                print('Error occurred')  # TODO Error handling
+                self.update_log('Error occurred')  # TODO Error handling
 
     # Selects a given port to connect to
     def select_port(self, port):
         if str(port) == 'No Devices Found':
             return
-        print("Port selected: " + str(port))
+        self.update_log("Port selected: {}".format(port))
         self.selectedPort = port
         idx = self.ports.index(port)
         self.selectedPortDescription = self.descriptions[idx]
         # enable start button
         self.ids.start_and_finish.disabled = False
 
+    # Update the integrated log
+    def update_log(self, text):
+        self.log += (text + '\n')
+
+        # Update Log text only if visible
+        if self.ids.chk.active:
+            self.ids.log.text = 'Log:\n' + self.log
+
 
 # Main App definition
 class MyApp(App):
     title = "Game Board Training Dashboard"
+
     def build(self):
         return MyGrid()
 
