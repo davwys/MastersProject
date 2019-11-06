@@ -1,7 +1,0 @@
-/Users/davidwyss/Desktop/Masterprojekt/MastersProject/arduinoGameBoard/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/davidwyss/Desktop/Masterprojekt/MastersProject/arduinoGameBoard/cmake-build-debug/CMakeFiles/arduinoGameBoard-upload.dir
-/Users/davidwyss/Desktop/Masterprojekt/MastersProject/arduinoGameBoard/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/davidwyss/Desktop/Masterprojekt/MastersProject/arduinoGameBoard/cmake-build-debug/CMakeFiles/upload.dir
-/Users/davidwyss/Desktop/Masterprojekt/MastersProject/arduinoGameBoard/cmake-build-debug/CMakeFiles/arduinoGameBoard-size.dir
-/Users/davidwyss/Desktop/Masterprojekt/MastersProject/arduinoGameBoard/cmake-build-debug/CMakeFiles/arduinoGameBoard.dir
-/Users/davidwyss/Desktop/Masterprojekt/MastersProject/arduinoGameBoard/cmake-build-debug/CMakeFiles/nano_CORE.dir
