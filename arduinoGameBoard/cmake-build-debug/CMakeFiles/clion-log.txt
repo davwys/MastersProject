@@ -1,0 +1,6 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/davidwyss/Desktop/Masterprojekt/MastersProject/arduinoGameBoard
+-- Generating arduinoGameBoard
+-- Using /Applications/Arduino.app/Contents/Java/hardware/tools/avr/bin/avr-objcopy for converting firmware image to hex
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/davidwyss/Desktop/Masterprojekt/MastersProject/arduinoGameBoard/cmake-build-debug
