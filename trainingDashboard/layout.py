@@ -73,9 +73,6 @@ class MyGrid(Widget):
             except OSError:
                 print('Error occurred')  # TODO Error handling
 
-        else:
-            print("can't upload")  # TODO this should never happen anyways
-
     # Selects a given port to connect to
     def select_port(self, port):
         if str(port) == 'No Devices Found':
@@ -87,8 +84,10 @@ class MyGrid(Widget):
         # enable start button
         self.ids.start_and_finish.disabled = False
 
+
 # Main App definition
 class MyApp(App):
+    title = "Game Board Training Dashboard"
     def build(self):
         return MyGrid()
 
