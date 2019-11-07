@@ -13,7 +13,6 @@ import glob
 import serial
 import serial.tools.list_ports
 
-
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 
@@ -44,6 +43,8 @@ class MyGrid(Widget):
     selectedPort = None
     selectedPortDescription = None
 
+
+
     # Update the list of available ports
     def update_ports(self):
         self.update_log('Getting device list...')
@@ -51,6 +52,7 @@ class MyGrid(Widget):
         self.ports = info[0]
         self.descriptions = info[1]
         self.ids.port_dropdown.values = self.ports
+
 
     # Start or finish the training process
     def start_finish_training(self):
@@ -67,6 +69,8 @@ class MyGrid(Widget):
             # Enable upload button after finishing training
             self.ids.upload.disabled = False
 
+
+
     # Toggle Log visibility
     def toggle_log(self, value):
         if not value:
@@ -78,16 +82,20 @@ class MyGrid(Widget):
             self.ids.log.size_hint_y = 1
             self.ids.log.text = 'Log:\n' + self.log
 
+
+
     # Upload new training data
     def upload(self):
         if self.selectedPort is not None:
             self.update_log("Connecting to port {}...".format(self.selectedPort))
             try:
                 self.update_log('Connected to port\n{}, uploading...'.format(self.ser.name))
-                self.ser.write(b'test') #write data as bytes
+                self.ser.write(b'CHANGE_MODE=1') #write data as bytes
                 # self.ser.close()  # close port TODO check need
             except OSError:
                 self.update_log('Error occurred')  # TODO Error handling
+
+
 
     # Selects a given port to connect to
     def select_port(self, port):
@@ -109,6 +117,8 @@ class MyGrid(Widget):
         except OSError:
             self.update_log('Error: Could not open port')
             self.toggle_log(True)
+
+
 
     # Update the integrated log
     def update_log(self, text):
