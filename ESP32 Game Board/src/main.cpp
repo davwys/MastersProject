@@ -47,10 +47,10 @@ void loop() {
             training_main();
             break;
          case UPLOAD:
-            //TODO
+            upload_main();
             break;
          case PLAYING:
-            //TODO
+            playing_main();
             break;
 
          default:

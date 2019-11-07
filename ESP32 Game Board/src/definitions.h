@@ -26,11 +26,6 @@ typedef enum  {
 }Status;
 
 
-typedef enum {
-
-  TRAIN_OK
-}Command;
-
 /* ==================
    Physical pin setup
    ================== */
