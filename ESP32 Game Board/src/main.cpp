@@ -28,7 +28,7 @@ void loop() {
 
     //Received command analysis TODO check different serial sources: bluetooth, USB etc.
     if (Serial.available() > 0) {
-        read_command();
+        receive_command();
     }
 
     //Main Behavior loop

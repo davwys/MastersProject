@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <definitions.h>
 
-// This file specifies analysis behavior for command input/output
+// This file specifies analysis and activation behavior for command input/output
 
 /*
 Possible states:
@@ -23,12 +23,12 @@ UPLOAD_START				            Input
 [...] {json}					          Input
 UPLOAD_END			                Input
 PLAY_OK					                Input
+
 TRAIN=P3_0x123				          Output
 UPLOAD_OK					              Output
 PLAY=A_123					            Output
 
 */
-
 
 char *InputCommands[5] = {
   "CHANGE_MODE=",
@@ -37,7 +37,6 @@ char *InputCommands[5] = {
   "UPLOAD_START",
   "UPLOAD_END"
 };
-
 
 
 //Flashes the selected LED for 300ms
@@ -58,8 +57,8 @@ bool validate_command(String command){
 }
 
 
-//Reads serial input commands
-void read_command(){
+//Receives and executes serial input commands
+void receive_command(){
   //Read incoming data via USB
   receivedData = Serial.readStringUntil('\n');
 
@@ -80,4 +79,8 @@ void read_command(){
         flash_led(LED_Red);
     }
   }
+
+//Sends serial output commands
+void send_command(){
+  //TODO.
 }
