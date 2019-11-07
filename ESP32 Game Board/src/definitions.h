@@ -1,5 +1,8 @@
-// Main definitions
+#include <Arduino.h>
 
+// Main definitions
+#ifndef DEFINITIONS_H
+#define DEFINITIONS_H
 
 /*  ==========================
     Status Enum for game board
@@ -13,28 +16,33 @@
     PLAYING     = actively playing the game (outputs API calls for game logic)
  */
 
-
-enum status {
+typedef enum  {
     READY,
     PRETRAINING,
     PREPLAYING,
     TRAINING,
     UPLOAD,
     PLAYING
-};
+}Status;
 
+
+typedef enum {
+
+  TRAIN_OK
+}Command;
 
 /* ==================
    Physical pin setup
    ================== */
 
 //LED Pins
-int LED_Red = 3;
-int LED_Green = 4;
+extern int LED_Red;
+extern int LED_Green;
 
-/* =====================
-   Logic variables setup
-   ===================== */
 
-String receivedData = "";       //Incoming Serial data string
-status currentStatus = READY;   //Game board's current status
+//
+extern Status currentStatus;
+extern String receivedData;
+
+
+#endif

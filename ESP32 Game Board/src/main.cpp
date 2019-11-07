@@ -1,17 +1,17 @@
 #include <Arduino.h>
 #include <definitions.h>
+#include <behaviors.h>
 
-#include <training.cpp>
-#include <upload.cpp>
-#inclue <playing.cpp>
 
-//Flashes the selected LED for 300ms (used for input confirmation)
-void flashLed(int pin) {
-    digitalWrite(pin, HIGH);   // turn LED on
-    delay(300);                //wait
-    digitalWrite(pin, LOW);    // turn LED off
-}
 
+//LED Pins
+int LED_Red = 3;
+int LED_Green = 4;
+
+
+//TODO descr
+Status currentStatus = READY;
+String receivedData = "";
 
 //Main setup function (runs on initialization)
 void setup() {
@@ -26,39 +26,16 @@ void setup() {
 //Main function
 void loop() {
 
-    //Received command analysis TODO move/make available to each file
+    //Received command analysis TODO check different serial sources: bluetooth, USB etc.
     if (Serial.available() > 0) {
-        //Read incoming data via USB
-        receivedData = Serial.readStringUntil('\n');
-
-
-        if (receivedData.length() > 0) {
-            //Command type: Mode change
-            if (receivedData.indexOf("CHANGE_MODE=") == 0) {
-                flashLed(LED_Green);
-
-                //Get command value
-                char temp = receivedData.charAt(12); // Use number after, for example CHANGE_MODE=1
-                int cmd = (int)temp;
-
-                Serial.print("Mode change to {}" + cmd);
-            }
-            //Command type:
-            else if (receivedData.indexOf("test") == 0) {
-                flashLed(LED_Green);
-            }
-            //Invalid command type: flash red LED
-            else {
-                flashLed(LED_Red);
-            }
-        }
+        read_command();
     }
 
     //Main Behavior loop
     switch (currentStatus)
       {
          case READY:
-            //TODO
+            //TODO asdf
             break;
          case PRETRAINING:
             //TODO
@@ -67,7 +44,7 @@ void loop() {
             //TODO
             break;
          case TRAINING:
-            //TODO
+            training_main();
             break;
          case UPLOAD:
             //TODO
