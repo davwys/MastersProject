@@ -1,38 +1,16 @@
 #include <Arduino.h>
+#include <definitions.h>
 
-/*  ==========================
-    Status Enum for game board
-    ==========================
+#include <training.cpp>
+#include <upload.cpp>
+#inclue <playing.cpp>
 
-    READY       = ready for training or game start
-    CONNECTED   = connected to training dashboard, not training yet (serial port open - prevents game start)
-    TRAINING    = training new data via dashboard (sends sensor inputs to dashboard via specified port)
-    PLAYING     = actively playing the game (outputs API calls for game logic)
- */
-
-enum status {
-    READY,
-    CONNECTED,
-    TRAINING,
-    PLAYING
-};
-
-
-/* ==================
-   Physical pin setup
-   ================== */
-
-//LED Pins
-int LED_Red = 3;
-int LED_Green = 4;
-
-/* =====================
-   Logic variables setup
-   ===================== */
-
-String receivedData = "";       //Incoming Serial data string
-status currentStatus = READY;   //Game board's current status
-
+//Flashes the selected LED for 300ms (used for input confirmation)
+void flashLed(int pin) {
+    digitalWrite(pin, HIGH);   // turn LED on
+    delay(300);                //wait
+    digitalWrite(pin, LOW);    // turn LED off
+}
 
 
 //Main setup function (runs on initialization)
@@ -45,15 +23,10 @@ void setup() {
     Serial.begin(57600);
 }
 
-//Flashes the selected LED for 300ms (used for input confirmation)
-void flashLed(int pin) {
-    digitalWrite(pin, HIGH);   // turn LED on
-    delay(300);                //wait
-    digitalWrite(pin, LOW);    // turn LED off
-}
-
 //Main function
 void loop() {
+
+    //Received command analysis TODO move/make available to each file
     if (Serial.available() > 0) {
         //Read incoming data via USB
         receivedData = Serial.readStringUntil('\n');
@@ -61,9 +34,14 @@ void loop() {
 
         if (receivedData.length() > 0) {
             //Command type: Mode change
-            if (receivedData.indexOf("CHANGE_MODE") == 0) {
+            if (receivedData.indexOf("CHANGE_MODE=") == 0) {
                 flashLed(LED_Green);
-                Serial.print("Mode change OK");
+
+                //Get command value
+                char temp = receivedData.charAt(12); // Use number after, for example CHANGE_MODE=1
+                int cmd = (int)temp;
+
+                Serial.print("Mode change to {}" + cmd);
             }
             //Command type:
             else if (receivedData.indexOf("test") == 0) {
@@ -75,4 +53,31 @@ void loop() {
             }
         }
     }
+
+    //Main Behavior loop
+    switch (currentStatus)
+      {
+         case READY:
+            //TODO
+            break;
+         case PRETRAINING:
+            //TODO
+            break;
+         case PREPLAYING:
+            //TODO
+            break;
+         case TRAINING:
+            //TODO
+            break;
+         case UPLOAD:
+            //TODO
+            break;
+         case PLAYING:
+            //TODO
+            break;
+
+         default:
+            //TODO default case? Reset to ready?
+            break;
+      }
 }
