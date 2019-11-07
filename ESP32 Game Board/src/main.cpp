@@ -35,7 +35,7 @@ void loop() {
     switch (currentStatus)
       {
          case READY:
-            //TODO asdf
+            //TODO?
             break;
          case PRETRAINING:
             //TODO
@@ -54,7 +54,8 @@ void loop() {
             break;
 
          default:
-            //TODO default case? Reset to ready?
+            //default case: Reset to ready (should never happen)
+            currentStatus = READY;
             break;
       }
 }

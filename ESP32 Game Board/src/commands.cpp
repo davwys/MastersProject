@@ -1,10 +1,13 @@
 #include <Arduino.h>
 #include <definitions.h>
 
-// This file specifies analysis and activation behavior for command input/output
-
 /*
+
+This file specifies analysis and activation behavior for command input/output.
+
+================
 Possible states:
+================
 
 0	  READY
 1	  PREPLAYING
@@ -30,7 +33,7 @@ PLAY=A_123					            Output
 
 */
 
-char *InputCommands[5] = {
+const char *InputCommands[5] = {
   "CHANGE_MODE=",
   "TRAIN_OK",
   "PLAY_OK",
@@ -56,6 +59,14 @@ bool validate_command(String command){
   return false;
 }
 
+void apply_mode_change(String command){
+  //Check whether this is a mode change command
+  if (receivedData.indexOf(InputCommands[0]) == 0){
+      //Get command value
+      char temp = receivedData.charAt(strlen(InputCommands[0])); // Use number after, for example CHANGE_MODE=1
+      int cmd = (int)temp;
+  }
+}
 
 //Receives and executes serial input commands
 void receive_command(){
@@ -67,9 +78,8 @@ void receive_command(){
   {
       flash_led(LED_Green);
 
-      //Get command value
-      //char temp = receivedData.charAt(12); // Use number after, for example CHANGE_MODE=1
-      //int cmd = (int)temp;
+      //If this is a mode change, apply it
+      apply_mode_change(receivedData);
 
       Serial.print("Got a valid command!");
     }
@@ -81,6 +91,7 @@ void receive_command(){
   }
 
 //Sends serial output commands
-void send_command(){
+void send_command(String cmd){
   //TODO.
+  Serial.print(cmd);
 }
