@@ -53,6 +53,17 @@ class MyGrid(Widget):
         self.descriptions = info[1]
         self.ids.port_dropdown.values = self.ports
 
+        if self.ids.port_dropdown.values[0] == 'No Devices Found':
+            print('inside if')
+            self.spin.text = 'No Devices Found'
+            self.ids.port_dropdown.values = ''
+
+    def initialize_training(self):
+        self.start_instruction = 'Press "Start Training"'
+        return self.start_instruction
+
+
+
 
     # Start or finish the training process
     def start_finish_training(self):
@@ -61,13 +72,22 @@ class MyGrid(Widget):
             self.saf.text = 'Finish Training'
             # Disable upload btn until finished
             self.ids.upload.disabled = True
-
+            self.instructions.text = '''Play a card on each area in alphabetical order.
+Then play a card on the Oracle and press "Finish Training"'''
         else:
             self.saf.text = 'Start Training'
-
             self.update_log('Finished Training!')
             # Enable upload button after finishing training
             self.ids.upload.disabled = False
+            self.ids.start_and_finish.disabled = True
+            self.instructions.text = 'Press "Upload to board"'
+
+    def reboot(self):
+        self.ids.start_and_finish.disabled = False
+        self.ids.upload.disabled = True
+        self.ids.start_and_finish.text = 'Start Training'
+        self.ids.instructions.text = 'Press "Start Training"'
+        self.update_log('reboot')
 
 
 
@@ -86,6 +106,7 @@ class MyGrid(Widget):
 
     # Upload new training data
     def upload(self):
+        self.update_log('Upload starting...')
         if self.selectedPort is not None:
             self.update_log("Connecting to port {}...".format(self.selectedPort))
             try:

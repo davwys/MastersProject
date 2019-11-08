@@ -6,6 +6,8 @@
 <MyGrid>
     saf: start_and_finish
     upld: upload
+    spin: port_dropdown
+    instructions: instructions
 
     GridLayout:
         cols:1
@@ -23,18 +25,23 @@
 
 
             size_hint_y: None
-            height: self.parent.height * 0.1
+            height: root.height * 0.1
             cols:3
-            Image:
+            GridLayout:
+                cols:1
                 size_hint_x: None
-                width: 250
-                source: 'assets/empa_logo.png'
-
+                width: self.parent.width * 0.25
+                Image:
+                    keep_ratio: False
+                    allow_stretch: True
+                    source: 'assets/UZH_Logo_e_Web/uzh_logo_e_pos_web_main.jpg'
             Label:
+                size_hint_x: None
+                width: self.parent.width * 0.50
                 text: "PFC Training Dashboard"
             Spinner:
                 size_hint_x: None
-                width: 400
+                width: self.parent.width * 0.25
                 id: port_dropdown
                 height: self.parent.height
                 pos_hint: {'center': (.5, .5)}
@@ -45,69 +52,78 @@
 
         GridLayout:
             cols: 3
-
-            Label:
-                # placeholder
+            GridLayout:
+                width: root.width * 0.25
+                size_hint_x: None
+                rows:3
+                Label:
+                    height: self.parent.height * 0.45
+                    size_hint_y: None
+                Label:
+                    height: self.parent.height * 0.45
+                    size_hint_y: None
+                Button:
+                    width: root.width * 0.25
+                    size_hint_x: None
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    text: 'Reboot'
+                    on_press: root.reboot()
 
             GridLayout:
-                height: self.parent.height * 0.9
+                height: root.height * 0.9
                 size_hint_y: None
-                rows: 8
-                RelativeLayout:
-                    Button:
-                        height: 100
-                        size_hint: .5, None
-                        pos_hint: {'x': .25}
-                        disabled: True
-                        id: start_and_finish
-                        text: "Start Training"
-                        on_press: root.start_finish_training()
+                width: root.width * 0.5
+                size_hint_x: None
+                rows: 5
                 Label:
-                    text: "1. Select the correct device in the top right"
-                    color: (0, 0, 0, 1)
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                Button:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    disabled: False
+                    id: start_and_finish
+                    text: "Start Training"
+                    on_press: root.start_finish_training()
                 Label:
-                    text: "2. Press 'Start Training'"
+                    id: instructions
+                    height: self.parent.height * 0.6
+                    size_hint_y: None
+                    text: root.initialize_training()
                     color: (0, 0, 0, 1)
-
+                Button:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    disabled: True
+                    id: upload
+                    text: "Upload to Board"
+                    on_press: root.upload()
                 Label:
-                    text: "3. Play a card on each area in alphabetical order"
-                    color: (0, 0, 0, 1)
-                Label:
-                    text: "4. Play a card on the Oracle"
-                    color: (0, 0, 0, 1)
-                Label:
-                    text: "5. Press 'Finish Training'"
-                    color: (0, 0, 0, 1)
-                Label:
-                    text: "6. Press 'Upload to Board'"
-                    color: (0, 0, 0, 1)
-                #Upload button
-
-                RelativeLayout:
-                    Button:
-                        height: 100
-                        size_hint: .5, None
-                        pos_hint: {'x': .25, 'y': .25}
-                        disabled: True
-                        id: upload
-                        text: "Upload to Board"
-                        on_press: root.upload()
-
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
             GridLayout:
+                width: root.width * 0.25
+                size_hint_x: None
                 rows: 2
                 # Show/Hide Log checkbox
                 CheckBox:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
                     id: chk
                     on_press: root.toggle_log(self.active)
+                    color: 0.5,0.5,0.5,1
 
                 Label:
+                    width: root.width * 0.25
+                    size_hint_x: None
                     height: 0
                     size_hint_y: None
                     canvas.before:
                         Color:
-                            rgba: 0, 0, 0, 0.8
+                            rgba: 0, 0, 0, 0.5
                         Rectangle:
                             pos: self.pos
                             size: self.size
                     id: log
-                    text: 'Log:'
+
