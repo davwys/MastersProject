@@ -1,0 +1,80 @@
+<Button>
+    background_normal: ''
+    background_down: ''
+    background_color: .05, .5, 1, 1
+
+<MyGrid>
+    GridLayout:
+        cols:1
+        rows:2
+        size: root.width, root.height
+
+        GridLayout:
+            size_hint_y:None
+            height: root.height * 0.5
+            cols:2
+            GridLayout:
+                rows:2
+                Label:
+                    color: 0,0,0,1
+                    text:'Area A'
+                    canvas:
+                        Color:
+                            rgba: [.7,.7,.95,.2]
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                Label:
+                    color: 0,0,0,1
+                    text:root.areaA()
+                    canvas:
+                        Color:
+                            rgba: [.7,.7,.95,.2]
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+            GridLayout:
+                rows:2
+                Label:
+                    color: 0,0,0,1
+                    text:'Area B'
+                    canvas:
+                        Color:
+                            rgba: [.2,.3,.95,.2]
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                Label:
+                    color: 0,0,0,1
+                    text:root.areaB()
+                    canvas:
+                        Color:
+                            rgba: [.2,.3,.95,.2]
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+        GridLayout:
+            size_hint_y:None
+            height: root.height * 0.5
+            rows:2
+            Label:
+                color: 0,0,0,1
+                text:'Oracle'
+                canvas:
+                    Color:
+                        rgba: [.5,.5,.95,.2]
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            Label:
+                color: 0,0,0,1
+                text:root.oracle()
+                canvas:
+                    Color:
+                        rgba: [.5,.5,.95,.2]
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+
+
