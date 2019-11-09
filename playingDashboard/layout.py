@@ -35,7 +35,7 @@ class MyGrid(Widget):
 
 # Main App definition
 class MyApp(App):
-    title = "Game Board Training Dashboard"
+    title = "Game Board Playing Dashboard"
 
     def build(self):
         return MyGrid()
