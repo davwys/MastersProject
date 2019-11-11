@@ -26,6 +26,8 @@ void setup() {
 
     //Initial serial communication (via Bluetooth)
     BTSerial.begin("GameBoardBluetooth");
+
+    Serial.println("Initializing ESP32 Game Board...");
 }
 
 //Main function
