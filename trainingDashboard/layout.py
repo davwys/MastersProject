@@ -66,6 +66,7 @@ class MyGrid(Widget):
 
     # Start or finish the training process
     def start_finish_training(self):
+        self.ids.reboot.disabled = False
         if self.saf.text == 'Start Training':
             self.update_log('Started Training!')
             self.saf.text = 'Finish Training'
@@ -86,12 +87,14 @@ class MyGrid(Widget):
             self.instructions.text = 'Press "Upload to board"'
 
 
+
     def reboot(self):
         self.ids.start_and_finish.disabled = False
         self.ids.upload.disabled = True
         self.ids.start_and_finish.text = 'Start Training'
         self.ids.instructions.text = 'Press "Start Training"'
         self.update_log('reboot')
+        self.ids.reboot.disabled = True
 
 
 
@@ -110,6 +113,7 @@ class MyGrid(Widget):
 
     # Upload new training data
     def upload(self):
+        self.ids.reboot.disabled = True
         self.update_log('Upload starting...')
         if self.selectedPort is not None:
             self.update_log("Connecting to port {}...".format(self.selectedPort))
@@ -119,6 +123,8 @@ class MyGrid(Widget):
                 # self.ser.close()  # close port TODO check need
             except OSError:
                 self.update_log('Error occurred')  # TODO Error handling
+
+        self.ids.upload.disabled = True
 
 
 

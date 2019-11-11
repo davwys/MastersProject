@@ -105,10 +105,11 @@
                     size_hint_y: None
                     BorderButton:
                         id: reboot
+                        disabled: True
                         text: 'Restart Training'
                         on_press:
                             root.reboot()
-                            self.back_color = .05, .5, 1, .5
+                            #self.back_color = .05, .5, 1, .5
 
             GridLayout:
                 height: root.height * 0.9
