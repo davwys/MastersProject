@@ -26,12 +26,15 @@
 <Spinner@Button>
     border_radius: 18
     color: self.back_color
+    font_size: dp(15)
     canvas.before:
         Color:
             rgba: self.back_color
         Line:
             rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
             width: 1.2
+<Label>
+    font_size: dp(20)
 
 <MyGrid>
     saf: start_and_finish
@@ -64,7 +67,6 @@
                     source: 'assets/uzh_logo.png'
             Label:
                 color: 0,0,0,1
-                font_size: 20
                 size_hint_x: None
                 width: self.parent.width * 0.50
                 text: "PFC Training Dashboard"
@@ -134,7 +136,6 @@
                     height: self.parent.height * 0.5
                     size_hint_y: None
                     text: root.initialize_training()
-                    font_size: 20
                     color: (0, 0, 0, 1)
                 RoundButton:
                     height: self.parent.height * 0.1
