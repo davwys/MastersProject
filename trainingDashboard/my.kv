@@ -2,6 +2,7 @@
     background_color: (0,0,0,0)
     background_normal: ''
     back_color: (.05, .5, 1, 1)
+    on_release: self.back_color = .05, .5, 1, 1
     color: (0,0,0,1)
     font_size: 20
 <RoundButton@Button>
@@ -78,7 +79,9 @@
                     id: port_dropdown
                     pos_hint: {'center': (.5, .5)}
                     text: 'Select device...'
-                    on_press: root.update_ports()
+                    on_press:
+                        root.update_ports()
+                        self.back_color = .05, .5, 1, .5
                     on_text: root.select_port(self.text)
 
         GridLayout:
@@ -101,8 +104,11 @@
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     BorderButton:
+                        id: reboot
                         text: 'Reboot'
-                        on_press: root.reboot()
+                        on_press:
+                            root.reboot()
+                            self.back_color = .05, .5, 1, .5
 
             GridLayout:
                 height: root.height * 0.9
@@ -119,7 +125,9 @@
                     disabled: False
                     id: start_and_finish
                     text: "Start Training"
-                    on_press: root.start_finish_training()
+                    on_press:
+                        root.start_finish_training()
+                        self.back_color = .05, .5, 1, .5
                 Label:
                     id: instructions
                     height: self.parent.height * 0.6
@@ -133,7 +141,9 @@
                     disabled: True
                     id: upload
                     text: "Upload to Board"
-                    on_press: root.upload()
+                    on_press:
+                        root.upload()
+                        self.back_color = .05, .5, 1, .5
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
