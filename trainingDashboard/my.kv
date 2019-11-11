@@ -41,13 +41,13 @@
 
     GridLayout:
         cols:1
-        rows:2
+        rows:3
         size: root.width, root.height
 
         GridLayout:
             canvas.before:
                 Color:
-                    rgba: 1,1,1,1
+                    rgba: 0,0,0,0.5
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -69,7 +69,7 @@
                 width: self.parent.width * 0.50
                 text: "PFC Training Dashboard"
             GridLayout:
-                padding: [5,5,5,5]
+                padding: [10,10,10,10]
                 cols: 1
                 width: self.parent.width * 0.25
                 size_hint_x: None
@@ -77,7 +77,7 @@
                 size_hint_y: None
                 Spinner:
                     id: port_dropdown
-                    pos_hint: {'center': (.5, .5)}
+                    #pos_hint: {'center': (.5, .5)}
                     text: 'Select device...'
                     on_press:
                         root.update_ports()
@@ -115,7 +115,7 @@
                 size_hint_y: None
                 width: root.width * 0.5
                 size_hint_x: None
-                rows: 5
+                rows: 4
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -130,7 +130,7 @@
                         self.back_color = .05, .5, 1, .5
                 Label:
                     id: instructions
-                    height: self.parent.height * 0.6
+                    height: self.parent.height * 0.5
                     size_hint_y: None
                     text: root.initialize_training()
                     font_size: 20
@@ -144,9 +144,6 @@
                     on_press:
                         root.upload()
                         self.back_color = .05, .5, 1, .5
-                Label:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
             GridLayout:
                 width: root.width * 0.25
                 size_hint_x: None
@@ -171,4 +168,17 @@
                             pos: self.pos
                             size: self.size
                     id: log
+
+        GridLayout:
+            cols:1
+            width: root.width
+            size_hint_x: None
+            size_hint_y: None
+            height: root.height * 0.1
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.5
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
 

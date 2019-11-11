@@ -85,6 +85,7 @@ class MyGrid(Widget):
             self.ids.start_and_finish.disabled = True
             self.instructions.text = 'Press "Upload to board"'
 
+
     def reboot(self):
         self.ids.start_and_finish.disabled = False
         self.ids.upload.disabled = True
@@ -101,8 +102,8 @@ class MyGrid(Widget):
             self.ids.log.size_hint_y = None
             self.ids.log.text = ''
         else:
-            self.ids.log.height = 100
-            self.ids.log.size_hint_y = 1
+            self.ids.log.height = self.parent.height * 0.71
+            self.ids.log.size_hint_y = None
             self.ids.log.text = 'Log:\n' + self.log
 
 
