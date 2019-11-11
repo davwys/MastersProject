@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "BluetoothSerial.h"
 #include <definitions.h>
 #include <behaviors.h>
 
@@ -8,6 +9,7 @@
 int LED_Red = 4;
 int LED_Green = 2;
 
+BluetoothSerial BTSerial; //Object for Bluetooth
 
 //TODO descr
 Status currentStatus = READY;
@@ -21,11 +23,19 @@ void setup() {
 
     //Initial serial communication (via USB)
     Serial.begin(57600);
+
+    //Initial serial communication (via Bluetooth)
+    BTSerial.begin("GameBoardBluetooth");
 }
 
 //Main function
 void loop() {
 
+    if (BTSerial.available()) //Check if we receive anything from Bluetooth
+     {
+       int incoming = BTSerial.read(); //Read what we recevive
+       Serial.print("Received:"); Serial.println(incoming);
+     }
     //Received command analysis TODO check different serial sources: bluetooth, USB etc.
     if (Serial.available() > 0) {
         receive_command();

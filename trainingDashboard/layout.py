@@ -22,7 +22,7 @@ def serial_ports():
     descriptions = []
     comlist = serial.tools.list_ports.comports()
     for element in comlist:
-        if element.product is not None: # Filter out non-applicable ports with no product description (non-connected)
+        if element.product is not None or "GameBoard" in element.device: # Filter out non-applicable ports with no product description (non-connected) - add all that contain "GameBoard" (for Bluetooth ports)
             name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
             names.append(name)
             descriptions.append(element.description)
@@ -120,11 +120,11 @@ class MyGrid(Widget):
             try:
                 self.update_log('Connected to port\n{}, uploading...'.format(self.ser.name))
                 self.ser.write(b'CHANGE_MODE=1') #write data as bytes
+                self.ids.upload.disabled = True
                 # self.ser.close()  # close port TODO check need
             except OSError:
                 self.update_log('Error occurred')  # TODO Error handling
 
-        self.ids.upload.disabled = True
         # TODO integrate into check if upload actually worked
         self.ids.instructions.text = '''All done! 
 You can close the dashboard
