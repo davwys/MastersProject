@@ -125,6 +125,10 @@ class MyGrid(Widget):
                 self.update_log('Error occurred')  # TODO Error handling
 
         self.ids.upload.disabled = True
+        # TODO integrate into check if upload actually worked
+        self.ids.instructions.text = '''All done! 
+You can close the dashboard
+and start playing'''
 
 
 
