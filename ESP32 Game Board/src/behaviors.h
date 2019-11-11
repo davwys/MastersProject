@@ -5,7 +5,7 @@ void training_main();
 void playing_main();
 void upload_main();
 
-void receive_command();
+void receive_command(bool usb);
 void flash_led(int pin);
 
 #endif

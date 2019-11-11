@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <BluetoothSerial.h>
+
 
 // Main definitions
 #ifndef DEFINITIONS_H
@@ -37,6 +39,7 @@ typedef enum  {
 extern int LED_Red;
 extern int LED_Green;
 
+extern BluetoothSerial BTSerial; //Object for Bluetooth
 
 //Core logic data
 extern Status currentStatus;

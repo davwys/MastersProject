@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "BluetoothSerial.h"
+#include <BluetoothSerial.h>
 #include <definitions.h>
 #include <behaviors.h>
 
@@ -31,15 +31,16 @@ void setup() {
 //Main function
 void loop() {
 
-    if (BTSerial.available()) //Check if we receive anything from Bluetooth
-     {
-       int incoming = BTSerial.read(); //Read what we recevive
-       Serial.print("Received:"); Serial.println(incoming);
-     }
-    //Received command analysis TODO check different serial sources: bluetooth, USB etc.
+
+    //Received command analysis (USB)
     if (Serial.available() > 0) {
-        receive_command();
+        receive_command(true);
     }
+    //Received command analysis (Bluetooth).
+    if (BTSerial.available())
+     {
+       receive_command(false);
+     }
 
     //Main Behavior loop
     switch (currentStatus)

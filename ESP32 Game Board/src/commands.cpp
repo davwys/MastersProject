@@ -83,10 +83,14 @@ bool apply_mode_change(String command){
 }
 
 
-//Receives and executes serial input commands TODO verify functionality
-void receive_command(){
+//Receives and executes serial input commands. Bool usb argument determines whether to check on USB or Bluetooth serial port
+void receive_command(bool usb){
+
   //Read incoming data via USB
-  receivedData = Serial.readStringUntil('\n');
+  if(usb)
+    receivedData = Serial.readStringUntil('\n');
+  else
+    receivedData = BTSerial.readStringUntil('\n');
 
   //Validate command input
   if (receivedData.length() > 0 && validate_command(receivedData) == true )
