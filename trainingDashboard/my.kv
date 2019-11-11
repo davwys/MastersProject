@@ -44,7 +44,6 @@
         size: root.width, root.height
 
         GridLayout:
-            padding: [0,5,0,5]
             canvas.before:
                 Color:
                     rgba: 1,1,1,1
@@ -63,18 +62,24 @@
                     allow_stretch: True
                     source: 'assets/uzh_logo.png'
             Label:
+                color: 0,0,0,1
+                font_size: 20
                 size_hint_x: None
                 width: self.parent.width * 0.50
                 text: "PFC Training Dashboard"
-            Spinner:
-                size_hint_x: None
+            GridLayout:
+                padding: [5,5,5,5]
+                cols: 1
                 width: self.parent.width * 0.25
-                id: port_dropdown
+                size_hint_x: None
                 height: self.parent.height
-                pos_hint: {'center': (.5, .5)}
-                text: 'Select device...'
-                on_press: root.update_ports()
-                on_text: root.select_port(self.text)
+                size_hint_y: None
+                Spinner:
+                    id: port_dropdown
+                    pos_hint: {'center': (.5, .5)}
+                    text: 'Select device...'
+                    on_press: root.update_ports()
+                    on_text: root.select_port(self.text)
 
         GridLayout:
             cols: 3
@@ -88,13 +93,16 @@
                 Label:
                     height: self.parent.height * 0.45
                     size_hint_y: None
-                BorderButton:
+                GridLayout:
+                    padding: [10,10,10,10]
+                    cols: 1
                     width: root.width * 0.25
                     size_hint_x: None
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    text: 'Reboot'
-                    on_press: root.reboot()
+                    BorderButton:
+                        text: 'Reboot'
+                        on_press: root.reboot()
 
             GridLayout:
                 height: root.height * 0.9
