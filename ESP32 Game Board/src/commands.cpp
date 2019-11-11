@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include <definitions.h>
+#include <esp_int_wdt.h>
+#include <esp_task_wdt.h>
 
 /*
 
@@ -43,6 +45,12 @@ const char *InputCommands[6] = {
   "REBOOT"
 };
 
+//Force the ESP32 to restart
+void hard_restart() {
+  esp_task_wdt_init(1,true);
+  esp_task_wdt_add(NULL);
+  while(true);
+}
 
 //Flashes the selected LED for 300ms
 void flash_led(int pin) {
@@ -83,7 +91,8 @@ bool apply_mode_change(String command){
 }
 
 
-//Receives and executes serial input commands. Bool usb argument determines whether to check on USB or Bluetooth serial port
+// Receives and executes serial input commands.
+// "usb" argument determines whether to check for input on the USB or Bluetooth serial port.
 void receive_command(bool usb){
 
   //Read incoming data via USB
@@ -97,10 +106,16 @@ void receive_command(bool usb){
   {
       flash_led(LED_Green);
 
-      //If this is a mode change, apply it
+      //Check if this is a mode change (and apply if yes), else handle other commands
       if(!apply_mode_change(receivedData))
       {
-        //TODO handle other command types here
+
+        //Reboot command: Reboot ESP
+        if(receivedData.indexOf("REBOOT") >= 0){
+          hard_restart();
+        }
+
+        //TODO other command types
         Serial.println("Got a valid non-mode change command");
       }
     }
