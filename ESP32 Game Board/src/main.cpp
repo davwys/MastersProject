@@ -5,8 +5,8 @@
 
 
 //LED Pins
-int LED_Red = 3;
-int LED_Green = 4;
+int LED_Red = 4;
+int LED_Green = 2;
 
 
 //TODO descr

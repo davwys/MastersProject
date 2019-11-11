@@ -54,7 +54,7 @@ void flash_led(int pin) {
 
 //Validates a given command - TODO validate upload data
 bool validate_command(String command){
-  for(int i = 0; i < 5; i++){
+  for(int i = 0; i <= 5; i++){
     if (receivedData.indexOf(InputCommands[i]) == 0)
       return true;
   }
@@ -69,12 +69,13 @@ bool apply_mode_change(String command){
   if (command.indexOf(InputCommands[0]) == 0){
       //Get command value
       char temp = command.charAt(strlen(InputCommands[0])); // Use number after, for example CHANGE_MODE=1
-      int cmd = (int)temp;
+      int cmd = (int)temp - 48; //Due to UTF/ASCII-Encoding, we subtract 48 to get the actual number
 
       //Apply status change
       currentStatus = Status(cmd);
 
-      Serial.print("Changed to mode " + cmd);
+      Serial.print("Changed to mode ");
+      Serial.println(cmd);
       return true;
   }
   else
@@ -88,22 +89,22 @@ void receive_command(){
   receivedData = Serial.readStringUntil('\n');
 
   //Validate command input
-  if (receivedData.length() > 0 && validate_command(receivedData))
+  if (receivedData.length() > 0 && validate_command(receivedData) == true )
   {
       flash_led(LED_Green);
 
       //If this is a mode change, apply it
-      if(apply_mode_change(receivedData))
-        return;
-      else{
+      if(!apply_mode_change(receivedData))
+      {
         //TODO handle other command types here
-        Serial.print("Got a valid non-mode change command!");
+        Serial.println("Got a valid non-mode change command");
       }
     }
     //Invalid command type: flash red LED
     else
     {
         flash_led(LED_Red);
+        Serial.println("Invalid command");
     }
   }
 
