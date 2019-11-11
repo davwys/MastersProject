@@ -54,7 +54,6 @@ class MyGrid(Widget):
         self.ids.port_dropdown.values = self.ports
 
         if self.ids.port_dropdown.values[0] == 'No Devices Found':
-            print('inside if')
             self.spin.text = 'No Devices Found'
             self.ids.port_dropdown.values = ''
 
@@ -72,8 +71,12 @@ class MyGrid(Widget):
             self.saf.text = 'Finish Training'
             # Disable upload btn until finished
             self.ids.upload.disabled = True
-            self.instructions.text = '''Play a card on each area in alphabetical order.
-Then play a card on the Oracle and press "Finish Training"'''
+            self.instructions.text = '''1. Activate each area 
+(in alphabetical order)
+
+2. Activate the Oracle 
+
+3. Press "Finish Training"'''
         else:
             self.saf.text = 'Start Training'
             self.update_log('Finished Training!')

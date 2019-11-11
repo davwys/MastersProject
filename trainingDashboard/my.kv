@@ -1,7 +1,36 @@
 <Button>
+    background_color: (0,0,0,0)
     background_normal: ''
-    background_down: ''
-    background_color: .05, .5, 1, 1
+    back_color: (.05, .5, 1, 1)
+    color: (0,0,0,1)
+    font_size: 20
+<RoundButton@Button>
+    border_radius: [18]
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius
+<BorderButton@Button>
+    border_radius: 18
+    color: self.back_color
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1.2
+<Spinner@Button>
+    border_radius: 18
+    color: self.back_color
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1.2
 
 <MyGrid>
     saf: start_and_finish
@@ -15,15 +44,13 @@
         size: root.width, root.height
 
         GridLayout:
-
+            padding: [0,5,0,5]
             canvas.before:
                 Color:
-                    rgba: .25, .25, .25, 1
+                    rgba: 1,1,1,1
                 Rectangle:
                     pos: self.pos
                     size: self.size
-
-
             size_hint_y: None
             height: root.height * 0.1
             cols:3
@@ -49,7 +76,6 @@
                 on_press: root.update_ports()
                 on_text: root.select_port(self.text)
 
-
         GridLayout:
             cols: 3
             GridLayout:
@@ -62,7 +88,7 @@
                 Label:
                     height: self.parent.height * 0.45
                     size_hint_y: None
-                Button:
+                BorderButton:
                     width: root.width * 0.25
                     size_hint_x: None
                     height: self.parent.height * 0.1
@@ -79,7 +105,7 @@
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                Button:
+                RoundButton:
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     disabled: False
@@ -91,8 +117,9 @@
                     height: self.parent.height * 0.6
                     size_hint_y: None
                     text: root.initialize_training()
+                    font_size: 20
                     color: (0, 0, 0, 1)
-                Button:
+                RoundButton:
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     disabled: True
