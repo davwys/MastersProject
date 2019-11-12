@@ -47,7 +47,7 @@ class MyGrid(Widget):
             else:
                 index = element.description.find('(')
                 cut_string = element.description[:index-1]
-                names.append(self.cutted_string)
+                names.append(self.cut_string)
                 self.selectedPort_Windows = element.device
 
         if len(names) == 0:
