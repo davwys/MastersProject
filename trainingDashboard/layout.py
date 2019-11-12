@@ -40,7 +40,8 @@ class MyGrid(Widget):
         for element in comlist:
             # UNIX (Macos/Linux): filter device
             if platform.system() is not "Windows":
-                if element.product is not None or "GameBoard" in element.device:  # Filter out non-applicable ports with no product description (non-connected) - add all that contain "GameBoard" (for Bluetooth ports)
+                # Filter out ports with no product description - add all that contain "GameBoard" (for Bluetooth ports)
+                if element.product is not None or "GameBoard" in element.device:
                     name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
                     names.append(name)
             else:

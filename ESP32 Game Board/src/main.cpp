@@ -2,7 +2,7 @@
 #include <BluetoothSerial.h>
 #include <definitions.h>
 #include <behaviors.h>
-
+#include <EEPROM.h>
 
 
 //LED Pins
