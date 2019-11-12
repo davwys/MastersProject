@@ -1,8 +1,12 @@
 import kivy
 from kivy.config import Config
-Config.set('graphics', 'resizable', 0)
+Config.set('graphics', 'resizable', 1)
+Config.set('graphics', 'width', '1000')
+Config.set('graphics', 'height', '750')
+Config.set('graphics', 'minimum_width', '1000')
+Config.set('graphics', 'minimum_height', '750')
 from kivy.core.window import Window
-Window.size = (1000, 750)
+#Window.size = (1000, 750)
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
