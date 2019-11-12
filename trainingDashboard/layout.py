@@ -1,4 +1,8 @@
 import kivy
+from kivy.config import Config
+Config.set('graphics', 'resizable', 0)
+from kivy.core.window import Window
+Window.size = (1000, 750)
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
@@ -7,11 +11,11 @@ from kivy.uix.button import Button
 from kivy.uix.spinner import Spinner
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
-from kivy.core.window import Window
 import sys
 import glob
 import serial
 import serial.tools.list_ports
+
 
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
