@@ -31,7 +31,7 @@ def serial_ports():
     comlist = serial.tools.list_ports.comports()
     for element in comlist:
         # UNIX (Macos/Linux): filter device
-        if platform is not "Windows":
+        if platform.system() is not "Windows":
             if element.product is not None or "GameBoard" in element.device: # Filter out non-applicable ports with no product description (non-connected) - add all that contain "GameBoard" (for Bluetooth ports)
                 name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
                 names.append(name)
@@ -51,8 +51,6 @@ class MyGrid(Widget):
     connected = False
     ports = ['No Devices Found']
     selectedPort = None
-    selectedPortDescription = None
-
 
 
     # Update the list of available ports
@@ -150,10 +148,12 @@ and start playing'''
             self.update_log("Port selected: {}".format(port))
             self.selectedPort = port
             idx = self.ports.index(port)
-            self.selectedPortDescription = self.descriptions[idx]
 
-            # Enable serial port
-            self.ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
+            # Enable serial port (system dependent)
+            if platform.system() is not "Windows":
+                self.ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
+            else:
+                self.ser = serial.Serial(str(self.selectedPort), 57600)  # open serial port
 
             # Enable start button
             self.ids.start_and_finish.disabled = False
