@@ -44,7 +44,9 @@ class MyGrid(Widget):
                     name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
                     names.append(name)
             else:
-                names.append(element.description)
+                self.index = element.description.find('(')
+                self.cutted_string = element.description[:self.index-1]
+                names.append(self.cutted_string)
                 self.selectedPort_Windows = element.device
 
         if len(names) == 0:
