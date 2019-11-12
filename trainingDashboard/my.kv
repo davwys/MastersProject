@@ -6,14 +6,14 @@
     color: (0,0,0,1)
     font_size: dp(20)
 <RoundButton@Button>
-    border_radius: [18]
+    border_radius: dp(18)
     canvas.before:
         Color:
             rgba: self.back_color
         RoundedRectangle:
             size: self.size
             pos: self.pos
-            radius: self.border_radius
+            radius: [dp(18),dp(18),dp(18),dp(18)]
 <BorderButton@Button>
     border_radius: dp(18)
     color: self.back_color
