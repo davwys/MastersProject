@@ -37,6 +37,7 @@ def serial_ports():
                 names.append(name)
         else:
             names.append(element.description)
+            self.selectedPort_Windows = element.device
 
     if len(names) == 0:
         names.append('No Devices Found')
@@ -51,7 +52,7 @@ class MyGrid(Widget):
     connected = False
     ports = ['No Devices Found']
     selectedPort = None
-
+    selectedPort_Windows = None
 
     # Update the list of available ports
     def update_ports(self):
@@ -153,7 +154,7 @@ and start playing'''
             if platform.system() is not "Windows":
                 self.ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
             else:
-                self.ser = serial.Serial(str(self.selectedPort), 57600)  # open serial port
+                self.ser = serial.Serial(str(self.selectedPort_Windows), 57600)  # open serial port
 
             # Enable start button
             self.ids.start_and_finish.disabled = False
