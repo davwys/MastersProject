@@ -21,13 +21,19 @@ void setup() {
     pinMode(LED_Red, OUTPUT);
     pinMode(LED_Green, OUTPUT);
 
+    digitalWrite(LED_Red, LOW);    // turn LED off
+    digitalWrite(LED_Green, LOW);    // turn LED off
+
     //Initial serial communication (via USB)
     Serial.begin(57600);
 
     //Initial serial communication (via Bluetooth)
     BTSerial.begin("GameBoardBluetooth");
 
+    Serial.println();
     Serial.println("Initializing ESP32 Game Board...");
+    Serial.print("Current Status: ");
+    Serial.println(currentStatus);
 }
 
 //Main function

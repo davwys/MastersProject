@@ -18,6 +18,7 @@ Possible states:
 4	  UPLOAD
 5	  PLAYING
 
+
 =============
 Command List:
 =============
@@ -80,11 +81,16 @@ bool apply_mode_change(String command){
       int cmd = (int)temp - 48; //Due to UTF/ASCII-Encoding, we subtract 48 to get the actual number
 
       //Apply status change
-      currentStatus = Status(cmd);
-
-      Serial.print("Changed to mode ");
-      Serial.println(cmd);
-      return true;
+      if(cmd >=0 && cmd <= 5){
+        currentStatus = Status(cmd);
+        Serial.print("Changed to mode ");
+        Serial.print(cmd);
+        return true;
+      }
+      else{
+         Serial.println("Mode change failed, wrong input data?");
+         return false;
+      }
   }
   else
     return false;
@@ -105,6 +111,7 @@ void receive_command(bool usb){
   if (receivedData.length() > 0 && validate_command(receivedData) == true )
   {
       flash_led(LED_Green);
+
 
       //Check if this is a mode change (and apply if yes), else handle other commands
       if(!apply_mode_change(receivedData))
