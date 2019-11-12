@@ -25,27 +25,6 @@ import platform
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 
-# Get a list of available serial ports TODO check on windows
-def serial_ports():
-    names = []
-    comlist = serial.tools.list_ports.comports()
-    for element in comlist:
-        # UNIX (Macos/Linux): filter device
-        if platform.system() is not "Windows":
-            if element.product is not None or "GameBoard" in element.device: # Filter out non-applicable ports with no product description (non-connected) - add all that contain "GameBoard" (for Bluetooth ports)
-                name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
-                names.append(name)
-        else:
-            names.append(element.description)
-            self.selectedPort_Windows = element.device
-
-    if len(names) == 0:
-        names.append('No Devices Found')
-
-    result = names
-    return result
-
-
 class MyGrid(Widget):
     log = ''
     ser = serial.Serial(None)
@@ -54,10 +33,30 @@ class MyGrid(Widget):
     selectedPort = None
     selectedPort_Windows = None
 
+    # Get a list of available serial ports TODO check on windows
+    def serial_ports(self):
+        names = []
+        comlist = serial.tools.list_ports.comports()
+        for element in comlist:
+            # UNIX (Macos/Linux): filter device
+            if platform.system() is not "Windows":
+                if element.product is not None or "GameBoard" in element.device:  # Filter out non-applicable ports with no product description (non-connected) - add all that contain "GameBoard" (for Bluetooth ports)
+                    name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
+                    names.append(name)
+            else:
+                names.append(element.description)
+                self.selectedPort_Windows = element.device
+
+        if len(names) == 0:
+            names.append('No Devices Found')
+
+        result = names
+        return result
+
     # Update the list of available ports
     def update_ports(self):
         self.update_log('Getting device list...')
-        self.ports = serial_ports()
+        self.ports = self.serial_ports()
         self.ids.port_dropdown.values = self.ports
 
         if self.ids.port_dropdown.values[0] == 'No Devices Found':
