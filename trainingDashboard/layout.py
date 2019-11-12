@@ -19,6 +19,7 @@ import sys
 import glob
 import serial
 import serial.tools.list_ports
+import platform
 
 
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
@@ -27,18 +28,20 @@ Window.clearcolor = (0.8, 0.8, 0.8, 1)
 # Get a list of available serial ports TODO check on windows
 def serial_ports():
     names = []
-    descriptions = []
     comlist = serial.tools.list_ports.comports()
     for element in comlist:
-        if element.product is not None or "GameBoard" in element.device: # Filter out non-applicable ports with no product description (non-connected) - add all that contain "GameBoard" (for Bluetooth ports)
-            name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
-            names.append(name)
-            descriptions.append(element.description)
+        # UNIX (Macos/Linux): filter device
+        if platform is not "Windows":
+            if element.product is not None or "GameBoard" in element.device: # Filter out non-applicable ports with no product description (non-connected) - add all that contain "GameBoard" (for Bluetooth ports)
+                name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
+                names.append(name)
+        else:
+            names.append(element.description)
+
     if len(names) == 0:
         names.append('No Devices Found')
-        descriptions.append('-')
 
-    result = [names, descriptions]
+    result = names
     return result
 
 
@@ -47,7 +50,6 @@ class MyGrid(Widget):
     ser = serial.Serial(None)
     connected = False
     ports = ['No Devices Found']
-    descriptions = ['-']
     selectedPort = None
     selectedPortDescription = None
 
@@ -56,9 +58,7 @@ class MyGrid(Widget):
     # Update the list of available ports
     def update_ports(self):
         self.update_log('Getting device list...')
-        info = serial_ports()
-        self.ports = info[0]
-        self.descriptions = info[1]
+        self.ports = serial_ports()
         self.ids.port_dropdown.values = self.ports
 
         if self.ids.port_dropdown.values[0] == 'No Devices Found':
