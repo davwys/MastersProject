@@ -9,8 +9,9 @@
 
 
 //LED Pins
-int LED_Red = 4;
-int LED_Green = 2;
+int LED_Pwr = 14;
+int LED_Sta = 12;
+int LED_Com = 13;
 
 //Storage handling
 int currentByte = 0;
@@ -24,10 +25,12 @@ String receivedData = "";
 
 //Main setup function (runs on initialization)
 void setup() {
-    pinMode(LED_BUILTIN, OUTPUT);
-    pinMode(LED_Red, OUTPUT);
-    pinMode(LED_Green, OUTPUT);
+    pinMode(LED_Pwr, OUTPUT);
+    pinMode(LED_Sta, OUTPUT);
+    pinMode(LED_Com, OUTPUT);
 
+    //Turn on power LED
+    digitalWrite(LED_Pwr, HIGH);
     //Initial serial communication (via USB)
     Serial.begin(57600);
 

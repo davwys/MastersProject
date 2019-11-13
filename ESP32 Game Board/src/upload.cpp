@@ -25,6 +25,7 @@ void saveString(const String input, int startAddr) {
   currentByte += len;
 }
 
+
 //Read a string from Flash memory
 String readStringFromFlash(int startAddr) {
   char in[128];
@@ -53,26 +54,19 @@ void read_data(bool usb){
     //Validate command input
     if (receivedData.length() > 0)// && validate_command(receivedData) == true ) TODO validate data
     {
-
-      Serial.print("Saving to Flash: ");
+      Serial.print("Saving to Memory: ");
       Serial.println(receivedData);
 
-      //Save to flash memory
+      //Save to memory
       saveString(receivedData, currentByte);
 
-
-      Serial.print("current byte is now:");
+      Serial.print("Current byte is now at: ");
       Serial.println(currentByte);
-
-
-      //TEST: Print saved data (probably as bytes lel)
-      int len = receivedData.length();
-      Serial.print("Loaded data: ");
-      Serial.println(readStringFromFlash(currentByte - len));
-
 
     }
 }
+
+
 
 void upload_main(){
   if (Serial.available() > 0) {

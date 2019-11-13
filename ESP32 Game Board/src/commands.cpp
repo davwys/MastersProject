@@ -110,7 +110,7 @@ void receive_command(bool usb){
   //Validate command input
   if (receivedData.length() > 0 && validate_command(receivedData) == true )
   {
-      flash_led(LED_Green);
+      flash_led(LED_Com);
 
 
       //Check if this is a mode change (and apply if yes), else handle other commands
@@ -129,7 +129,6 @@ void receive_command(bool usb){
     //Invalid command type: flash red LED
     else
     {
-        flash_led(LED_Red);
         Serial.println("Invalid command");
     }
   }

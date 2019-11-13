@@ -36,8 +36,9 @@ typedef enum  {
  */
 
 //LED Pins
-extern int LED_Red;
-extern int LED_Green;
+extern int LED_Pwr;
+extern int LED_Sta;
+extern int LED_Com;
 
 //Storage handling
 extern int currentByte;
