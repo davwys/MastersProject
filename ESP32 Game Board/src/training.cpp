@@ -1,4 +1,8 @@
 #include <behaviors.h>
+#include <Wire.h>
+#include <SPI.h>
+// #include <Adafruit_PN532.h>
+
 /*
     Behavior while in training mode:
     - if ready and card is played, return raw sensor values via serial

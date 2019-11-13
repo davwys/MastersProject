@@ -1,10 +1,11 @@
 #include <Arduino.h>
 #include <BluetoothSerial.h>
-
+#include <Adafruit_PN532.h>
 
 // Main definitions
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
+
 
 /*
 ==========================
@@ -31,9 +32,9 @@ typedef enum  {
 
 /*
 ==================
- Physical pin setup
- ==================
- */
+Physical pin setup
+==================
+*/
 
 //LED Pins
 extern int LED_Pwr;
@@ -42,13 +43,23 @@ extern int LED_Com;
 
 //Storage handling
 extern int currentByte;
-
 //Bluetooth Serial object
 extern BluetoothSerial BTSerial;
 
 //Core logic data
 extern Status currentStatus;
 extern String receivedData;
+
+
+/*
+==================
+NFC Sensor setup
+=================
+*/
+
+extern Adafruit_PN532 sensor1;
+extern Adafruit_PN532 sensor2;
+extern Adafruit_PN532 sensor3;
 
 
 #endif

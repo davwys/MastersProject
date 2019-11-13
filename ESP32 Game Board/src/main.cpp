@@ -3,9 +3,21 @@
 #include <definitions.h>
 #include <behaviors.h>
 #include <EEPROM.h>
+#include <Adafruit_PN532.h>
 
 //Flash storage size (for Lolin D32 Pro: max. 4MB, we use 2MB -> 2000000)
 #define STORAGE_SIZE 4096
+
+#define SCK  (2)
+#define MOSI (3)
+#define MISO (5)
+#define SENSOR1   (4)
+#define SENSOR2   (0)
+#define SENSOR3   (2)
+
+Adafruit_PN532 sensor1(SCK, MISO, MOSI, SENSOR1);
+Adafruit_PN532 sensor2(SCK, MISO, MOSI, SENSOR2);
+Adafruit_PN532 sensor3(SCK, MISO, MOSI, SENSOR3);
 
 
 //LED Pins
@@ -25,6 +37,7 @@ String receivedData = "";
 
 //Main setup function (runs on initialization)
 void setup() {
+    pinMode(LED_BUILTIN, OUTPUT);
     pinMode(LED_Pwr, OUTPUT);
     pinMode(LED_Sta, OUTPUT);
     pinMode(LED_Com, OUTPUT);
@@ -40,6 +53,18 @@ void setup() {
     //Initialize Flash storage (using EEPROM lib)
     EEPROM.begin(STORAGE_SIZE);
 
+    //Initialize NFC/RFID sensors //TODO add more
+
+    sensor1.begin();
+    sensor2.begin();
+    sensor3.begin();
+
+
+    // TODO might be needed
+    //digitalWrite(SENSOR1, HIGH); etc.
+
+
+    //Print initialzation data
     Serial.println();
     Serial.println("Initializing ESP32 Game Board...");
     Serial.print("Current Status: ");
