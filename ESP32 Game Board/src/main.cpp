@@ -4,12 +4,19 @@
 #include <behaviors.h>
 #include <EEPROM.h>
 
+//Flash storage size (for Lolin D32 Pro: max. 4MB, we use 2MB -> 2000000)
+#define STORAGE_SIZE 4096
+
 
 //LED Pins
 int LED_Red = 4;
 int LED_Green = 2;
 
-BluetoothSerial BTSerial; //Object for Bluetooth
+//Storage handling
+int currentByte = 0;
+
+//Bluetooth serial object
+BluetoothSerial BTSerial;
 
 //TODO descr
 Status currentStatus = READY;
@@ -28,7 +35,7 @@ void setup() {
     BTSerial.begin("GameBoardBluetooth");
 
     //Initialize Flash storage (using EEPROM lib)
-    EEPROM.begin(EEPROM_SIZE);
+    EEPROM.begin(STORAGE_SIZE);
 
     Serial.println();
     Serial.println("Initializing ESP32 Game Board...");

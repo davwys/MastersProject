@@ -39,7 +39,11 @@ typedef enum  {
 extern int LED_Red;
 extern int LED_Green;
 
-extern BluetoothSerial BTSerial; //Object for Bluetooth
+//Storage handling
+extern int currentByte;
+
+//Bluetooth Serial object
+extern BluetoothSerial BTSerial;
 
 //Core logic data
 extern Status currentStatus;
