@@ -112,7 +112,6 @@ void receive_command(bool usb){
   {
       flash_led(LED_Com);
 
-
       //Check if this is a mode change (and apply if yes), else handle other commands
       if(!apply_mode_change(receivedData))
       {
