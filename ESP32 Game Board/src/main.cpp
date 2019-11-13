@@ -21,14 +21,14 @@ void setup() {
     pinMode(LED_Red, OUTPUT);
     pinMode(LED_Green, OUTPUT);
 
-    digitalWrite(LED_Red, LOW);    // turn LED off
-    digitalWrite(LED_Green, LOW);    // turn LED off
-
     //Initial serial communication (via USB)
     Serial.begin(57600);
 
     //Initial serial communication (via Bluetooth)
     BTSerial.begin("GameBoardBluetooth");
+
+    //Initialize Flash storage (using EEPROM lib)
+    EEPROM.begin(EEPROM_SIZE);
 
     Serial.println();
     Serial.println("Initializing ESP32 Game Board...");
@@ -39,17 +39,17 @@ void setup() {
 //Main function
 void loop() {
 
-
-    //Received command analysis (USB)
-    if (Serial.available() > 0) {
-        receive_command(true);
-    }
-    //Received command analysis (Bluetooth).
-    if (BTSerial.available())
-     {
-       receive_command(false);
+    if(currentStatus != UPLOAD){
+      //Received command analysis (USB)
+      if (Serial.available() > 0) {
+          receive_command(true);
+      }
+      //Received command analysis (Bluetooth).
+      if (BTSerial.available())
+       {
+         receive_command(false);
+       }
      }
-
     //Main Behavior loop
     switch (currentStatus)
       {
