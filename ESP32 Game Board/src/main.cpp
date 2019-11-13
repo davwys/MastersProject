@@ -8,12 +8,12 @@
 //Flash storage size (for Lolin D32 Pro: max. 4MB, we use 2MB -> 2000000)
 #define STORAGE_SIZE 4096
 
-#define SCK  (2)
-#define MOSI (3)
-#define MISO (5)
+#define SCK  (18)
+#define MOSI (23)
+#define MISO (19)
 #define SENSOR1   (4)
-#define SENSOR2   (0)
-#define SENSOR3   (2)
+#define SENSOR2   (32) //Don't use Pin 0, TODO pin definition!
+#define SENSOR3   (33)
 
 Adafruit_PN532 sensor1(SCK, MISO, MOSI, SENSOR1);
 Adafruit_PN532 sensor2(SCK, MISO, MOSI, SENSOR2);
@@ -21,8 +21,8 @@ Adafruit_PN532 sensor3(SCK, MISO, MOSI, SENSOR3);
 
 
 //LED Pins
-int LED_Pwr = 14;
-int LED_Sta = 12;
+int LED_Pwr = 2;
+int LED_Sta = 14;
 int LED_Com = 13;
 
 //Storage handling
@@ -44,6 +44,8 @@ void setup() {
 
     //Turn on power LED
     digitalWrite(LED_Pwr, HIGH);
+    digitalWrite(LED_Sta, HIGH);
+    digitalWrite(LED_Com, HIGH);
     //Initial serial communication (via USB)
     Serial.begin(57600);
 
