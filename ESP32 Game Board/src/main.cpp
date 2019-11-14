@@ -72,30 +72,6 @@ Mode logic setup
 Mode currentMode = READY;
 String receivedData = "";
 
-//Initializes a given NFC sensor
-void initializeSensor(Adafruit_PN532 sensor, int id){
-
-    // TODO might be needed
-    //digitalWrite(SENSOR1, HIGH);
-
-    sensor.begin();
-    uint32_t versiondata = sensor.getFirmwareVersion();
-    //If no sensor found, return
-    if (!versiondata) {
-      Serial.print("Didn't find Sensor #"); Serial.println(id);
-      return;
-    }
-    else{
-      //Sensor Found
-      sensorCount++;
-      Serial.print("Found chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX);
-      Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
-      Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
-      //Configure sensor to read RFID tags
-      sensor.SAMConfig();
-    }
-}
-
 //Main setup function (runs on initialization)
 void setup() {
 
@@ -123,14 +99,15 @@ void setup() {
 
     Serial.println("Beginning sensor search...");
 
-    initializeSensor(sensor1, 1);
-    initializeSensor(sensor2, 2);
-    initializeSensor(sensor3, 3);
-    initializeSensor(sensor4, 4);
-    initializeSensor(sensor5, 5);
-    initializeSensor(sensor6, 6);
-    initializeSensor(sensor7, 7);
-    initializeSensor(sensor8, 8);
+    //Try initializing each sensor
+    initialize_sensor(sensor1, 1);
+    initialize_sensor(sensor2, 2);
+    initialize_sensor(sensor3, 3);
+    initialize_sensor(sensor4, 4);
+    initialize_sensor(sensor5, 5);
+    initialize_sensor(sensor6, 6);
+    initialize_sensor(sensor7, 7);
+    initialize_sensor(sensor8, 8);
 
     Serial.print("Sensor search complete, found "); Serial.print(sensorCount); Serial.println(" sensors.");
 

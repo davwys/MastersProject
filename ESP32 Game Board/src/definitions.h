@@ -57,6 +57,8 @@ NFC Sensor setup
 =================
 */
 
+void initialize_sensor(Adafruit_PN532 sensor, int id);
+
 extern int sensorCount;
 
 //Sensors defined in main.cpp
