@@ -82,7 +82,7 @@ bool apply_mode_change(String command){
 
       //Apply status change
       if(cmd >=0 && cmd <= 5){
-        currentStatus = Status(cmd);
+        currentMode = Mode(cmd);
         Serial.print("Changed to mode ");
         Serial.print(cmd);
         return true;

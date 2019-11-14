@@ -27,7 +27,7 @@ typedef enum  {
     TRAINING,
     UPLOAD,
     PLAYING
-}Status;
+}Mode;
 
 
 /*
@@ -47,7 +47,7 @@ extern int currentByte;
 extern BluetoothSerial BTSerial;
 
 //Core logic data
-extern Status currentStatus;
+extern Mode currentMode;
 extern String receivedData;
 
 
@@ -57,9 +57,18 @@ NFC Sensor setup
 =================
 */
 
+extern int MAX_SENSORS;
+
 extern Adafruit_PN532 sensor1;
 extern Adafruit_PN532 sensor2;
 extern Adafruit_PN532 sensor3;
+extern Adafruit_PN532 sensor4;
+extern Adafruit_PN532 sensor5;
+extern Adafruit_PN532 sensor6;
+extern Adafruit_PN532 sensor7;
+extern Adafruit_PN532 sensor8;
+//extern Adafruit_PN532 sensor9;
+//extern Adafruit_PN532 sensor10;
 
 
 #endif
