@@ -23,8 +23,6 @@ NFC Sensor setup
 =================
 */
 
-#define MAX_SENSORS 10
-
 #define SCK  (18)
 #define MOSI (23)
 #define MISO (19)
@@ -50,6 +48,8 @@ Adafruit_PN532 sensor8(SCK, MISO, MOSI, SENSOR8);
 //Adafruit_PN532 sensor9(SCK, MISO, MOSI, SENSOR9);
 //Adafruit_PN532 sensor10(SCK, MISO, MOSI, SENSOR10);
 
+int sensorCount = 0;
+
 /*
 ==================
 LED Pin setup
@@ -72,8 +72,33 @@ Mode logic setup
 Mode currentMode = READY;
 String receivedData = "";
 
+//Initializes a given NFC sensor
+void initializeSensor(Adafruit_PN532 sensor, int id){
+
+    // TODO might be needed
+    //digitalWrite(SENSOR1, HIGH);
+
+    sensor.begin();
+    uint32_t versiondata = sensor.getFirmwareVersion();
+    //If no sensor found, return
+    if (!versiondata) {
+      Serial.print("Didn't find Sensor #"); Serial.println(id);
+      return;
+    }
+    else{
+      //Sensor Found
+      sensorCount++;
+      Serial.print("Found chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX);
+      Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
+      Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
+      //Configure sensor to read RFID tags
+      sensor.SAMConfig();
+    }
+}
+
 //Main setup function (runs on initialization)
 void setup() {
+
     pinMode(LED_BUILTIN, OUTPUT);
     pinMode(LED_Pwr, OUTPUT);
     pinMode(LED_Sta, OUTPUT);
@@ -90,22 +115,27 @@ void setup() {
     //Initialize Flash storage (using EEPROM lib)
     EEPROM.begin(STORAGE_SIZE);
 
-    //Initialize NFC/RFID sensors //TODO add more
-
-    sensor1.begin();
-    sensor2.begin();
-    sensor3.begin();
-
-
-    // TODO might be needed
-    //digitalWrite(SENSOR1, HIGH); etc.
-
-
     //Print initialzation data
     Serial.println();
     Serial.println("Initializing ESP32 Game Board...");
     Serial.print("Current Mode: ");
     Serial.println(currentMode);
+
+    Serial.println("Beginning sensor search...");
+
+    initializeSensor(sensor1, 1);
+    initializeSensor(sensor2, 2);
+    initializeSensor(sensor3, 3);
+    initializeSensor(sensor4, 4);
+    initializeSensor(sensor5, 5);
+    initializeSensor(sensor6, 6);
+    initializeSensor(sensor7, 7);
+    initializeSensor(sensor8, 8);
+
+    Serial.print("Sensor search complete, found "); Serial.print(sensorCount); Serial.println(" sensors.");
+
+    digitalWrite(LED_Sta, HIGH);
+
 }
 
 //Main function
