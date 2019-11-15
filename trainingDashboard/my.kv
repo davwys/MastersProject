@@ -86,37 +86,20 @@
 
         GridLayout:
             cols: 3
+            height: root.height * 0.8
+            size_hint_y: None
             GridLayout:
                 width: root.width * 0.25
                 size_hint_x: None
-                rows:3
-                Label:
-                    height: self.parent.height * 0.45
-                    size_hint_y: None
-                Label:
-                    height: self.parent.height * 0.45
-                    size_hint_y: None
-                GridLayout:
-                    padding: [10,10,10,10]
-                    cols: 1
-                    width: root.width * 0.25
-                    size_hint_x: None
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                    BorderButton:
-                        id: reboot
-                        disabled: True
-                        text: 'Restart Training'
-                        on_press:
-                            root.reboot()
-                            #self.back_color = .05, .5, 1, .5
+                height: self.parent.height * 0.8
+                size_hint_y: None
 
             GridLayout:
-                height: root.height * 0.9
+                height: root.height * 0.8
                 size_hint_y: None
                 width: root.width * 0.5
                 size_hint_x: None
-                rows: 4
+                rows: 7
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -131,10 +114,41 @@
                         self.back_color = .05, .5, 1, .5
                 Label:
                     id: instructions
-                    height: self.parent.height * 0.5
+                    height: self.parent.height * 0.4
                     size_hint_y: None
                     text: root.initialize_training()
                     color: (0, 0, 0, 1)
+                GridLayout:
+                    padding: [10,10,10,10]
+                    cols: 5
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    Label:
+                        width: self.parent.width * 0.1
+                        size_hint_x: None
+                    BorderButton:
+                        id: oracle_yes
+                        width: self.parent.width * 0.3
+                        size_hint_x: None
+                        text: 'Yes'
+                        disabled: True
+                        on_press: root.ids.instructions.text = 'Activate the Oracle and press "Upload to Board"'
+                    Label:
+                        width: self.parent.width * 0.2
+                        size_hint_x: None
+                    BorderButton:
+                        id: oracle_no
+                        width: self.parent.width * 0.3
+                        size_hint_x: None
+                        text: 'No'
+                        disabled: True
+                        on_press: root.start_finish_training()
+                    Label:
+                        width: self.parent.width * 0.1
+                        size_hint_x: None
+                Label:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
                 RoundButton:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -144,9 +158,14 @@
                     on_press:
                         root.upload()
                         self.back_color = .05, .5, 1, .5
+                Label:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
             GridLayout:
                 width: root.width * 0.25
                 size_hint_x: None
+                height: root.height * 0.8
+                size_hint_y: None
                 rows: 2
                 # Show/Hide Log checkbox
                 CheckBox:
@@ -181,4 +200,19 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
+            GridLayout:
+                padding: [10,10,10,10]
+                cols: 1
+                width: self.parent.width * 0.25
+                size_hint_x: None
+                height: self.parent.height * 1
+                size_hint_y: None
+                BorderButton:
+                    id: reboot
+                    disabled: True
+                    text: 'Restart Training'
+                    on_press:
+                        root.reboot()
+                        #self.back_color = .05, .5, 1, .5
+
 

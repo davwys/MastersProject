@@ -84,9 +84,9 @@ class MyGrid(Widget):
             self.instructions.text = '''1. Activate each area 
 (in alphabetical order)
 
-2. Activate the Oracle 
-
-3. Press "Finish Training"'''
+2. Do you have an Oracle? '''
+            self.ids.oracle_yes.disabled = False
+            self.ids.oracle_no.disabled = False
         else:
             self.saf.text = 'Start Training'
             self.update_log('Finished Training!')
@@ -114,7 +114,7 @@ class MyGrid(Widget):
             self.ids.log.size_hint_y = None
             self.ids.log.text = ''
         else:
-            self.ids.log.height = self.parent.height * 0.71
+            self.ids.log.height = self.parent.height * 0.72
             self.ids.log.size_hint_y = None
             self.ids.log.text = 'Log:\n' + self.log
 
