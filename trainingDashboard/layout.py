@@ -76,7 +76,7 @@ class MyGrid(Widget):
 2. Do you have an Oracle? '''
         self.ids.oracle_yes.disabled = False
         self.ids.oracle_no.disabled = False
-        self.ids.start_and_finish.disabled = True
+        self.ids.start_training.disabled = True
 
     def oracle_yes(self):
         self.ids.oracle_yes.disabled = True
@@ -113,9 +113,9 @@ You can close the dashboard
 and start playing'''
 
     def reboot(self):
-        self.ids.start_and_finish.disabled = False
+        self.ids.start_training.disabled = False
         self.ids.upload.disabled = True
-        self.ids.start_and_finish.text = 'Start Training'
+        self.ids.start_training.text = 'Start Training'
         self.ids.instructions.text = 'Press "Start Training"'
         self.update_log('reboot')
         self.ids.reboot.disabled = True
@@ -151,7 +151,7 @@ and start playing'''
                 self.ser = serial.Serial(str(self.selectedPort_Windows), 57600)  # open serial port
 
             # Enable start button
-            self.ids.start_and_finish.disabled = False
+            self.ids.start_training.disabled = False
         except OSError:
             self.update_log('Error: Could not open port')
             self.toggle_log(True)
