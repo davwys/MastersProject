@@ -66,36 +66,51 @@ class MyGrid(Widget):
             self.spin.text = 'No Devices Found'
             self.ids.port_dropdown.values = ''
 
-    def initialize_training(self):
-        self.start_instruction = 'Press "Start Training"'
-        return self.start_instruction
-
-
-
-
     # Start or finish the training process
-    def start_finish_training(self):
+    def start_training(self):
         self.ids.reboot.disabled = False
-        if self.saf.text == 'Start Training':
-            self.update_log('Started Training!')
-            self.saf.text = 'Finish Training'
-            # Disable upload btn until finished
-            self.ids.upload.disabled = True
-            self.instructions.text = '''1. Activate each area 
+        self.update_log('Started Training!')
+        self.instructions.text = '''1. Activate each area 
 (in alphabetical order)
 
 2. Do you have an Oracle? '''
-            self.ids.oracle_yes.disabled = False
-            self.ids.oracle_no.disabled = False
-        else:
-            self.saf.text = 'Start Training'
-            self.update_log('Finished Training!')
-            # Enable upload button after finishing training
-            self.ids.upload.disabled = False
-            self.ids.start_and_finish.disabled = True
-            self.instructions.text = 'Press "Upload to board"'
+        self.ids.oracle_yes.disabled = False
+        self.ids.oracle_no.disabled = False
+        self.ids.start_and_finish.disabled = True
 
+    def oracle_yes(self):
+        self.ids.oracle_yes.disabled = True
+        self.ids.oracle_no.disabled = True
+        self.ids.instructions.text = 'Activate the Oracle and press "Upload to Board"'
+        self.ids.upload.disabled = False
+        self.update_log('Oracle incoming...')
 
+    def oracle_no(self):
+        self.ids.oracle_yes.disabled = True
+        self.ids.oracle_no.disabled = True
+        self.ids.instructions.text = 'Press "Upload to Board"'
+        self.ids.upload.disabled = False
+        self.update_log('No Oracle')
+
+    # Upload new training data
+    def upload(self):
+        self.ids.reboot.disabled = True
+        self.update_log('Upload starting...')
+        self.ids.upload.disabled = True
+        if self.selectedPort is not None:
+            self.update_log("Connecting to port {}...".format(self.selectedPort))
+            try:
+                self.update_log('Connected to port\n{}, uploading...'.format(self.ser.name))
+                self.ser.write(b'CHANGE_MODE=1')  # write data as bytes
+                self.ids.upload.disabled = True
+                # self.ser.close()  # close port TODO check need
+            except OSError:
+                self.update_log('Error occurred')  # TODO Error handling
+
+        # TODO integrate into check if upload actually worked
+        self.ids.instructions.text = '''All done! 
+You can close the dashboard
+and start playing'''
 
     def reboot(self):
         self.ids.start_and_finish.disabled = False
@@ -104,8 +119,8 @@ class MyGrid(Widget):
         self.ids.instructions.text = 'Press "Start Training"'
         self.update_log('reboot')
         self.ids.reboot.disabled = True
-
-
+        self.ids.oracle_yes.disabled = True
+        self.ids.oracle_no.disabled = True
 
     # Toggle Log visibility
     def toggle_log(self, value):
@@ -117,29 +132,6 @@ class MyGrid(Widget):
             self.ids.log.height = self.parent.height * 0.72
             self.ids.log.size_hint_y = None
             self.ids.log.text = 'Log:\n' + self.log
-
-
-
-    # Upload new training data
-    def upload(self):
-        self.ids.reboot.disabled = True
-        self.update_log('Upload starting...')
-        if self.selectedPort is not None:
-            self.update_log("Connecting to port {}...".format(self.selectedPort))
-            try:
-                self.update_log('Connected to port\n{}, uploading...'.format(self.ser.name))
-                self.ser.write(b'CHANGE_MODE=1') #write data as bytes
-                self.ids.upload.disabled = True
-                # self.ser.close()  # close port TODO check need
-            except OSError:
-                self.update_log('Error occurred')  # TODO Error handling
-
-        # TODO integrate into check if upload actually worked
-        self.ids.instructions.text = '''All done! 
-You can close the dashboard
-and start playing'''
-
-
 
     # Selects a given port to connect to
     def select_port(self, port):
@@ -163,8 +155,6 @@ and start playing'''
         except OSError:
             self.update_log('Error: Could not open port')
             self.toggle_log(True)
-
-
 
     # Update the integrated log
     def update_log(self, text):

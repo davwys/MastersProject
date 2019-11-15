@@ -1,9 +1,9 @@
 <Button>
     background_color: (0,0,0,0)
     background_normal: ''
-    back_color: (.05, .5, 1, 1)
-    on_release: self.back_color = .05, .5, 1, 1
+    back_color: (.05, .5, 1, 1) if self.disabled == False else (.05, .5, 1, 0.5)
     color: (0,0,0,1)
+    on_press: self.back_color = .05, .5, 1, .5
 <RoundButton@Button>
     border_radius: dp(18)
     canvas.before:
@@ -23,6 +23,7 @@
             rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
             width: 1.2
 <Spinner@Button>
+    on_release: self.back_color = .05, .5, 1, 1
     border_radius: dp(12)
     color: self.back_color
     canvas.before:
@@ -33,6 +34,8 @@
             width: 1.2
 <Label>
     font_size: dp(20)
+
+
 
 <MyGrid>
     saf: start_and_finish
@@ -93,7 +96,6 @@
                 size_hint_x: None
                 height: self.parent.height * 0.8
                 size_hint_y: None
-
             GridLayout:
                 height: root.height * 0.8
                 size_hint_y: None
@@ -109,14 +111,12 @@
                     disabled: False
                     id: start_and_finish
                     text: "Start Training"
-                    on_press:
-                        root.start_finish_training()
-                        self.back_color = .05, .5, 1, .5
+                    on_press: root.start_training()
                 Label:
                     id: instructions
                     height: self.parent.height * 0.4
                     size_hint_y: None
-                    text: root.initialize_training()
+                    text: 'Press "Start Training"'
                     color: (0, 0, 0, 1)
                 GridLayout:
                     padding: [10,10,10,10]
@@ -132,7 +132,7 @@
                         size_hint_x: None
                         text: 'Yes'
                         disabled: True
-                        on_press: root.ids.instructions.text = 'Activate the Oracle and press "Upload to Board"'
+                        on_press: root.oracle_yes()
                     Label:
                         width: self.parent.width * 0.2
                         size_hint_x: None
@@ -142,7 +142,7 @@
                         size_hint_x: None
                         text: 'No'
                         disabled: True
-                        on_press: root.start_finish_training()
+                        on_press: root.oracle_no()
                     Label:
                         width: self.parent.width * 0.1
                         size_hint_x: None
@@ -155,9 +155,7 @@
                     disabled: True
                     id: upload
                     text: "Upload to Board"
-                    on_press:
-                        root.upload()
-                        self.back_color = .05, .5, 1, .5
+                    on_press: root.upload()
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -174,7 +172,6 @@
                     id: chk
                     on_press: root.toggle_log(self.active)
                     color: 0.5,0.5,0.5,1
-
                 Label:
                     width: root.width * 0.25
                     size_hint_x: None
@@ -213,6 +210,5 @@
                     text: 'Restart Training'
                     on_press:
                         root.reboot()
-                        #self.back_color = .05, .5, 1, .5
 
 
