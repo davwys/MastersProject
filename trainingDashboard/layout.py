@@ -114,7 +114,7 @@ class MyGrid(Widget):
             self.ids.log.size_hint_y = None
             self.ids.log.text = ''
         else:
-            self.ids.log.height = self.parent.height * 0.71
+            self.ids.log.height = self.parent.height * 0.72
             self.ids.log.size_hint_y = None
             self.ids.log.text = 'Log:\n' + self.log
 
