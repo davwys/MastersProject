@@ -109,6 +109,8 @@ String readTag(Adafruit_PN532 sensor, int id, bool verbose){
       //Subtract encoding ("en" for plain text)
       text = text.substring(2);
 
+      //Add sensor ID
+      text = "SensorID" + String(id) + "_" + text;
       //return final read text
       return text;
     }

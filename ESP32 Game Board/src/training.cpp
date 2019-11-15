@@ -14,19 +14,28 @@
 //Determines whether a card can be played at the moment
 bool training_ready = true;
 
-void training_main(){
-
-  //If training dashboard is ready for new data
-  if(training_ready){
+//Checks a sensor for training input and generates training output packet
+void trainOnSensor(Adafruit_PN532 sensor, int id){
     try{
-      String tmp = readTag(sensor1, 1, false);
+      String tmp = readTag(sensor, id, false);
       if(tmp.length() > 4){
-        Serial.println("TRAIN=" + tmp);
+        Serial.println("TRAIN={" + tmp + "}");
       }
     }
     catch (std::runtime_error e){
       //Catch errors for incomplete data
     }
+}
+
+
+void training_main(){
+
+  //If training dashboard is ready for new data
+  if(training_ready){
+    //TODO add other sensors
+    trainOnSensor(sensor1, 1);
+    trainOnSensor(sensor2, 2);
+    trainOnSensor(sensor3, 3);
   }
   else{
     //TODO: Await TRAIN_OK
