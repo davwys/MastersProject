@@ -2,6 +2,18 @@
 #include <definitions.h>
 #include <Adafruit_PN532.h>
 
+
+/*
+   Information about tags we use:
+
+   TAG Type       PAGES   USER START    USER STOP
+   --------       -----   ----------    ---------
+   NTAG 213       45      4             39
+
+*/
+
+
+
 //Initializes a given NFC sensor.
 //Timeout (per sensor) is set in the library's Adafruit_PN532.h file
 void initialize_sensor(Adafruit_PN532 sensor, int id){
@@ -26,48 +38,27 @@ void initialize_sensor(Adafruit_PN532 sensor, int id){
     }
 }
 
-//Reads an NFC tag and returns data. TODO test
-void readTag(Adafruit_PN532 sensor, int id){
+//Reads an NFC tag and returns data contained within
+//Params: Sensor, sensor ID (number), whether to be print additional info or not)
+void readTag(Adafruit_PN532 sensor, int id, bool verbose){
   uint8_t success;
-  uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  // Buffer to store the returned UID
-  uint8_t uidLength;                        // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
-
-  // Wait for an NTAG203 card.  When one is found 'uid' will be populated with
-  // the UID, and uidLength will indicate the size of the UUID (normally 7)
+  uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  //Buffer to store the returned UID
+  uint8_t uidLength;                        //Length of the UID (4 or 7 bytes depending on ISO14443A card type)
+  uint8_t pageNumber = 9; //Number of pages to read. Max is 45, we only use the first 9
   success = sensor.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
 
   if (success) {
-    // Display some basic information about the card
-    Serial.println("Found an ISO14443A card");
-    Serial.print("  UID Length: ");Serial.print(uidLength, DEC);Serial.println(" bytes");
-    Serial.print("  UID Value: ");
-    sensor.PrintHex(uid, uidLength);
-    Serial.println("");
+    //Print card UID if any is found
+    if(verbose)
+      Serial.print("Found card with UID "); sensor.PrintHex(uid, uidLength);
+    uint8_t data[32];
 
-    if (uidLength == 7)
+    for (uint8_t i = 7; i <= pageNumber; i++) //Start at 7, because we don't need non-user data / format encoding stuff
     {
-      uint8_t data[32];
+      success = sensor.ntag2xx_ReadPage(i, data);
 
-      // We probably have an NTAG2xx card (though it could be Ultralight as well)
-      Serial.println("Seems to be an NTAG2xx tag (7 byte UID)");
-
-      // NTAG2x3 cards have 39*4 bytes of user pages (156 user bytes),
-      // starting at page 4 ... larger cards just add pages to the end of
-      // this range:
-
-      // See: http://www.nxp.com/documents/short_data_sheet/NTAG203_SDS.pdf
-
-      // TAG Type       PAGES   USER START    USER STOP
-      // --------       -----   ----------    ---------
-      // NTAG 203       42      4             39
-      // NTAG 213       45      4             39
-      // NTAG 215       135     4             129
-      // NTAG 216       231     4             225
-
-      for (uint8_t i = 0; i < 42; i++)
-      {
-        success = sensor.ntag2xx_ReadPage(i, data);
-
+      //Verbose logging of card data
+      if(verbose){
         // Display the current page number
         Serial.print("PAGE ");
         if (i < 10)
@@ -92,10 +83,19 @@ void readTag(Adafruit_PN532 sensor, int id){
           Serial.println("Unable to read the requested page!");
         }
       }
-    }
-    else
-    {
-      Serial.println("This doesn't seem to be an NTAG203 tag (UUID length != 7 bytes)!");
+
+      //Non-Verbose: return only relevant data
+      else{
+        if (success)
+        {
+          //Dump page data
+          //sensor.PrintHex(data, 4);
+          String txt((char*) data);
+          //String txt(reinterpret_cast<char*>(data));
+          BTSerial.println(txt);
+        }
+      }
+
     }
   }
 

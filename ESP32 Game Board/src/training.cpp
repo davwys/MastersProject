@@ -15,7 +15,7 @@ bool training_ready = true;
 
 void training_main(){
   if(training_ready){
-    readTag(sensor1, 1);
+    readTag(sensor1, 1, false);
   }
   else{
     //TODO: Await TRAIN_OK
