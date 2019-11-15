@@ -26,9 +26,9 @@ NFC Sensor setup
 #define SCK  (18)
 #define MOSI (23)
 #define MISO (19)
-#define SENSOR1   (4)
+#define SENSOR1   (33)
 #define SENSOR2   (32)
-#define SENSOR3   (33)
+#define SENSOR3   (4)
 #define SENSOR4   (13) //TODO test
 #define SENSOR5   (25) //TODO test
 #define SENSOR6   (26) //TODO test

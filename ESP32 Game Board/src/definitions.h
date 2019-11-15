@@ -58,6 +58,7 @@ NFC Sensor setup
 */
 
 void initialize_sensor(Adafruit_PN532 sensor, int id);
+void readTag(Adafruit_PN532 sensor, int id);
 
 extern int sensorCount;
 

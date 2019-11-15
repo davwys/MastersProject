@@ -1,7 +1,7 @@
 #include <behaviors.h>
-#include <Wire.h>
-#include <SPI.h>
-// #include <Adafruit_PN532.h>
+#include <definitions.h>
+#include <definitions.h>
+#include <Adafruit_PN532.h>
 
 /*
     Behavior while in training mode:
@@ -15,7 +15,7 @@ bool training_ready = true;
 
 void training_main(){
   if(training_ready){
-
+    readTag(sensor1, 1);
   }
   else{
     //TODO: Await TRAIN_OK
