@@ -63,14 +63,14 @@ class MyGrid(Widget):
         self.ids.port_dropdown.values = self.ports
 
         if self.ids.port_dropdown.values[0] == 'No Devices Found':
-            self.spin.text = 'No Devices Found'
+            self.ids.port_dropdown.text = 'No Devices Found'
             self.ids.port_dropdown.values = ''
 
     # Start or finish the training process
     def start_training(self):
         self.ids.reboot.disabled = False
         self.update_log('Started Training!')
-        self.instructions.text = '''1. Activate each area 
+        self.ids.instructions.text = '''1. Activate each area 
 (in alphabetical order)
 
 2. Do you have an Oracle? '''
