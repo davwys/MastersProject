@@ -2,6 +2,7 @@
 #include <definitions.h>
 #include <definitions.h>
 #include <Adafruit_PN532.h>
+#include <stdexcept>
 
 /*
     Behavior while in training mode:
@@ -14,8 +15,18 @@
 bool training_ready = true;
 
 void training_main(){
+
+  //If training dashboard is ready for new data
   if(training_ready){
-    readTag(sensor1, 1, false);
+    try{
+      String tmp = readTag(sensor1, 1, false);
+      if(tmp.length() > 4){
+        Serial.println("TRAIN=" + tmp);
+      }
+    }
+    catch (std::runtime_error e){
+      //Catch errors for incomplete data
+    }
   }
   else{
     //TODO: Await TRAIN_OK

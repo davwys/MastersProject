@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <definitions.h>
 #include <Adafruit_PN532.h>
+#include <stdexcept>
 
 
 /*
@@ -38,77 +39,83 @@ void initialize_sensor(Adafruit_PN532 sensor, int id){
     }
 }
 
-//Reads an NFC tag and returns data contained within
+//Reads an NFC tag and returns data contained within as a String
 //Params: Sensor, sensor ID (number), whether to be print additional info or not)
-void readTag(Adafruit_PN532 sensor, int id, bool verbose){
+String readTag(Adafruit_PN532 sensor, int id, bool verbose){
   uint8_t success;
   uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  //Buffer to store the returned UID
   uint8_t uidLength;                        //Length of the UID (4 or 7 bytes depending on ISO14443A card type)
   uint8_t pageNumber = 9; //Number of pages to read. Max is 45, we only use the first 9
   success = sensor.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
-  String text; //Final read text string
-
+  String text;        //Final read text string
+  bool valid = true;  //Whether we got all needed data
   if (success) {
     //Print card UID if any is found
-    if(verbose)
-      Serial.print("Found card with UID "); sensor.PrintHex(uid, uidLength);
+    if(verbose){
+        Serial.print("Found card with UID "); sensor.PrintHex(uid, uidLength);
+    }
     uint8_t data[32];
 
     for (uint8_t i = 7; i <= pageNumber; i++) //Start at 7, because we don't need non-user data / format encoding stuff
     {
       success = sensor.ntag2xx_ReadPage(i, data);
 
-      //Verbose logging of card data
-      if(verbose){
-        // Display the current page number
-        Serial.print("PAGE ");
-        if (i < 10)
-        {
-          Serial.print("0");
-          Serial.print(i);
-        }
-        else
-        {
-          Serial.print(i);
-        }
-        Serial.print(": ");
-
-        // Display the results, depending on 'success'
-        if (success)
-        {
-          // Dump the page data
-          sensor.PrintHexChar(data, 4);
-        }
-        else
-        {
-          Serial.println("Unable to read the requested page!");
-        }
-      }
-
-      //Non-Verbose: return only relevant data
-      else{
-        if (success)
-        {
-          char temp[4];
-
-          //sensor.PrintHex(data, 4);
-          for(int i = 0; i < 4; i++){
-            temp[i] = data[i];
+      if(success){
+        //Verbose logging of card data
+        if(verbose){
+          // Display the current page number
+          Serial.print("PAGE ");
+          if (i < 10)
+          {
+            Serial.print("0");
+            Serial.print(i);
           }
+          else
+          {
+            Serial.print(i);
+          }
+          Serial.print(": ");
 
-          String txt_temp((char*) temp);
-          String txt = txt_temp.substring(0,4);
-          text += txt;
+          // Display the results, depending on 'success'
+          if (success)
+          {
+            // Dump the page data
+            sensor.PrintHexChar(data, 4);
+          }
+          else
+          {
+            Serial.println("Unable to read the requested page!");
+          }
         }
-      }
+        //Read 4 bytes from the data we just read
+        char temp[4];
+        for(int i = 0; i < 4; i++){
+          temp[i] = data[i];
+        }
 
+        //Convert to string & append to our return string
+        String txt_temp((char*) temp);
+        String txt = txt_temp.substring(0,4);
+        //This is the final string
+        text += txt;
+      }
+      else{
+        valid = false;
+      }
     }
 
-    //Subtract encoding ("en" for plain text)
-    text = text.substring(2);
+    //If we got the complete data block
+    if(valid && text.length() >= 8){
+      //Subtract encoding ("en" for plain text)
+      text = text.substring(2);
 
-    //Print final read text
-    BTSerial.println(text);
+      //return final read text
+      return text;
+    }
+    else{
+      //Serial.print("Error: Couldn't finish reading data");
+      throw std::runtime_error("Error: Couldn't finish reading data");
+    }
   }
 
 }
