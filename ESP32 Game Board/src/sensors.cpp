@@ -46,6 +46,7 @@ void readTag(Adafruit_PN532 sensor, int id, bool verbose){
   uint8_t uidLength;                        //Length of the UID (4 or 7 bytes depending on ISO14443A card type)
   uint8_t pageNumber = 9; //Number of pages to read. Max is 45, we only use the first 9
   success = sensor.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
+  String text; //Final read text string
 
   if (success) {
     //Print card UID if any is found
@@ -88,15 +89,26 @@ void readTag(Adafruit_PN532 sensor, int id, bool verbose){
       else{
         if (success)
         {
-          //Dump page data
+          char temp[4];
+
           //sensor.PrintHex(data, 4);
-          String txt((char*) data);
-          //String txt(reinterpret_cast<char*>(data));
-          BTSerial.println(txt);
+          for(int i = 0; i < 4; i++){
+            temp[i] = data[i];
+          }
+
+          String txt_temp((char*) temp);
+          String txt = txt_temp.substring(0,4);
+          text += txt;
         }
       }
 
     }
+
+    //Subtract encoding ("en" for plain text)
+    text = text.substring(2);
+
+    //Print final read text
+    BTSerial.println(text);
   }
 
 }
