@@ -99,7 +99,7 @@
                 size_hint_y: None
                 width: root.width * 0.5
                 size_hint_x: None
-                rows: 5
+                rows: 7
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -114,10 +114,41 @@
                         self.back_color = .05, .5, 1, .5
                 Label:
                     id: instructions
-                    height: self.parent.height * 0.5
+                    height: self.parent.height * 0.4
                     size_hint_y: None
                     text: root.initialize_training()
                     color: (0, 0, 0, 1)
+                GridLayout:
+                    padding: [10,10,10,10]
+                    cols: 5
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    Label:
+                        width: self.parent.width * 0.1
+                        size_hint_x: None
+                    BorderButton:
+                        id: oracle_yes
+                        width: self.parent.width * 0.3
+                        size_hint_x: None
+                        text: 'Yes'
+                        disabled: True
+                        on_press: root.ids.instructions.text = 'Activate the Oracle and press "Upload to Board"'
+                    Label:
+                        width: self.parent.width * 0.2
+                        size_hint_x: None
+                    BorderButton:
+                        id: oracle_no
+                        width: self.parent.width * 0.3
+                        size_hint_x: None
+                        text: 'No'
+                        disabled: True
+                        on_press: root.start_finish_training()
+                    Label:
+                        width: self.parent.width * 0.1
+                        size_hint_x: None
+                Label:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
                 RoundButton:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -128,9 +159,8 @@
                         root.upload()
                         self.back_color = .05, .5, 1, .5
                 Label:
-                    height: self.parent.height * 0.2
+                    height: self.parent.height * 0.1
                     size_hint_y: None
-                    text: 'Oracle flow?'
             GridLayout:
                 width: root.width * 0.25
                 size_hint_x: None

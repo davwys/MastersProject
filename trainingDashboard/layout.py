@@ -84,9 +84,9 @@ class MyGrid(Widget):
             self.instructions.text = '''1. Activate each area 
 (in alphabetical order)
 
-2. Activate the Oracle 
-
-3. Press "Finish Training"'''
+2. Do you have an Oracle? '''
+            self.ids.oracle_yes.disabled = False
+            self.ids.oracle_no.disabled = False
         else:
             self.saf.text = 'Start Training'
             self.update_log('Finished Training!')
