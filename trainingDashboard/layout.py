@@ -114,6 +114,9 @@ class MyGrid(Widget):
         thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
         thread.start()
 
+    def submit_area_name(self, area_name):
+        print(area_name)
+
     def oracle_yes(self):
         self.ids.oracle_yes.disabled = True
         self.ids.oracle_no.disabled = True
