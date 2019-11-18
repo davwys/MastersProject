@@ -48,7 +48,7 @@ class MyGrid(Widget):
     #   [Investor, 2, 32],
     #   [Company, 1, 32]
     # ]
-    trainingInput = [[]]
+    trainingInput = []
 
 
 
@@ -134,7 +134,7 @@ class MyGrid(Widget):
         self.ids.submit_name.disabled = False
 
     def submit_area_name(self, name):
-        if len(name) > 0:
+        if 0 < len(name) < 20:
             self.ids.area_name.disabled = True
             self.ids.area_name.text = ''
             self.ids.submit_name.disabled = True
@@ -145,11 +145,16 @@ class MyGrid(Widget):
             # Confirm received training data
             self.ser.write(b'TRAIN_OK')
             self.save_training_data(self.tempData)
+        else:
+            self.update_log('Error: Name too long')
 
 
     def save_training_data(self, data):
-        print("OK")
+        print("Saving training data:")
         print(data)
+        self.trainingInput.append(data)
+        print("Training data now at:")
+        print(self.trainingInput)
 
     # Upload new training data
     def upload(self):
