@@ -24,8 +24,8 @@ import threading
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 
-
 class MyGrid(Widget):
+
     log = ''
     ser = serial.Serial(None)
     connected = False
@@ -35,6 +35,9 @@ class MyGrid(Widget):
 
     # Temporary data storage
     tempData = [None, None, None]
+
+    # Check for restarts
+    restarted = False
 
     # Training input array:
     # =====================
@@ -49,8 +52,6 @@ class MyGrid(Widget):
     #   [Company, 1, 32]
     # ]
     trainingInput = []
-
-
 
     # Read and handle serial input data
     def read_from_port(self, ser):
@@ -67,6 +68,8 @@ class MyGrid(Widget):
         c_start = "CardID="
         message = msg[msg.find(start)+len(start):msg.rfind(end)]
         # message example: SensorID=1_CardID=072
+        if "SensorID=" not in message or "CardID=" not in message:
+            return
 
         sensor_id_string = message[message.find(s_start) + len(s_start):message.rfind(s_end)]
         card_id_string = message[message.find(c_start) + len(c_start):len(message)]
@@ -125,8 +128,9 @@ class MyGrid(Widget):
         self.ser.flush()
 
         # Start training TODO kill after completion
-        thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
-        thread.start()
+        if not self.restarted:
+            thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
+            thread.start()
 
     def request_area_name(self):
         self.ids.area_name.disabled = False
@@ -148,10 +152,7 @@ class MyGrid(Widget):
         else:
             self.update_log('Error: Name too long')
 
-
     def save_training_data(self, data):
-        print("Saving training data:")
-        print(data)
         self.trainingInput.append(data)
         print("Training data now at:")
         print(self.trainingInput)
@@ -178,6 +179,8 @@ and start playing'''
 
     # Restarts the training process
     def restart_training(self):
+
+        self.restarted = True
         self.ids.start_training.disabled = False
         self.ids.upload.disabled = True
         self.ids.start_training.text = 'Start Training'
@@ -186,6 +189,13 @@ and start playing'''
         # Send restart command
         self.ser.write(b'RESTART_TRAINING')  # write data as bytes
         self.ids.restart.disabled = True
+        self.tempData = None
+        self.trainingInput = []
+
+        # disable name input
+        self.ids.area_name.disabled = True
+        self.ids.area_name.text = ''
+        self.ids.submit_name.disabled = True
 
     # Toggle Log visibility
     def toggle_log(self, value):
