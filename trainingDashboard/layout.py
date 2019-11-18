@@ -26,6 +26,12 @@ Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 class MyGrid(Widget):
 
+    # load external methods
+    from serial_functions import serial_ports, read_from_port, update_ports, select_port, read_training_input
+    from input import request_area_name, submit_area_name
+    from data_handling import save_training_data, handle_training_message
+    from log import update_log, toggle_log
+
     log = ''
     ser = serial.Serial(None)
     connected = False
@@ -53,70 +59,6 @@ class MyGrid(Widget):
     # ]
     trainingInput = []
 
-    # Read and handle serial input data
-    def read_from_port(self, ser):
-        while True:
-            reading = ser.readline().decode()
-            self.update_log('Received: ' + str(reading))
-            self.handle_training_message(reading)
-
-    def handle_training_message(self, msg):
-        start = "{"
-        end = "}"
-        s_start = "SensorID="
-        s_end = "_"
-        c_start = "CardID="
-        message = msg[msg.find(start)+len(start):msg.rfind(end)]
-        # message example: SensorID=1_CardID=072
-        if "SensorID=" not in message or "CardID=" not in message:
-            return
-
-        sensor_id_string = message[message.find(s_start) + len(s_start):message.rfind(s_end)]
-        card_id_string = message[message.find(c_start) + len(c_start):len(message)]
-        sensor_id = int(sensor_id_string)
-        card_id = int(card_id_string)
-        print("Sensor ID: {}".format(sensor_id))
-        print("Card ID: {}".format(card_id))
-
-        # Validate both IDs and save to temporary storage
-        if sensor_id > 0 and 0 < card_id < 999:
-            self.tempData = [None, sensor_id, card_id]
-            self.request_area_name()
-
-    # Get a list of available serial ports
-    def serial_ports(self):
-        names = []
-        comlist = serial.tools.list_ports.comports()
-        for element in comlist:
-            # macOS: filter device
-            if platform.system() is not "Windows":
-                # Filter out ports with no product description - add all that contain "GameBoard" (for Bluetooth ports)
-                if element.product is not None or "GameBoard" in element.device:
-                    name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
-                    names.append(name)
-            # Windows: get nice name for COM ports
-            else:
-                index = element.description.find('(')
-                cut_string = element.description[:index-1]
-                names.append(cut_string)
-                self.selectedPort_Windows = element.device
-
-        if len(names) == 0:
-            names.append('No Devices Found')
-
-        result = names
-        return result
-
-    # Update the list of available ports
-    def update_ports(self):
-        self.update_log('Getting device list...')
-        self.ports = self.serial_ports()
-        self.ids.port_dropdown.values = self.ports
-
-        if self.ids.port_dropdown.values[0] == 'No Devices Found':
-            self.ids.port_dropdown.text = 'No Devices Found'
-            self.ids.port_dropdown.values = ''
-
     # Start or finish the training process
     def start_training(self):
         self.ids.restart.disabled = False
@@ -131,31 +73,6 @@ class MyGrid(Widget):
         if not self.restarted:
             thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
             thread.start()
-
-    def request_area_name(self):
-        self.ids.area_name.disabled = False
-        self.ids.area_name.text = ''
-        self.ids.submit_name.disabled = False
-
-    def submit_area_name(self, name):
-        if 0 < len(name) < 20:
-            self.ids.area_name.disabled = True
-            self.ids.area_name.text = ''
-            self.ids.submit_name.disabled = True
-
-            # Save name to temp data
-            self.tempData[0] = name
-
-            # Confirm received training data
-            self.ser.write(b'TRAIN_OK')
-            self.save_training_data(self.tempData)
-        else:
-            self.update_log('Error: Name too long')
-
-    def save_training_data(self, data):
-        self.trainingInput.append(data)
-        print("Training data now at:")
-        print(self.trainingInput)
 
     # Upload new training data
     def upload(self):
@@ -196,56 +113,6 @@ and start playing'''
         self.ids.area_name.disabled = True
         self.ids.area_name.text = ''
         self.ids.submit_name.disabled = True
-
-    # Toggle Log visibility
-    def toggle_log(self, value):
-        if not value:
-            self.ids.log.height = 0
-            self.ids.log.size_hint_y = None
-            self.ids.log.text = ''
-        else:
-            self.ids.log.height = self.parent.height * 0.72
-            self.ids.log.size_hint_y = None
-            self.ids.log.text = 'Log:\n' + self.log
-
-    # Selects a given port to connect to
-    def select_port(self, port):
-
-        if str(port) == 'No Devices Found':
-            return
-
-        try:
-            self.update_log("Port selected: {}".format(port))
-            self.selectedPort = port
-            idx = self.ports.index(port)
-
-            # Enable serial port (system dependent)
-            if platform.system() is not "Windows":
-                self.ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
-            else:
-                self.ser = serial.Serial(str(self.selectedPort_Windows), 57600)  # open serial port
-
-            # Enable start button
-            self.ids.start_training.disabled = False
-        except OSError:
-            self.update_log('Error: Could not open port')
-            self.toggle_log(True)
-
-    # Update the integrated log
-    def update_log(self, text):
-        print(text)
-        self.log += (text + '\n')
-
-        # Update Log text only if visible
-        if self.ids.chk.active:
-            self.ids.log.text = 'Log:\n' + self.log
-
-    def read_training_input(self):
-        i = 0
-        while i < 25:
-            txt = self.ser.read(1)
-            self.update_log(str(txt))
-            i += 1
 
 
 # Main App definition
