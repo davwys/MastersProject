@@ -38,24 +38,11 @@ void trainOnSensor(Adafruit_PN532 sensor, int id){
 
 void training_main(){
 
-  //If training dashboard is ready for new data
+  //If training dashboard is ready for new data - otherwise, we await TRAIN_OK command
   if(training_ready){
     //TODO add other sensors
     trainOnSensor(sensor1, 1);
     trainOnSensor(sensor2, 2);
     trainOnSensor(sensor3, 3);
-  }
-  else{
-    //TODO: Await TRAIN_OK
-    //Read incoming data via USB/BT TODO swith
-    if(true)
-      receivedData = Serial.readStringUntil('\n');
-    else
-      receivedData = BTSerial.readStringUntil('\n');
-
-    if(receivedData.indexOf("TRAIN_OK") == 0){
-      training_ready = true;
-    }
-
   }
 }

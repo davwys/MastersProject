@@ -74,4 +74,13 @@ extern Adafruit_PN532 sensor8;
 //extern Adafruit_PN532 sensor9; //TODO
 //extern Adafruit_PN532 sensor10;
 
+/*
+Training data
+*/
+extern bool training_ready;
+
+//Names the last played sensor
+extern bool playedSensors[10];
+
+
 #endif

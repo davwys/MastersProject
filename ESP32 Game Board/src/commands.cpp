@@ -37,13 +37,14 @@ PLAY=A_123					            Output
 
 */
 
-const char *InputCommands[6] = {
+const char *InputCommands[7] = {
   "CHANGE_MODE=",
   "TRAIN_OK",
   "PLAY_OK",
   "UPLOAD_START",
   "UPLOAD_END",
-  "REBOOT"
+  "REBOOT",
+  "RESTART_TRAINING"
 };
 
 //Force the ESP32 to restart
@@ -63,7 +64,7 @@ void flash_led(int pin) {
 
 //Validates a given command - TODO validate upload data
 bool validate_command(String command){
-  for(int i = 0; i <= 5; i++){
+  for(int i = 0; i <= 6; i++){
     if (receivedData.indexOf(InputCommands[i]) == 0)
       return true;
   }
@@ -96,6 +97,15 @@ bool apply_mode_change(String command){
     return false;
 }
 
+//Restarts the training process
+void restart_training(){
+  for(int i = 0; i < 10; i++){
+    playedSensors[i] = false;
+  }
+  training_ready = true;
+
+  Serial.println("Restarted training process!");
+}
 
 // Receives and executes serial input commands.
 // "usb" argument determines whether to check for input on the USB or Bluetooth serial port.
@@ -117,12 +127,19 @@ void receive_command(bool usb){
       {
 
         //Reboot command: Reboot ESP
-        if(receivedData.indexOf("REBOOT") >= 0){
+        if(receivedData.indexOf("REBOOT") == 0){
           hard_restart();
+        }
+        //Training restart command
+        else if(receivedData.indexOf("RESTART_TRAINING") == 0){
+          restart_training();
+        }
+        //Training OK command
+        else if(receivedData.indexOf("TRAIN_OK") == 0){
+          training_ready = true;
         }
 
         //TODO other command types
-        Serial.println("Got a valid non-mode change command");
       }
     }
     //Invalid command type: flash red LED
