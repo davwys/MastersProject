@@ -122,13 +122,9 @@
                     Label:
                         width: self.parent.width * 0.1
                         size_hint_x: None
-                    BorderButton:
-                        id: oracle_yes
+                    Label:
                         width: self.parent.width * 0.3
                         size_hint_x: None
-                        text: 'Yes'
-                        disabled: True
-                        on_press: root.oracle_yes()
                     TextInput:
                         id: area_name
                         width: self.parent.width * 0.2
@@ -137,11 +133,11 @@
                         disabled: True
 
                     BorderButton:
-                        id: oracle_no
+                        id: submit_name
                         width: self.parent.width * 0.3
                         size_hint_x: None
                         text: 'Submit Area Name'
-                        disabled: False
+                        disabled: True
                         on_press: root.submit_area_name(area_name.text)
                     Label:
                         width: self.parent.width * 0.1

@@ -33,8 +33,8 @@ class MyGrid(Widget):
     selectedPort = None
     selectedPort_Windows = None
 
-    # Name for the current area
-    areaName = None
+    # Temporary data storage
+    tempData = [None, None, None]
 
     # Training input array:
     # =====================
@@ -75,13 +75,10 @@ class MyGrid(Widget):
         print("Sensor ID: {}".format(sensor_id))
         print("Card ID: {}".format(card_id))
 
-        request_area_name()
-
-        name = 'x' #TODO
-        # Validate both IDs TODO get valid name first
+        # Validate both IDs and save to temporary storage
         if sensor_id > 0 and 0 < card_id < 999:
-            self.ser.write(b'TRAIN_OK')  # Confirm received training data
-            self.save_training_data([name, sensor_id, card_id])
+            self.tempData = [None, sensor_id, card_id]
+            self.request_area_name()
 
     # Get a list of available serial ports
     def serial_ports(self):
@@ -121,12 +118,8 @@ class MyGrid(Widget):
     def start_training(self):
         self.ids.restart.disabled = False
         self.update_log('Started Training!')
-        self.ids.instructions.text = '''1. Activate each area 
-(in alphabetical order)
+        self.ids.instructions.text = '''1. Activate each area (in alphabetical order)'''
 
-2. Do you have an Oracle? '''
-        self.ids.oracle_yes.disabled = False
-        self.ids.oracle_no.disabled = False
         self.ids.start_training.disabled = True
         self.ser.write(b'CHANGE_MODE=3')  # Change to training mode
         self.ser.flush()
@@ -135,22 +128,26 @@ class MyGrid(Widget):
         thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
         thread.start()
 
-    def submit_area_name(self, area_name):
-        print(area_name)
+    def request_area_name(self):
+        self.ids.area_name.disabled = False
+        self.ids.submit_name.disabled = False
 
-    def oracle_yes(self):
-        self.ids.oracle_yes.disabled = True
-        self.ids.oracle_no.disabled = True
-        self.ids.instructions.text = 'Activate the Oracle and press "Upload to Board"'
-        self.ids.upload.disabled = False
-        self.update_log('Oracle incoming...')
+    def submit_area_name(self, name):
+        if len(name) > 0:
+            self.ids.area_name.disabled = True
+            self.ids.submit_name.disabled = True
 
-    def oracle_no(self):
-        self.ids.oracle_yes.disabled = True
-        self.ids.oracle_no.disabled = True
-        self.ids.instructions.text = 'Press "Upload to Board"'
-        self.ids.upload.disabled = False
-        self.update_log('No Oracle')
+            # Save name to temp data
+            self.tempData[0] = name
+
+            # Confirm received training data
+            self.ser.write(b'TRAIN_OK')
+            self.save_training_data(self.tempData)
+
+
+    def save_training_data(self, data):
+        print("OK")
+        print(data)
 
     # Upload new training data
     def upload(self):
@@ -182,8 +179,6 @@ and start playing'''
         # Send restart command
         self.ser.write(b'RESTART_TRAINING')  # write data as bytes
         self.ids.restart.disabled = True
-        self.ids.oracle_yes.disabled = True
-        self.ids.oracle_no.disabled = True
 
     # Toggle Log visibility
     def toggle_log(self, value):
