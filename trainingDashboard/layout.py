@@ -130,11 +130,13 @@ class MyGrid(Widget):
 
     def request_area_name(self):
         self.ids.area_name.disabled = False
+        self.ids.area_name.text = ''
         self.ids.submit_name.disabled = False
 
     def submit_area_name(self, name):
         if len(name) > 0:
             self.ids.area_name.disabled = True
+            self.ids.area_name.text = ''
             self.ids.submit_name.disabled = True
 
             # Save name to temp data
