@@ -127,15 +127,15 @@ void receive_command(bool usb){
       {
 
         //Reboot command: Reboot ESP
-        if(receivedData.indexOf("REBOOT") == 0){
+        if(receivedData.indexOf("REBOOT") >= 0){
           hard_restart();
         }
         //Training restart command
-        else if(receivedData.indexOf("RESTART_TRAINING") == 0){
+        else if(receivedData.indexOf("RESTART_TRAINING") >= 0){
           restart_training();
         }
         //Training OK command
-        else if(receivedData.indexOf("TRAIN_OK") == 0){
+        else if(receivedData.indexOf("TRAIN_OK") >= 0){
           training_ready = true;
         }
 

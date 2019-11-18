@@ -37,7 +37,7 @@ class MyGrid(Widget):
         names = []
         comlist = serial.tools.list_ports.comports()
         for element in comlist:
-            # UNIX (Macos/Linux): filter device
+            # UNIX (macOS/Linux): filter device
             if platform.system() is not "Windows":
                 # Filter out ports with no product description - add all that contain "GameBoard" (for Bluetooth ports)
                 if element.product is not None or "GameBoard" in element.device:
@@ -67,7 +67,7 @@ class MyGrid(Widget):
 
     # Start or finish the training process
     def start_training(self):
-        self.ids.reboot.disabled = False
+        self.ids.restart.disabled = False
         self.update_log('Started Training!')
         self.ids.instructions.text = '''1. Activate each area 
 (in alphabetical order)
@@ -76,6 +76,7 @@ class MyGrid(Widget):
         self.ids.oracle_yes.disabled = False
         self.ids.oracle_no.disabled = False
         self.ids.start_training.disabled = True
+        self.ser.write(b'CHANGE_MODE=3')  # Change to training mode
 
     def oracle_yes(self):
         self.ids.oracle_yes.disabled = True
@@ -93,14 +94,14 @@ class MyGrid(Widget):
 
     # Upload new training data
     def upload(self):
-        self.ids.reboot.disabled = True
+        self.ids.restart.disabled = True
         self.update_log('Upload starting...')
         self.ids.upload.disabled = True
         if self.selectedPort is not None:
             self.update_log("Connecting to port {}...".format(self.selectedPort))
             try:
                 self.update_log('Connected to port\n{}, uploading...'.format(self.ser.name))
-                self.ser.write(b'CHANGE_MODE=1')  # write data as bytes
+                self.ser.write(b'CHANGE_MODE=4')  # write data as bytes
                 self.ids.upload.disabled = True
                 # self.ser.close()  # close port TODO check need
             except OSError:
@@ -111,15 +112,15 @@ class MyGrid(Widget):
 You can close the dashboard
 and start playing'''
 
-    def reboot(self):
+    def restart_training(self):
         self.ids.start_training.disabled = False
         self.ids.upload.disabled = True
         self.ids.start_training.text = 'Start Training'
         self.ids.instructions.text = 'Press "Start Training"'
-        self.update_log('Rebooting...')  # TODO disconnect as well
-        # Send reboot command
+        self.update_log('Restarting training...')  # TODO disconnect as well
+        # Send restart command
         self.ser.write(b'RESTART_TRAINING')  # write data as bytes
-        self.ids.reboot.disabled = True
+        self.ids.restart.disabled = True
         self.ids.oracle_yes.disabled = True
         self.ids.oracle_no.disabled = True
 
