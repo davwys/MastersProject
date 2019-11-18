@@ -19,9 +19,19 @@ import glob
 import serial
 import serial.tools.list_ports
 import platform
-from training import *
+import threading
 
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
+
+
+def handle_data(data):
+    print(data)
+
+
+def read_from_port(ser):
+    while True:
+        reading = ser.readline().decode()
+        handle_data(reading)
 
 
 class MyGrid(Widget):
@@ -32,17 +42,18 @@ class MyGrid(Widget):
     selectedPort = None
     selectedPort_Windows = None
 
-    # Get a list of available serial ports TODO check on windows
+    # Get a list of available serial ports
     def serial_ports(self):
         names = []
         comlist = serial.tools.list_ports.comports()
         for element in comlist:
-            # UNIX (macOS/Linux): filter device
+            # macOS: filter device
             if platform.system() is not "Windows":
                 # Filter out ports with no product description - add all that contain "GameBoard" (for Bluetooth ports)
                 if element.product is not None or "GameBoard" in element.device:
                     name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
                     names.append(name)
+            # Windows: get nice name for COM ports
             else:
                 index = element.description.find('(')
                 cut_string = element.description[:index-1]
@@ -77,6 +88,11 @@ class MyGrid(Widget):
         self.ids.oracle_no.disabled = False
         self.ids.start_training.disabled = True
         self.ser.write(b'CHANGE_MODE=3')  # Change to training mode
+        self.ser.flush()
+        # self.read_training_input()
+
+        thread = threading.Thread(target=read_from_port, args=(self.ser,))
+        thread.start()
 
     def oracle_yes(self):
         self.ids.oracle_yes.disabled = True
@@ -112,6 +128,7 @@ class MyGrid(Widget):
 You can close the dashboard
 and start playing'''
 
+    # Restarts the training process
     def restart_training(self):
         self.ids.start_training.disabled = False
         self.ids.upload.disabled = True
@@ -167,6 +184,12 @@ and start playing'''
         if self.ids.chk.active:
             self.ids.log.text = 'Log:\n' + self.log
 
+    def read_training_input(self):
+        i = 0
+        while i < 25:
+            txt = self.ser.read(1)
+            self.update_log(str(txt))
+            i += 1
 
 # Main App definition
 class MyApp(App):
