@@ -32,7 +32,25 @@ class MyGrid(Widget):
     ports = ['No Devices Found']
     selectedPort = None
     selectedPort_Windows = None
-    
+
+    # Name for the current area
+    areaName = None
+
+    # Training input array:
+    # =====================
+    #
+    # Format:
+    # [[Area, SensorID, CardID]]
+    #
+    # Example:
+    # [
+    #   [Oracle, 3, 72],
+    #   [Investor, 2, 32],
+    #   [Company, 1, 32]
+    # ]
+    trainingInput = [[]]
+
+
 
     # Read and handle serial input data
     def read_from_port(self, ser):
@@ -57,10 +75,13 @@ class MyGrid(Widget):
         print("Sensor ID: {}".format(sensor_id))
         print("Card ID: {}".format(card_id))
 
-        # Validate both IDs
+        request_area_name()
+
+        name = 'x' #TODO
+        # Validate both IDs TODO get valid name first
         if sensor_id > 0 and 0 < card_id < 999:
             self.ser.write(b'TRAIN_OK')  # Confirm received training data
-            # TODO mapper
+            self.save_training_data([name, sensor_id, card_id])
 
     # Get a list of available serial ports
     def serial_ports(self):
