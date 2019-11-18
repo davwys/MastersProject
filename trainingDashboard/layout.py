@@ -32,6 +32,7 @@ class MyGrid(Widget):
     ports = ['No Devices Found']
     selectedPort = None
     selectedPort_Windows = None
+    
 
     # Read and handle serial input data
     def read_from_port(self, ser):

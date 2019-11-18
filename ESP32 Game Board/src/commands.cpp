@@ -106,8 +106,6 @@ void restart_training(){
     playedSensors[i] = false;
   }
   training_ready = true;
-
-  Serial.println("Restarted training process!");
 }
 
 // Receives and executes serial input commands.
