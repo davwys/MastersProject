@@ -37,7 +37,29 @@ class MyGrid(Widget):
     def read_from_port(self, ser):
         while True:
             reading = ser.readline().decode()
-            self.update_log(str(reading))
+            self.update_log('Received: ' + str(reading))
+            self.handle_training_message(reading)
+
+    def handle_training_message(self, msg):
+        start = "{"
+        end = "}"
+        s_start = "SensorID="
+        s_end = "_"
+        c_start = "CardID="
+        message = msg[msg.find(start)+len(start):msg.rfind(end)]
+        # message example: SensorID=1_CardID=072
+
+        sensor_id_string = message[message.find(s_start) + len(s_start):message.rfind(s_end)]
+        card_id_string = message[message.find(c_start) + len(c_start):len(message)]
+        sensor_id = int(sensor_id_string)
+        card_id = int(card_id_string)
+        print("Sensor ID: {}".format(sensor_id))
+        print("Card ID: {}".format(card_id))
+
+        # Validate both IDs
+        if sensor_id > 0 and 0 < card_id < 999:
+            self.ser.write(b'TRAIN_OK')  # Confirm received training data
+            # TODO mapper
 
     # Get a list of available serial ports
     def serial_ports(self):
@@ -87,7 +109,7 @@ class MyGrid(Widget):
         self.ser.write(b'CHANGE_MODE=3')  # Change to training mode
         self.ser.flush()
 
-        # Start training
+        # Start training TODO kill after completion
         thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
         thread.start()
 
