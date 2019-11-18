@@ -19,9 +19,6 @@
 //Timeout (per sensor) is set in the library's Adafruit_PN532.h file
 void initialize_sensor(Adafruit_PN532 sensor, int id){
 
-    // TODO might be needed
-    //digitalWrite(SENSOR1, HIGH);
-
     sensor.begin();
     uint32_t versiondata = sensor.getFirmwareVersion();
     //If no sensor found, return

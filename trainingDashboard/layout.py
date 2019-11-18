@@ -117,7 +117,9 @@ and start playing'''
         self.ids.upload.disabled = True
         self.ids.start_training.text = 'Start Training'
         self.ids.instructions.text = 'Press "Start Training"'
-        self.update_log('reboot')
+        self.update_log('Rebooting...')  # TODO disconnect as well
+        # Send reboot command
+        self.ser.write(b'REBOOT')  # write data as bytes
         self.ids.reboot.disabled = True
         self.ids.oracle_yes.disabled = True
         self.ids.oracle_no.disabled = True

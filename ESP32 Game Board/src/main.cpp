@@ -82,6 +82,8 @@ void setup() {
 
     //Turn on power LED
     digitalWrite(LED_Pwr, HIGH);
+
+    digitalWrite(LED_Sta, LOW);
     //Initial serial communication (via USB)
     Serial.begin(57600);
 
@@ -98,6 +100,13 @@ void setup() {
     Serial.println(currentMode);
 
     Serial.println("Beginning sensor search...");
+
+/*
+    // TODO might be needed
+    digitalWrite(SENSOR1, HIGH);
+    digitalWrite(SENSOR2, HIGH);
+    digitalWrite(SENSOR3, HIGH);
+*/
 
     //Try initializing each sensor
     initialize_sensor(sensor1, 1);
