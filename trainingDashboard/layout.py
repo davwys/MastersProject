@@ -24,15 +24,6 @@ import threading
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 
-def handle_data(data):
-    print(data)
-
-
-def read_from_port(ser):
-    while True:
-        reading = ser.readline().decode()
-        handle_data(reading)
-
 
 class MyGrid(Widget):
     log = ''
@@ -41,6 +32,12 @@ class MyGrid(Widget):
     ports = ['No Devices Found']
     selectedPort = None
     selectedPort_Windows = None
+
+    # Read and handle serial input data
+    def read_from_port(self, ser):
+        while True:
+            reading = ser.readline().decode()
+            self.update_log(str(reading))
 
     # Get a list of available serial ports
     def serial_ports(self):
@@ -89,9 +86,9 @@ class MyGrid(Widget):
         self.ids.start_training.disabled = True
         self.ser.write(b'CHANGE_MODE=3')  # Change to training mode
         self.ser.flush()
-        # self.read_training_input()
 
-        thread = threading.Thread(target=read_from_port, args=(self.ser,))
+        # Start training
+        thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
         thread.start()
 
     def oracle_yes(self):
@@ -190,6 +187,7 @@ and start playing'''
             txt = self.ser.read(1)
             self.update_log(str(txt))
             i += 1
+
 
 # Main App definition
 class MyApp(App):

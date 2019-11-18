@@ -84,8 +84,11 @@ bool apply_mode_change(String command){
       //Apply status change
       if(cmd >=0 && cmd <= 5){
         currentMode = Mode(cmd);
-        Serial.print("Changed to mode ");
-        Serial.print(cmd);
+        //Don't print mode change to training mode
+        if(cmd != 3){
+          Serial.print("Changed to mode ");
+          Serial.print(cmd);
+        }
         return true;
       }
       else{
