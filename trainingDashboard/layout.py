@@ -6,7 +6,6 @@ Config.set('graphics', 'height', '750')
 Config.set('graphics', 'minimum_width', '1000')
 Config.set('graphics', 'minimum_height', '750')
 from kivy.core.window import Window
-#Window.size = (1000, 750)
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
@@ -20,7 +19,7 @@ import glob
 import serial
 import serial.tools.list_ports
 import platform
-
+from training import *
 
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 

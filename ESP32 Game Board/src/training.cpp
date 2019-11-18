@@ -32,12 +32,10 @@ void trainOnSensor(Adafruit_PN532 sensor, int id){
       //Catch errors for incomplete data
     }
   }
-
 }
 
-
+//Main training function
 void training_main(){
-
   //If training dashboard is ready for new data - otherwise, we await TRAIN_OK command
   if(training_ready){
     //TODO add other sensors
