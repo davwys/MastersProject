@@ -20,6 +20,7 @@ import serial
 import serial.tools.list_ports
 import platform
 import threading
+from kivy.uix.scrollview import ScrollView
 
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 

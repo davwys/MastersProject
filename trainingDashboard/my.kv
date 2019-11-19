@@ -178,19 +178,23 @@
                 GridLayout:
                     cols: 1
                     padding: [10,0,0,0]
-                    Label:
-                        width: root.width * 0.25
-                        size_hint_x: None
-                        height: 0
-                        size_hint_y: None
-                        canvas.before:
-                            Color:
-                                rgba: 0, 0, 0, 0.5
-                            RoundedRectangle:
-                                size: self.size
-                                pos: self.pos
-                                radius: [dp(18),dp(18),dp(18),dp(18)]
-                        id: log
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        Label:
+                            id: log
+                            width: root.width * 0.25
+                            size_hint_x: None
+                            size_hint_y: None
+                            text_size: self.width, None
+                            height: self.texture_size[1]
+                            canvas.before:
+                                Color:
+                                    rgba: 0, 0, 0, 0.5
+                                RoundedRectangle:
+                                    size: self.size
+                                    pos: self.pos
+
 
         GridLayout:
             cols:1
