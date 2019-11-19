@@ -186,15 +186,9 @@
                             width: root.width * 0.25
                             size_hint_x: None
                             size_hint_y: None
-                            text_size: self.width, None
+                            text_size: self.width*0.9, None
                             height: self.texture_size[1]
-                            canvas.before:
-                                Color:
-                                    rgba: 0, 0, 0, 0.5
-                                RoundedRectangle:
-                                    size: self.size
-                                    pos: self.pos
-
+                            color: (0,0,0,0.5)
 
         GridLayout:
             cols:1
