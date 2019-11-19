@@ -37,8 +37,8 @@
 <TextInput>
     background_color: (0,0,0,0)
     background_normal: ''
-    font_size: self.height*0.5
-    cursor_color: 0, 0, 0, 1
+    font_size: dp(20)
+    cursor_color: (.05, .5, 1, 1)
     padding_x: [self.width*0.1,self.width*0.1]
     canvas.before:
         Color:
@@ -134,11 +134,13 @@
                     size_hint_y: None
                     TextInput:
                         id: area_name
+                        color: 1,0,0,1
                         multiline: False
                         width: self.parent.width * 0.6
                         size_hint_x: None
                         hint_text: 'Enter your area name here'
                         disabled: True
+                        focus: True
                     Label:
                         width: self.parent.width * 0.1
                         size_hint_x: None
