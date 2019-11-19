@@ -34,6 +34,19 @@
             width: 1.2
 <Label>
     font_size: dp(20)
+<TextInput>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    font_size: self.height*0.5
+    cursor_color: 0, 0, 0, 1
+    padding_x: [self.width*0.1,self.width*0.1]
+    canvas.before:
+        Color:
+            rgba: (.05, .5, 1, 1) if self.disabled == False else (.05, .5, 1, 0.5)
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], dp(18))
+            width: 1.2
+
 
 
 
@@ -115,34 +128,27 @@
                     text: 'Press "Start Training"'
                     color: (0, 0, 0, 1)
                 GridLayout:
-                    padding: [10,10,10,10]
-                    cols: 5
+                    padding: [0,10,0,10]
+                    cols: 3
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    Label:
-                        width: self.parent.width * 0.1
-                        size_hint_x: None
-                    Label:
-                        width: self.parent.width * 0.3
-                        size_hint_x: None
                     TextInput:
                         id: area_name
                         multiline: False
-                        width: self.parent.width * 0.2
+                        width: self.parent.width * 0.6
                         size_hint_x: None
-                        hint_text: 'Area name'
+                        hint_text: 'Enter your area name here'
                         disabled: True
-
+                    Label:
+                        width: self.parent.width * 0.1
+                        size_hint_x: None
                     BorderButton:
                         id: submit_name
                         width: self.parent.width * 0.3
                         size_hint_x: None
-                        text: 'Submit Area Name'
+                        text: 'Submit'
                         disabled: True
                         on_press: root.submit_area_name(area_name.text)
-                    Label:
-                        width: self.parent.width * 0.1
-                        size_hint_x: None
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -169,18 +175,22 @@
                     id: chk
                     on_press: root.toggle_log(self.active)
                     color: 0.5,0.5,0.5,1
-                Label:
-                    width: root.width * 0.25
-                    size_hint_x: None
-                    height: 0
-                    size_hint_y: None
-                    canvas.before:
-                        Color:
-                            rgba: 0, 0, 0, 0.5
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-                    id: log
+                GridLayout:
+                    cols: 1
+                    padding: [10,0,0,0]
+                    Label:
+                        width: root.width * 0.25
+                        size_hint_x: None
+                        height: 0
+                        size_hint_y: None
+                        canvas.before:
+                            Color:
+                                rgba: 0, 0, 0, 0.5
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [dp(18),dp(18),dp(18),dp(18)]
+                        id: log
 
         GridLayout:
             cols:1

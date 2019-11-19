@@ -63,7 +63,7 @@ class MyGrid(Widget):
     def start_training(self):
         self.ids.restart.disabled = False
         self.update_log('Started Training!')
-        self.ids.instructions.text = '''1. Activate each area (in alphabetical order)'''
+        self.ids.instructions.text = '''Activate an area and add a name'''
 
         self.ids.start_training.disabled = True
         self.ser.write(b'CHANGE_MODE=3')  # Change to training mode
