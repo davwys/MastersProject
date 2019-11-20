@@ -76,6 +76,9 @@ def read_from_port(self, ser):
         reading = ser.readline().decode()
         self.update_log('Received: ' + str(reading))
         self.handle_training_message(reading)
+        # Kills the thread when stop flag is set
+        if self.stopThread:
+            break
 
 
 # Reads input (called via dedicated serial thread)

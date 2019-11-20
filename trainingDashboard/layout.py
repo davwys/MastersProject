@@ -46,6 +46,9 @@ class MyGrid(Widget):
     # Check for restarts
     restarted = False
 
+    # Thread kill flag (kills input thread upon starting upload)
+    stopThread = False
+
     # Training input array:
     # =====================
     #
@@ -86,6 +89,9 @@ class MyGrid(Widget):
                 # Open port & change to UPLOAD mode
                 self.update_log('Connected to port\n{}, uploading...'.format(self.ser.name))
                 self.ser.write(b'CHANGE_MODE=4')
+
+                # Stop input thread
+                self.stopThread = True
 
                 # Upload gathered training data
                 self.upload_training_data(self.trainingInput)
