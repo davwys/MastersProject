@@ -138,9 +138,9 @@
                         multiline: False
                         width: self.parent.width * 0.6
                         size_hint_x: None
-                        hint_text: 'Enter your area name here'
+                        #hint_text: 'Enter your area name here'
                         disabled: True
-                        focus: True
+                        #focus: True
                     Label:
                         width: self.parent.width * 0.1
                         size_hint_x: None
@@ -159,7 +159,7 @@
                     size_hint_y: None
                     disabled: True
                     id: upload
-                    text: "Upload to Board"
+                    text: "Upload and Finish"
                     on_press: root.upload()
                 Label:
                     height: self.parent.height * 0.1
