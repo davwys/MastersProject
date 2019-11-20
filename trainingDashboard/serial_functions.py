@@ -72,9 +72,9 @@ def select_port(self, port):
 
 # Read and handle serial input data
 def read_from_port(self, ser):
-    while True:
+    while not self.stopThread:
         reading = ser.readline().decode()
-        self.update_log('Received: ' + str(reading))
+        self.update_log('Got: ' + str(reading))
         self.handle_training_message(reading)
         # Kills the thread when stop flag is set
         if self.stopThread:
@@ -115,4 +115,3 @@ def upload_training_data(self, data):
 
         # Write to serial port (encoded as bytes)
         self.ser.write(upl.encode('utf-8'))
-

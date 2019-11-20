@@ -20,6 +20,7 @@ import serial
 import serial.tools.list_ports
 import platform
 import threading
+import time
 from kivy.uix.scrollview import ScrollView
 
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
@@ -93,7 +94,8 @@ class MyGrid(Widget):
                 # Stop input thread
                 self.stopThread = True
 
-                # Upload gathered training data
+                # Wait for 2s, then upload gathered training data
+                time.sleep(2)
                 self.upload_training_data(self.trainingInput)
 
                 # self.ser.close()  # TODO close port & disconnect
