@@ -23,5 +23,7 @@ def submit_area_name(self, name):
         # Confirm received training data
         self.ser.write(b'TRAIN_OK')
         self.save_training_data(self.tempData)
+        # Enable upload after we have at least one row of data
+        self.ids.upload.disabled = False
     else:
         self.update_log('Error: Name too long')

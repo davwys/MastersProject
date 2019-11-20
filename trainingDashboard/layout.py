@@ -28,7 +28,7 @@ Window.clearcolor = (0.8, 0.8, 0.8, 1)
 class MyGrid(Widget):
 
     # load external methods
-    from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_training_input
+    from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_training_input, upload_training_data
     from input import request_area_name, submit_area_name
     from data_handling import save_training_data, handle_training_message
     from log import update_log, toggle_log
@@ -83,21 +83,25 @@ class MyGrid(Widget):
         if self.selectedPort is not None:
             self.update_log("Connecting to port {}...".format(self.selectedPort))
             try:
+                # Open port & change to UPLOAD mode
                 self.update_log('Connected to port\n{}, uploading...'.format(self.ser.name))
-                self.ser.write(b'CHANGE_MODE=4')  # write data as bytes
-                self.ids.upload.disabled = True
-                # self.ser.close()  # close port TODO check need
+                self.ser.write(b'CHANGE_MODE=4')
+
+                # Upload gathered training data
+                self.upload_training_data(self.trainingInput)
+
+                # self.ser.close()  # TODO close port & disconnect
             except OSError:
+                self.ids.upload.disabled = False
                 self.update_log('Error occurred')  # TODO Error handling
 
         # TODO integrate into check if upload actually worked
         self.ids.instructions.text = '''All done! 
 You can close the dashboard
-and start playing'''
+and start playing.'''
 
     # Restarts the training process
     def restart_training(self):
-
         self.restarted = True
         self.ids.start_training.disabled = False
         self.ids.upload.disabled = True

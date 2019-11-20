@@ -1,3 +1,4 @@
+from log import update_log
 
 
 # Handles an individual training message, checks its validity
@@ -18,8 +19,9 @@ def handle_training_message(self, msg):
     card_id_string = message[message.find(c_start) + len(c_start):len(message)]
     sensor_id = int(sensor_id_string)
     card_id = int(card_id_string)
-    print("Sensor ID: {}".format(sensor_id))
-    print("Card ID: {}".format(card_id))
+    # Print read data to log (disabled for now)
+    # self.update_log("Sensor ID: {}".format(sensor_id))
+    # self.update_log("Card ID: {}".format(card_id))
 
     # Validate both IDs and save to temporary storage
     if sensor_id > 0 and 0 < card_id < 999:
@@ -30,6 +32,9 @@ def handle_training_message(self, msg):
 # Saves an input array with name, sensor ID and card ID to the training input array
 # Example input: ['AreaA', 3, 123]
 def save_training_data(self, data):
+    # Append to array
     self.trainingInput.append(data)
-    print("Training data now at:")
-    print(self.trainingInput)
+
+    # Print current training data state to log
+    self.update_log("Current training data:")
+    self.update_log(str(self.trainingInput))

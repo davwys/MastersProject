@@ -84,3 +84,16 @@ def read_training_input(self):
         txt = self.ser.read(1)
         self.update_log(str(txt))
         i += 1
+
+
+def upload_training_data(self, data):
+    print("Data to upload: ")
+    print(str(data))
+    self.update_log('Beginning upload...')
+
+    # For each row (example: ['AreaA', 3, 123])
+    for value in data:
+        # Extract first two values (area name and sensor ID)
+        dat = {value[0], value[1]}
+        print('Upload: {}'.format(dat))
+

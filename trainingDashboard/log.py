@@ -10,7 +10,7 @@ def toggle_log(self, value):
         self.ids.log.text = 'Log:\n' + self.log
 
 
-# Update the integrated log
+# Update the integrated log (and print to terminal)
 def update_log(self, text):
     print(text)
     self.log += (text + '\n')
