@@ -1,3 +1,8 @@
+
+
+# Handles an individual training message, checks its validity
+# and (if valid) saves the relevant values to the trainingInput array
+# Example: TRAIN={SensorID=3_CardID=52}
 def handle_training_message(self, msg):
     start = "{"
     end = "}"
@@ -22,6 +27,8 @@ def handle_training_message(self, msg):
         self.request_area_name()
 
 
+# Saves an input array with name, sensor ID and card ID to the training input array
+# Example input: ['AreaA', 3, 123]
 def save_training_data(self, data):
     self.trainingInput.append(data)
     print("Training data now at:")

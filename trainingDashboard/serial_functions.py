@@ -3,11 +3,14 @@ import glob
 import serial
 import serial.tools.list_ports
 import platform
-import threading
+
+# This file contains all functions related to serial communications,
+# e.g. communications between the training dashboard and the game
+# board's main controller.
 
 
 # Get a list of available serial ports
-def serial_ports(self):
+def get_serial_ports(self):
     names = []
     comlist = serial.tools.list_ports.comports()
     for element in comlist:
@@ -34,7 +37,7 @@ def serial_ports(self):
 # Update the list of available ports
 def update_ports(self):
     self.update_log('Getting device list...')
-    self.ports = self.serial_ports()
+    self.ports = self.get_serial_ports()
     self.ids.port_dropdown.values = self.ports
 
     if self.ids.port_dropdown.values[0] == 'No Devices Found':

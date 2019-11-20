@@ -28,7 +28,7 @@ Window.clearcolor = (0.8, 0.8, 0.8, 1)
 class MyGrid(Widget):
 
     # load external methods
-    from serial_functions import serial_ports, read_from_port, update_ports, select_port, read_training_input
+    from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_training_input
     from input import request_area_name, submit_area_name
     from data_handling import save_training_data, handle_training_message
     from log import update_log, toggle_log
