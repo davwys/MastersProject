@@ -15,6 +15,7 @@ def request_area_name(self):
 # and sends "TRAIN_OK" message to request new training data
 def submit_area_name(self, name):
     if 0 < len(name) < 20:
+        self.ids.area_name.hint_text = ''
         self.ids.area_name.disabled = True
         self.ids.area_name.text = ''
         self.ids.submit_name.disabled = True
