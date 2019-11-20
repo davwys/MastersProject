@@ -3,6 +3,7 @@ import glob
 import serial
 import serial.tools.list_ports
 import platform
+import numpy as np
 
 # This file contains all functions related to serial communications,
 # e.g. communications between the training dashboard and the game
@@ -91,9 +92,15 @@ def upload_training_data(self, data):
     print(str(data))
     self.update_log('Beginning upload...')
 
+    # Convert to Numpy array
+    data = np.array(data)
+
+    # Sort by sensor ID
+    data = data[np.argsort(data[:, 1])]
+
     # For each row (example: ['AreaA', 3, 123])
     for value in data:
-        # Extract first two values (area name and sensor ID)
-        dat = {value[0], value[1]}
+        # Extract first two values (sensor ID, area name)
+        dat = [value[1], value[0]]
         print('Upload: {}'.format(dat))
 
