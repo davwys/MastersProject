@@ -115,3 +115,5 @@ def upload_training_data(self, data):
 
         # Write to serial port (encoded as bytes)
         self.ser.write(upl.encode('utf-8'))
+
+    # TODO: UPLOAD_END command

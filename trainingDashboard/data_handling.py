@@ -35,6 +35,6 @@ def save_training_data(self, data):
     # Append to array
     self.trainingInput.append(data)
 
-    # Print current training data state to log
-    self.update_log("Current training data:")
-    self.update_log(str(self.trainingInput))
+    # (optional) Print current training data state to log
+    # self.update_log("Current training data:")
+    # self.update_log(str(self.trainingInput))
