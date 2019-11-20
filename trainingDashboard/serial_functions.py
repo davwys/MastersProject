@@ -90,6 +90,8 @@ def read_training_input(self):
         i += 1
 
 
+# Uploads a given training data set (only Area names and Sensor IDs) to the main board
+# Main board HAS TO BE in UPLOAD mode for this!
 def upload_training_data(self, data):
     print("Data to upload: ")
     print(str(data))
@@ -105,5 +107,12 @@ def upload_training_data(self, data):
     for value in data:
         # Extract first two values (sensor ID, area name)
         dat = [value[1], value[0]]
-        print('Upload: {}'.format(dat))
+        print('Uploading: {}'.format(dat))
+
+        # Format for upload (example: {1=AreaA}
+        upl = "{" + str(dat[0]) + "=" + str(dat[1]) + "}"
+        print('Data is: {}'.format(upl))
+
+        # Write to serial port (encoded as bytes)
+        self.ser.write(upl.encode('utf-8'))
 
