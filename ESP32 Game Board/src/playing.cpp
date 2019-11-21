@@ -1,10 +1,63 @@
 #include <behaviors.h>
 #include <definitions.h>
 #include <Arduino.h>
+#include <stdexcept>
+
+//helper function for splitting string
+String split(String s, char parser, int index) {
+  String rs="";
+  int parserIndex = index;
+  int parserCnt=0;
+  int rFromIndex=0, rToIndex=-1;
+  while (index >= parserCnt) {
+    rFromIndex = rToIndex+1;
+    rToIndex = s.indexOf(parser,rFromIndex);
+    if (index == parserCnt) {
+      if (rToIndex == 0 || rToIndex == -1) return "";
+      return s.substring(rFromIndex,rToIndex);
+    } else parserCnt++;
+  }
+  return rs;
+}
+
+
+//Determines whether a card can be played at the moment TODO add timer stuff
+bool playing_ready = true;
+
+
+//Checks a sensor for training input and generates correct API call from learned mapping
+void play_on_sensor(Adafruit_PN532 sensor, int id){
+  try{
+    String tmp = readTag(sensor, id, false);
+    if(tmp.length() > 4){
+
+      String sid_str = split(tmp, '_',0);
+      String cid_str = split(tmp, '_',1);
+      Serial.print("card str: ");
+      Serial.println(cid_str);
+
+
+      //Extract sensor ID to get name afterwards
+      sid_str.replace("SensorID=", "");
+      char sid_char[64];
+      sid_str.toCharArray(sid_char, 64);
+      int sid = atoi(sid_char);
+
+      //Get area name from mapping
+      String areaName = mapping[sid-1];
+
+      //Generate output: "Area=x_CardID=123"
+      String output = "Area=" + areaName + cid_str;
+      Serial.println("PLAY={" + output + "}");
+
+      //playing_ready = false; TODO add
+    }
+  }
+  catch (std::runtime_error e){} //Catch errors for incomplete data
+}
 
 //Reads mapping data from flash memory and saves to local array
 void read_mapping_data(){
-
   //Read the entire saved mapping
   //example: {1, 'AreaA'}{2, 'Oracle'}{3, 'AreaB'}
   String temp = read_string_from_flash(0);
@@ -35,22 +88,26 @@ void read_mapping_data(){
       // Find the next command in input string
       command = strtok(0, "}{");
   }
-
 }
 
-void playing_main(){
 
+//Main function when in PLAYING mode
+void playing_main(){
   //If we haven't loaded the learned mapping yet, load it from flash
   if(mapping[0] == NULL){
     read_mapping_data();
   }
+  //Actual playing logic: capture sensor input (if ready) & return API calls
   else{
-    for(int i = 0; i < 10; i++){
-      Serial.print(mapping[i]);
-      Serial.print(", ");
+    if(playing_ready){
+      play_on_sensor(sensor1, 1);
+      play_on_sensor(sensor2, 2);
+      play_on_sensor(sensor3, 3);
+      //TODO add other sensors here
     }
-    Serial.println();
-    Serial.println();
+    //TODO add stuff for PLAY_OK
+    else{
+
+    }
   }
-  //TODO function
 }

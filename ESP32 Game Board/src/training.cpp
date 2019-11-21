@@ -18,7 +18,7 @@ bool training_ready = true;
 bool playedSensors[10] = {false, false, false, false, false, false, false, false, false, false};
 
 //Checks a sensor for training input and generates training output packet
-void trainOnSensor(Adafruit_PN532 sensor, int id){
+void train_on_sensor(Adafruit_PN532 sensor, int id){
   if(!playedSensors[id]){
     try{
       String tmp = readTag(sensor, id, false);
@@ -39,8 +39,8 @@ void training_main(){
   //If training dashboard is ready for new data - otherwise, we await TRAIN_OK command
   if(training_ready){
     //TODO add other sensors
-    trainOnSensor(sensor1, 1);
-    trainOnSensor(sensor2, 2);
-    trainOnSensor(sensor3, 3);
+    train_on_sensor(sensor1, 1);
+    train_on_sensor(sensor2, 2);
+    train_on_sensor(sensor3, 3);
   }
 }
