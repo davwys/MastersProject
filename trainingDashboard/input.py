@@ -33,5 +33,7 @@ def submit_area_name(self, name):
         self.update_log('Area {} has been activated'.format(name))
     elif characters.search(name) is not None:
         self.update_log('Invalid area name')
+        self.ids.submit_name.disabled = False
     else:
         self.update_log('Error: Name too long')
+        self.ids.submit_name.disabled = False
