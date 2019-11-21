@@ -39,7 +39,10 @@
     background_normal: ''
     font_size: dp(20)
     cursor_color: (.05, .5, 1, 1)
+    #left, right
     padding_x: [self.width*0.1,self.width*0.1]
+    #top, bottom
+    padding_y: [self.height/2.0 - (self.line_height/2.0)*len(self._lines), 0]
     canvas.before:
         Color:
             rgba: (.05, .5, 1, 1) if self.disabled == False else (.05, .5, 1, 0.5)
@@ -138,8 +141,8 @@
                         multiline: False
                         width: self.parent.width * 0.6
                         size_hint_x: None
-                        #hint_text: 'Enter your area name here'
-                        disabled: True
+                        hint_text: 'Enter your area name here'
+                        #disabled: True
                         #focus: True
                     Label:
                         width: self.parent.width * 0.1
