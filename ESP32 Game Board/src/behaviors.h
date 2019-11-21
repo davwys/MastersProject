@@ -13,6 +13,8 @@ void flash_led(int pin);
 
 
 //Read a string from Flash memory
-String readStringFromFlash(int startAddr);
+String read_string_from_flash(int startAddr);
+
+void read_mapping_data();
 
 #endif

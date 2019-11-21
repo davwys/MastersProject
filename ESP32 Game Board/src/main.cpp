@@ -60,6 +60,7 @@ int LED_Pwr = 2;
 int LED_Sta = 22; //TODO Pins: tested but not working: 12, 13, 14...
 int LED_Com = 21;
 
+String mapping[10];
 
 //Bluetooth serial object
 BluetoothSerial BTSerial;

@@ -6,7 +6,7 @@
 
 
 //Write a String flash memory, using a given start address
-void saveString(const String input, int startAddr) {
+void save_string(const String input, int startAddr) {
   //Convert input string to char array
   int len = input.length();
   char toStore[len];
@@ -27,7 +27,7 @@ void saveString(const String input, int startAddr) {
 
 
 //Read a string from Flash memory
-String readStringFromFlash(int startAddr) {
+String read_string_from_flash(int startAddr) {
   char in[128];
   char curIn;
   int i = 0;
@@ -58,7 +58,7 @@ void read_data(bool usb){
       Serial.println(receivedData);
 
       //Save to memory
-      saveString(receivedData, currentByte);
+      save_string(receivedData, currentByte);
 
       Serial.print("Current byte is now at: ");
       Serial.println(currentByte);
