@@ -29,12 +29,12 @@ bool playing_ready = true;
 void play_on_sensor(Adafruit_PN532 sensor, int id){
   try{
     String tmp = readTag(sensor, id, false);
+    //Tmp looks like: SensorID=1_CardID=2
     if(tmp.length() > 4){
 
-      String sid_str = split(tmp, '_',0);
-      String cid_str = split(tmp, '_',1);
-      Serial.print("card str: ");
-      Serial.println(cid_str);
+      //Extract sensor ID string & card ID string
+      String sid_str = split(tmp, '_', 0);
+      String cid_str = tmp.substring(tmp.indexOf("CardID="));
 
 
       //Extract sensor ID to get name afterwards
@@ -46,8 +46,8 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
       //Get area name from mapping
       String areaName = mapping[sid-1];
 
-      //Generate output: "Area=x_CardID=123"
-      String output = "Area=" + areaName + cid_str;
+      //Generate output: "Area='something'_CardID=123"
+      String output = "Area='" + areaName + "'_"+ cid_str;
       Serial.println("PLAY={" + output + "}");
 
       //playing_ready = false; TODO add
