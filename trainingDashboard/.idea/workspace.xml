@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ESP32 Game Board/src/playing.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../ESP32 Game Board/src/playing.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ESP32 Game Board/src/training.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../ESP32 Game Board/src/training.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,6 +271,7 @@
       <workItem from="1574244688804" duration="1814000" />
       <workItem from="1574263992597" duration="107000" />
       <workItem from="1574279448323" duration="82000" />
+      <workItem from="1574365273467" duration="81000" />
     </task>
     <servers />
   </component>

@@ -54,15 +54,24 @@ void read_data(bool usb){
     //Validate command input
     if (receivedData.length() > 0)// && validate_command(receivedData) == true ) TODO validate data
     {
-      Serial.print("Saving to Memory: ");
-      Serial.println(receivedData);
+      //Check if data is "UPLOAD_END"
+      if(receivedData.indexOf("UPLOAD_END") == 0){
+        //Upload ended, go back to pretraining mode
+        Serial.println("Upload complete!");
+        currentMode = Mode(PRETRAINING);
+      }
+      //If not, save to memory
+      else
+      {
+        Serial.print("Saving to Memory: ");
+        Serial.println(receivedData);
 
-      //Save to memory
-      save_string(receivedData, currentByte);
+        //Save to memory
+        save_string(receivedData, currentByte);
 
-      Serial.print("Current byte is now at: ");
-      Serial.println(currentByte);
-
+        Serial.print("Current byte is now at: ");
+        Serial.println(currentByte);
+      }
     }
 }
 
