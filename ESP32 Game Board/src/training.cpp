@@ -25,6 +25,7 @@ void train_on_sensor(Adafruit_PN532 sensor, int id){
       if(tmp.length() > 4){
         playedSensors[id] = true;
         Serial.println("TRAIN={" + tmp + "}");
+        BTSerial.println("TRAIN={" + tmp + "}");
         training_ready = false;
       }
     }
@@ -38,9 +39,10 @@ void train_on_sensor(Adafruit_PN532 sensor, int id){
 void training_main(){
   //If training dashboard is ready for new data - otherwise, we await TRAIN_OK command
   if(training_ready){
-    //TODO add other sensors
-    train_on_sensor(sensor1, 1);
-    train_on_sensor(sensor2, 2);
-    train_on_sensor(sensor3, 3);
+     //TODO add other sensors
+     train_on_sensor(sensor1, 1);
+     train_on_sensor(sensor2, 2);
+     train_on_sensor(sensor3, 3);
+
   }
 }

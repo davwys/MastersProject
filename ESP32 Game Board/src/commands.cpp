@@ -146,12 +146,9 @@ void receive_command(bool usb){
     //Invalid command type: flash red LED
     else
     {
-        Serial.println("Invalid command");
+        if(usb)
+          Serial.println("Invalid command");
+        else
+          BTSerial.println("Invalid command");
     }
   }
-
-//Sends serial output commands
-void send_command(String cmd){
-  //TODO
-  Serial.print(cmd);
-}
