@@ -16,7 +16,7 @@ def request_area_name(self):
 # and sends "TRAIN_OK" message to request new training data
 def submit_area_name(self, name):
     characters = re.compile('[@_&!#$%^*()<>?/\|{}~:;]')
-    if 0 < len(name) < 20:
+    if 0 < len(name) < 20 and characters.search(name) is None:
         self.ids.area_name.hint_text = ''
         self.ids.area_name.disabled = True
         self.ids.area_name.text = ''
@@ -34,6 +34,7 @@ def submit_area_name(self, name):
     elif characters.search(name) is not None:
         self.update_log('Invalid area name')
         self.ids.submit_name.disabled = False
+
     else:
         self.update_log('Error: Name too long')
         self.ids.submit_name.disabled = False
