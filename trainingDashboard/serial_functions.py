@@ -4,6 +4,7 @@ import serial
 import serial.tools.list_ports
 import platform
 import numpy as np
+import time
 
 # This file contains all functions related to serial communications,
 # e.g. communications between the training dashboard and the game
@@ -116,4 +117,6 @@ def upload_training_data(self, data):
         # Write to serial port (encoded as bytes)
         self.ser.write(upl.encode('utf-8'))
 
-    # TODO: UPLOAD_END command
+    # Wait for 2s before sending end command to prevent errors
+    time.sleep(2)
+    self.ser.write(b'UPLOAD_END')
