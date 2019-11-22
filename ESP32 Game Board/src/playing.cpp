@@ -48,7 +48,10 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
 
       //Generate output: "Area='something'_CardID=123"
       String output = "Area='" + areaName + "'_"+ cid_str;
+
+      //Send on both bluetooth and USB
       Serial.println("PLAY={" + output + "}");
+      BTSerial.println("PLAY={" + output + "}");
 
       //playing_ready = false; TODO add
     }

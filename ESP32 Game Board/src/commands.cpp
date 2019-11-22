@@ -88,11 +88,14 @@ bool apply_mode_change(String command){
         if(cmd != 3){
           Serial.print("Changed to mode ");
           Serial.print(cmd);
+          BTSerial.print("Changed to mode ");
+          BTSerial.print(cmd);
         }
         return true;
       }
       else{
          Serial.println("Mode change failed, wrong input data?");
+         BTSerial.println("Mode change failed, wrong input data?");
          return false;
       }
   }
