@@ -1,3 +1,5 @@
 def areaTL(self):
-    action = 'Action A'
-    return action
+    area_name = 'A' #TODO get area name
+    card_ID = '33'  # TODO get card ID
+    output = 'User played card {} on area {}'.format(card_ID, area_name)
+    return output
