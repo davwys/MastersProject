@@ -1,4 +1,10 @@
 import kivy
+from kivy.config import Config
+Config.set('graphics', 'resizable', 1)
+Config.set('graphics', 'width', '1000')
+Config.set('graphics', 'height', '750')
+Config.set('graphics', 'minimum_width', '1000')
+Config.set('graphics', 'minimum_height', '750')
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
@@ -19,19 +25,9 @@ Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 class MyGrid(Widget):
 
-    def areaA(self):
-        action = 'Action A'
-        return action
-
-    def areaB(self):
-        action = 'Action B'
-        return action
-
-    def oracle(self):
-        action = 'Action Oracle'
-        return action
-
-
+    from areaTopLeft import areaTL
+    from areaTopRight import areaTR
+    from areaBottom import areaB
 
 # Main App definition
 class MyApp(App):
