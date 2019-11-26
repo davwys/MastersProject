@@ -34,7 +34,7 @@ class MyGrid(Widget):
     from data_handling import save_training_data, handle_training_message
     from log import update_log, toggle_log
 
-    log = ''
+    log = ""
     ser = serial.Serial(None)
     connected = False
     ports = ['No Devices Found']
@@ -71,7 +71,8 @@ class MyGrid(Widget):
         self.ids.instructions.text = '''Activate an area and add a name'''
 
         self.ids.start_training.disabled = True
-        self.ser.write(b'CHANGE_MODE=3')  # Change to training mode
+        # Change to training mode
+        self.ser.write(b'CHANGE_MODE=1')
         self.ser.flush()
 
         # Start training TODO kill after completion
@@ -82,14 +83,14 @@ class MyGrid(Widget):
     # Upload new training data
     def upload(self):
         self.ids.restart.disabled = True
-        self.update_log('Upload starting...')
+        self.log = self.update_log('Upload starting...')
         self.ids.upload.disabled = True
         if self.selectedPort is not None:
             self.update_log("Connecting to port {}...".format(self.selectedPort))
             try:
                 # Open port & change to UPLOAD mode
                 self.update_log('Connected to port\n{}, uploading...'.format(self.ser.name))
-                self.ser.write(b'CHANGE_MODE=4')
+                self.ser.write(b'CHANGE_MODE=2')
 
                 # Stop input thread
                 self.stopThread = True

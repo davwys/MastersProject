@@ -82,10 +82,10 @@ bool apply_mode_change(String command){
       int cmd = (int)temp - 48; //Due to UTF/ASCII-Encoding, we subtract 48 to get the actual number
 
       //Apply status change
-      if(cmd >=0 && cmd <= 5){
+      if(cmd >=0 && cmd <= 3){
         currentMode = Mode(cmd);
         //Don't print mode change to training mode
-        if(cmd != 3){
+        if(cmd != 1){
           Serial.print("Changed to mode ");
           Serial.print(cmd);
           BTSerial.print("Changed to mode ");

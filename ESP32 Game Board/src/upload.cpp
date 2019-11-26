@@ -58,7 +58,7 @@ void read_data(bool usb){
       if(receivedData.indexOf("UPLOAD_END") == 0){
         //Upload ended, go back to pretraining mode
         Serial.println("Upload complete!");
-        currentMode = Mode(PRETRAINING);
+        currentMode = Mode(READY);
       }
       //If not, save to memory
       else

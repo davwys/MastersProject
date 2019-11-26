@@ -12,9 +12,13 @@ def toggle_log(self, value):
 
 # Update the integrated log (and print to terminal)
 def update_log(self, text):
-    print(text)
-    self.log += (text + '\n')
+    if text is not None:
+        print(text)
+        if self.log is not None:
+            self.log += (text + '\n')
+        else:
+            self.log = (text + '\n')
 
-    # Update Log text only if visible
-    if self.ids.chk.active:
-        self.ids.log.text = 'Log:\n' + self.log
+        # Update Log text only if visible
+        if self.ids.chk.active:
+            self.ids.log.text = 'Log:\n' + self.log

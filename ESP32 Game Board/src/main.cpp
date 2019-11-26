@@ -145,12 +145,6 @@ void loop() {
          case READY:
             //TODO?
             break;
-         case PRETRAINING:
-            //TODO
-            break;
-         case PREPLAYING:
-            //TODO
-            break;
          case TRAINING:
             training_main();
             break;

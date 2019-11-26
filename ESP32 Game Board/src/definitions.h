@@ -22,8 +22,6 @@ PLAYING     = actively playing the game (outputs API calls for game logic)
 
 typedef enum  {
     READY,
-    PRETRAINING,
-    PREPLAYING,
     TRAINING,
     UPLOAD,
     PLAYING
