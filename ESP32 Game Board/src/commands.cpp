@@ -12,11 +12,9 @@ Possible states:
 ================
 
 0	  READY
-1	  PREPLAYING
-2	  PRETRAINING
-3	  TRAINING
-4	  UPLOAD
-5	  PLAYING
+1	  TRAINING
+2	  UPLOAD
+3	  PLAYING
 
 
 =============
@@ -25,8 +23,7 @@ Command List:
 
 CHANGE_MODE=x where x = 0..5		Input
 TRAIN_OK					              Input
-UPLOAD_START				            Input
-[...] {json}					          Input
+[...]       					          Input
 UPLOAD_END			                Input
 PLAY_OK					                Input
 REBOOT                          Input
@@ -55,7 +52,7 @@ void hard_restart() {
 //Flashes the selected LED for 300ms
 void flash_led(int pin) {
     digitalWrite(pin, HIGH);   // turn LED on
-    delay(300);                //wait
+    delay(300);                //wait TODO rewrite without delay
     digitalWrite(pin, LOW);    // turn LED off
 }
 
