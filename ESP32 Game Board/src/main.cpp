@@ -30,11 +30,11 @@ NFC Sensor setup
 #define SENSOR2   (16)
 #define SENSOR3   (15)
 #define SENSOR4   (13) //TODO test
-#define SENSOR5   (25) //TODO test -> WONT WORK
-#define SENSOR6   (26) //TODO test -> WONT WORK
+#define SENSOR5   (25) //TODO test
+#define SENSOR6   (26) //TODO test
 #define SENSOR7   (27) //TODO test
 #define SENSOR8   (34) //TODO test
-//#define SENSOR9   (33) //TODO find pins! --> test 14 & 15
+//#define SENSOR9   (33) //TODO find pins!
 //#define SENSOR10  (33) //TODO find pins!
 
 Adafruit_PN532 sensor1(SCK, MISO, MOSI, SENSOR1);
@@ -57,7 +57,7 @@ LED Pin setup
 */
 
 int LED_Pwr = 2;
-int LED_Sta = 22; //TODO Pins working: 21, 22
+int LED_Sta = 22;
 int LED_Com = 21;
 
 String mapping[10];

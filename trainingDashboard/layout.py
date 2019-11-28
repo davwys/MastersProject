@@ -99,7 +99,6 @@ class MyGrid(Widget):
                 time.sleep(2)
                 self.upload_training_data(self.trainingInput)
 
-                # self.ser.close()  # TODO close port & disconnect
             except OSError:
                 self.ids.upload.disabled = False
                 self.update_log('Error occurred')  # TODO Error handling

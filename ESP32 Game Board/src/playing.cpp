@@ -53,6 +53,9 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
       Serial.println("PLAY={" + output + "}");
       BTSerial.println("PLAY={" + output + "}");
 
+      //Flash COM LED
+      flash_led(LED_Com);
+
       //playing_ready = false; TODO add
     }
   }

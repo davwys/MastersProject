@@ -120,4 +120,8 @@ def upload_training_data(self, data):
     # Wait for 2s before sending end command to prevent errors
     time.sleep(2)
     self.ser.write(b'UPLOAD_END')
+
+    time.sleep(2)
+    # Close serial port
+    self.ser.close()
     # Switch to Ready mode happens on controller side
