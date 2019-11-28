@@ -21,16 +21,14 @@ Possible states:
 Command List:
 =============
 
-CHANGE_MODE=x where x = 0..5		Input
+CHANGE_MODE=x where x = 0..3		Input
 TRAIN_OK					              Input
-[...]       					          Input
-UPLOAD_END			                Input
+UPLOAD_END			                Input -> only applicable in upload mode, thus not handled here
 PLAY_OK					                Input
 REBOOT                          Input
-
-TRAIN=P3_0x123				          Output
-UPLOAD_OK					              Output
-PLAY=A_123					            Output
+restart_training                Input
+TRAIN={SensorID=3_CardID=72}    Output
+PLAY={'AreaA'_CardID=123}       Output
 
 */
 
