@@ -26,12 +26,12 @@ NFC Sensor setup
 #define SCK  (18)
 #define MOSI (23)
 #define MISO (19)
-#define SENSOR1   (33)
+#define SENSOR1   (4)
 #define SENSOR2   (32)
-#define SENSOR3   (4)
+#define SENSOR3   (33)
 #define SENSOR4   (13) //TODO test
-#define SENSOR5   (25) //TODO test
-#define SENSOR6   (26) //TODO test
+#define SENSOR5   (25) //TODO test -> WONT WORK
+#define SENSOR6   (26) //TODO test -> WONT WORK
 #define SENSOR7   (27) //TODO test
 #define SENSOR8   (34) //TODO test
 //#define SENSOR9   (33) //TODO find pins! --> test 14 & 15
@@ -111,13 +111,16 @@ void setup() {
 
     //Try initializing each sensor
     initialize_sensor(sensor1, 1);
+    delay(500);
     initialize_sensor(sensor2, 2);
+    delay(500);
     initialize_sensor(sensor3, 3);
+    /*
     initialize_sensor(sensor4, 4);
     initialize_sensor(sensor5, 5);
     initialize_sensor(sensor6, 6);
     initialize_sensor(sensor7, 7);
-    initialize_sensor(sensor8, 8);
+    initialize_sensor(sensor8, 8);*/
 
     Serial.print("Sensor search complete, found "); Serial.print(sensorCount); Serial.println(" sensors.");
 

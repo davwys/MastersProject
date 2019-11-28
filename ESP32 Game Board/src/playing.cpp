@@ -86,7 +86,6 @@ void read_mapping_data(){
 
           //Save values to mapping array
           mapping[sensorId-1] = areaName; //Sensor 1 gets saved to position 0
-
       }
       // Find the next command in input string
       command = strtok(0, "}{");

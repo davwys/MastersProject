@@ -37,12 +37,10 @@ PLAY=A_123					            Output
 
 */
 
-const char *InputCommands[7] = {
+const char *InputCommands[5] = {
   "CHANGE_MODE=",
   "TRAIN_OK",
   "PLAY_OK",
-  "UPLOAD_START",
-  "UPLOAD_END",
   "REBOOT",
   "RESTART_TRAINING"
 };
@@ -64,7 +62,7 @@ void flash_led(int pin) {
 
 //Validates a given command - TODO validate upload data
 bool validate_command(String command){
-  for(int i = 0; i <= 6; i++){
+  for(int i = 0; i <= 4; i++){
     if (receivedData.indexOf(InputCommands[i]) == 0)
       return true;
   }
@@ -129,21 +127,22 @@ void receive_command(bool usb){
       //Check if this is a mode change (and apply if yes), else handle other commands
       if(!apply_mode_change(receivedData))
       {
-
         //Reboot command: Reboot ESP
         if(receivedData.indexOf("REBOOT") >= 0){
           hard_restart();
         }
-        //Training restart command
-        else if(receivedData.indexOf("RESTART_TRAINING") >= 0){
-          restart_training();
-        }
         //Training OK command
-        else if(receivedData.indexOf("TRAIN_OK") >= 0){
+        else if(receivedData.indexOf("TRAIN_OK") >= 0 && currentMode == Mode(TRAINING)){
           training_ready = true;
         }
-
-        //TODO other command types
+        //Training restart command
+        else if(receivedData.indexOf("RESTART_TRAINING") >= 0 && currentMode == Mode(TRAINING)){
+          restart_training();
+        }
+        //Play_ok: flash COM LED
+        else if(receivedData.indexOf("PLAY_OK") >= 0 && currentMode == Mode(PLAYING)){
+          flash_led(LED_Com);
+        }
       }
     }
     //Invalid command type: flash red LED
