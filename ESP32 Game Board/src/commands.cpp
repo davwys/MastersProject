@@ -26,9 +26,9 @@ TRAIN_OK					              Input
 UPLOAD_END			                Input -> only applicable in upload mode, thus not handled here
 PLAY_OK					                Input
 REBOOT                          Input
-restart_training                Input
+RESTART_TRAINING                Input
 TRAIN={SensorID=3_CardID=72}    Output
-PLAY={'AreaA'_CardID=123}       Output
+PLAY={Area='Oracle'_CardID=12}  Output
 
 */
 

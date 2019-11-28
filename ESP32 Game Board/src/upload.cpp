@@ -69,8 +69,8 @@ void read_data(bool usb){
         //Save to memory
         save_string(receivedData, currentByte);
 
-        Serial.print("Current byte is now at: ");
-        Serial.println(currentByte);
+        //Serial.print("Current byte is now at: ");
+        //Serial.println(currentByte);
       }
     }
 }

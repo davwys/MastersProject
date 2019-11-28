@@ -27,11 +27,11 @@ void train_on_sensor(Adafruit_PN532 sensor, int id){
         Serial.println("TRAIN={" + tmp + "}");
         BTSerial.println("TRAIN={" + tmp + "}");
         training_ready = false;
+        //Flash communication LED to confirm sending command
+        flash_led(LED_Com);
       }
     }
-    catch (std::runtime_error e){
-      //Catch errors for incomplete data
-    }
+    catch (std::runtime_error e){} //Catch errors for incomplete data
   }
 }
 

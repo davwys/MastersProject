@@ -26,9 +26,9 @@ NFC Sensor setup
 #define SCK  (18)
 #define MOSI (23)
 #define MISO (19)
-#define SENSOR1   (4)
-#define SENSOR2   (32)
-#define SENSOR3   (33)
+#define SENSOR1   (4)   //Working: 4, 15, 16,
+#define SENSOR2   (16)
+#define SENSOR3   (15)
 #define SENSOR4   (13) //TODO test
 #define SENSOR5   (25) //TODO test -> WONT WORK
 #define SENSOR6   (26) //TODO test -> WONT WORK
@@ -57,7 +57,7 @@ LED Pin setup
 */
 
 int LED_Pwr = 2;
-int LED_Sta = 22; //TODO Pins: tested but not working: 12, 13, 14...
+int LED_Sta = 22; //TODO Pins working: 21, 22
 int LED_Com = 21;
 
 String mapping[10];
@@ -110,10 +110,9 @@ void setup() {
 */
 
     //Try initializing each sensor
+    delay(1000);
     initialize_sensor(sensor1, 1);
-    delay(500);
     initialize_sensor(sensor2, 2);
-    delay(500);
     initialize_sensor(sensor3, 3);
     /*
     initialize_sensor(sensor4, 4);
