@@ -27,6 +27,11 @@ def get_serial_ports(self):
 
             # index = element.description.find('(')
             # cut_string = element.description[:index - 1]
+            print("device name:")
+            print(element.name)
+            print(element.description)
+            print(element.device)
+            print(element.product)
             names.append(element.device)
             self.selectedPort_Windows = element.device
 

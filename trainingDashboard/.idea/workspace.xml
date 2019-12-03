@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/serial_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/serial_functions.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -288,7 +287,7 @@
       <workItem from="1575221718582" duration="91000" />
       <workItem from="1575231184294" duration="101000" />
       <workItem from="1575297413352" duration="2431000" />
-      <workItem from="1575368408683" duration="897000" />
+      <workItem from="1575368408683" duration="1027000" />
     </task>
     <servers />
   </component>
