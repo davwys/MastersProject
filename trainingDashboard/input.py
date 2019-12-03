@@ -1,6 +1,7 @@
 import serial
 import serial.tools.list_ports
 import re
+import platform
 
 
 # Enables user input for an area name after a card has been played
@@ -8,7 +9,8 @@ def request_area_name(self):
     self.ids.area_name.disabled = False
     self.ids.area_name.text = ''
     self.ids.submit_name.disabled = False
-    # self.ids.area_name.focus = True
+    if platform.system() is not "Windows":
+        self.ids.area_name.focus = True
     self.ids.area_name.hint_text = 'Enter your area name here'
 
 
