@@ -25,10 +25,8 @@ def get_serial_ports(self):
                 names.append(name)
         # Windows: get nice name for COM ports
         else:
-            index = element.description.find('(')
-            cut_string = element.description[:index - 1]
-            names.append(cut_string)
-            self.selectedPort_Windows = element.device
+            names.append(element.device)
+            self.selectedPort = element.device
 
     if len(names) == 0:
         names.append('No Devices Found')
@@ -62,7 +60,7 @@ def select_port(self, port):
         if platform.system() is not "Windows":
             self.ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
         else:
-            self.ser = serial.Serial(str(self.selectedPort_Windows), 57600)  # open serial port
+            self.ser = serial.Serial(str(self.selectedPort), 57600)  # open serial port
 
         time.sleep(1)
         # Change to playing mode
