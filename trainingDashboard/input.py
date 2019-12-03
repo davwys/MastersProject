@@ -12,10 +12,20 @@ def request_area_name(self):
     self.ids.area_name.hint_text = 'Enter your area name here'
 
 
+# Validates a given area name
+def validate_area_name(name):
+    res = True
+    for c in name:
+        if not re.match('^[a-zA-Z0-9]', c):
+            res = False
+
+    return res
+
+
 # Saves the area name given by the user (if length is within a valid range)
 # and sends "TRAIN_OK" message to request new training data
 def submit_area_name(self, name):
-    if 0 < len(name) < 20 and re.match('^[a-zA-Z0-9]', name):
+    if 0 < len(name) < 20 and validate_area_name(name):
         self.ids.area_name.hint_text = ''
         self.ids.area_name.disabled = True
         self.ids.area_name.text = ''
@@ -30,7 +40,7 @@ def submit_area_name(self, name):
         # Enable upload after we have at least one row of data
         self.ids.upload.disabled = False
         self.update_log('Area {} has been activated'.format(name))
-    elif not re.match('^[a-zA-Z0-9]', name):
+    elif not validate_area_name(name):
         self.update_log('Invalid area name')
         self.ids.submit_name.disabled = False
 
