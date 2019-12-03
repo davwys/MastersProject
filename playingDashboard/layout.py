@@ -22,12 +22,16 @@ import serial.tools.list_ports
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 
-
 class MyGrid(Widget):
+
+    # load external methods
+    from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_playing_input
+    from data_handling import handle_playing_message
 
     from areaTopLeft import areaTL
     from areaTopRight import areaTR
     from areaBottom import areaB
+
 
 # Main App definition
 class MyApp(App):
