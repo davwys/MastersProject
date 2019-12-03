@@ -18,6 +18,8 @@ import sys
 import glob
 import serial
 import serial.tools.list_ports
+import threading
+import time
 
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
@@ -31,6 +33,9 @@ class MyGrid(Widget):
     from areaTopLeft import areaTL
     from areaTopRight import areaTR
     from areaBottom import areaB
+
+    # Thread kill flag (kills input thread on program end)
+    stopThread = False
 
 
 # Main App definition

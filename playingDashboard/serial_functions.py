@@ -5,9 +5,10 @@ import serial.tools.list_ports
 import platform
 import numpy as np
 import time
+import threading
 
 # This file contains all functions related to serial communications,
-# e.g. communications between the training dashboard and the game
+# e.g. communications between the playing dashboard and the game
 # board's main controller.
 
 
@@ -68,6 +69,10 @@ def select_port(self, port):
         self.ser.write(b'CHANGE_MODE=3')
         self.ser.flush()
 
+        # Start serial read thread
+        thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
+        thread.start()
+
     except OSError:
         print('Error: Could not open port')
 
@@ -77,7 +82,7 @@ def read_from_port(self, ser):
     while not self.stopThread:
         reading = ser.readline().decode()
         print('Got: ' + str(reading))
-        self.handle_training_message(reading)
+        self.handle_playing_message(reading)
         # Kills the thread when stop flag is set
         if self.stopThread:
             break

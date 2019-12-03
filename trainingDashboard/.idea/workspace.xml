@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../playingDashboard/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../playingDashboard/data_handling.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../playingDashboard/serial_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../playingDashboard/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../playingDashboard/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../playingDashboard/layout.py" beforeDir="false" afterPath="$PROJECT_DIR$/../playingDashboard/layout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../playingDashboard/my.kv" beforeDir="false" afterPath="$PROJECT_DIR$/../playingDashboard/my.kv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../playingDashboard/serial_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../playingDashboard/serial_functions.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -292,7 +288,7 @@
       <workItem from="1574977516572" duration="79000" />
       <workItem from="1575221718582" duration="91000" />
       <workItem from="1575231184294" duration="101000" />
-      <workItem from="1575297413352" duration="2049000" />
+      <workItem from="1575297413352" duration="2298000" />
     </task>
     <servers />
   </component>
