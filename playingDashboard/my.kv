@@ -35,6 +35,8 @@
             width: 1.2
 <Label>
     font_size: dp(20)
+<Areaname@Label>
+    font_size: dp(40)
 
 <MyGrid>
     GridLayout:
@@ -87,7 +89,7 @@
             cols:2
             GridLayout:
                 rows:2
-                Label:
+                Areaname:
                     color: 0,0,0,1
                     text:'Actions'
                     canvas:
@@ -108,7 +110,7 @@
                             size: self.size
             GridLayout:
                 rows:2
-                Label:
+                Areaname:
                     color: 0,0,0,1
                     text:'Buildings'
                     canvas:
@@ -131,7 +133,7 @@
             size_hint_y:None
             height: root.height * 0.45
             rows:2
-            Label:
+            Areaname:
                 color: 0,0,0,1
                 text:'Oracle'
                 canvas:
