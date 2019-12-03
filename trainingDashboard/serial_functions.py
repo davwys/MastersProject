@@ -24,9 +24,10 @@ def get_serial_ports(self):
                 names.append(name)
         # Windows: get nice name for COM ports
         else:
-            index = element.description.find('(')
-            cut_string = element.description[:index - 1]
-            names.append(cut_string)
+
+            # index = element.description.find('(')
+            # cut_string = element.description[:index - 1]
+            names.append(element.device)
             self.selectedPort_Windows = element.device
 
     if len(names) == 0:
