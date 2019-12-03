@@ -24,21 +24,7 @@ def get_serial_ports(self):
                 names.append(name)
         # Windows: get nice name for COM ports
         else:
-
-            # index = element.description.find('(')
-            # cut_string = element.description[:index - 1]
-            print("device name:")
-            print(element.name)
-            print(element.description)
-            print(element.device)
-            print(element.product)
-            print(element.location)
-            print(element.manufacturer)
-            print(element.hwid)
-            print(element.pid)
-            print(element.serial_number)
-            print(element.interface)
-            names.append(element.device)
+            names.append(element.description)
             self.selectedPort_Windows = element.device
 
     if len(names) == 0:
