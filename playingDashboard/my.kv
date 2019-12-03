@@ -89,7 +89,7 @@
                 rows:2
                 Label:
                     color: 0,0,0,1
-                    text:'Area A'
+                    text:'Actions'
                     canvas:
                         Color:
                             rgba: [.7,.7,.95,.2]
@@ -97,8 +97,9 @@
                             pos: self.pos
                             size: self.size
                 Label:
+                    id: actions
                     color: 0,0,0,1
-                    text:root.areaTL()
+                    text: ''
                     canvas:
                         Color:
                             rgba: [.7,.7,.95,.2]
@@ -109,7 +110,7 @@
                 rows:2
                 Label:
                     color: 0,0,0,1
-                    text:'Area B'
+                    text:'Buildings'
                     canvas:
                         Color:
                             rgba: [.2,.3,.95,.2]
@@ -117,8 +118,9 @@
                             pos: self.pos
                             size: self.size
                 Label:
+                    id: buildings
                     color: 0,0,0,1
-                    text:root.areaTR()
+                    text: ''
                     canvas:
                         Color:
                             rgba: [.2,.3,.95,.2]
@@ -139,8 +141,9 @@
                         pos: self.pos
                         size: self.size
             Label:
+                id: oracle
                 color: 0,0,0,1
-                text:root.areaB()
+                text: ''
                 canvas:
                     Color:
                         rgba: [.5,.5,.95,.2]

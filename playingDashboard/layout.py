@@ -30,10 +30,6 @@ class MyGrid(Widget):
     from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_playing_input
     from data_handling import handle_playing_message
 
-    from areaTopLeft import areaTL
-    from areaTopRight import areaTR
-    from areaBottom import areaB
-
     # Thread kill flag (kills input thread on program end)
     stopThread = False
 
