@@ -39,7 +39,6 @@ class MyGrid(Widget):
     connected = False
     ports = ['No Devices Found']
     selectedPort = None
-    selectedPort_Windows = None
 
     # Temporary data storage
     tempData = [None, None, None]
