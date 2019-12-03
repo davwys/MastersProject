@@ -32,6 +32,12 @@ def get_serial_ports(self):
             print(element.description)
             print(element.device)
             print(element.product)
+            print(element.location)
+            print(element.manufacturer)
+            print(element.hwid)
+            print(element.pid)
+            print(element.serial_number)
+            print(element.interface)
             names.append(element.device)
             self.selectedPort_Windows = element.device
 

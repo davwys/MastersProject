@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../trainingDashboard/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../trainingDashboard/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trainingDashboard/serial_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../trainingDashboard/serial_functions.py" afterDir="false" />
-    </list>
+    <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,7 +258,7 @@
       <workItem from="1573224052155" duration="276000" />
       <workItem from="1573224368351" duration="455000" />
       <workItem from="1573316619720" duration="16000" />
-      <workItem from="1575367012618" duration="4041000" />
+      <workItem from="1575367012618" duration="4179000" />
     </task>
     <servers />
   </component>
