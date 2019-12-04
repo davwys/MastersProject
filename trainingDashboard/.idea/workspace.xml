@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/input.py" beforeDir="false" afterPath="$PROJECT_DIR$/input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serial_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/serial_functions.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,26 +38,20 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Python.layout">
     <configuration default="true" type="DjangoTestsConfigurationType">
@@ -135,7 +129,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
+      <option name="SDK_HOME" value="/usr/bin/python3.7" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -236,6 +230,18 @@
       <item itemvalue="Python.layout" />
     </list>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -288,6 +294,11 @@
       <workItem from="1575231184294" duration="101000" />
       <workItem from="1575297413352" duration="2431000" />
       <workItem from="1575368408683" duration="2266000" />
+      <workItem from="1575456688154" duration="99000" />
+      <workItem from="1575456848605" duration="163000" />
+      <workItem from="1575457141444" duration="56000" />
+      <workItem from="1575457209685" duration="1597000" />
+      <workItem from="1575458838771" duration="81000" />
     </task>
     <servers />
   </component>
@@ -310,8 +321,42 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="720" y="353" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575457276186">
+      <screen x="70" y="27" width="2490" height="1413" />
+    </state>
+    <state x="720" y="353" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.2490.1413@70.27.2490.1413" timestamp="1575457276186" />
+    <state width="894" height="192" key="GridCell.Tab.0.bottom" timestamp="1575458989613">
+      <screen x="70" y="27" width="2490" height="1413" />
+    </state>
+    <state width="894" height="192" key="GridCell.Tab.0.bottom/70.27.2490.1413@70.27.2490.1413" timestamp="1575458989613" />
+    <state width="894" height="192" key="GridCell.Tab.0.center" timestamp="1575458989612">
+      <screen x="70" y="27" width="2490" height="1413" />
+    </state>
+    <state width="894" height="192" key="GridCell.Tab.0.center/70.27.2490.1413@70.27.2490.1413" timestamp="1575458989612" />
+    <state width="894" height="192" key="GridCell.Tab.0.left" timestamp="1575458989612">
+      <screen x="70" y="27" width="2490" height="1413" />
+    </state>
+    <state width="894" height="192" key="GridCell.Tab.0.left/70.27.2490.1413@70.27.2490.1413" timestamp="1575458989612" />
+    <state width="894" height="192" key="GridCell.Tab.0.right" timestamp="1575458989613">
+      <screen x="70" y="27" width="2490" height="1413" />
+    </state>
+    <state width="894" height="192" key="GridCell.Tab.0.right/70.27.2490.1413@70.27.2490.1413" timestamp="1575458989613" />
+    <state x="166" y="644" width="1022" height="737" key="SettingsEditor" timestamp="1575458176300">
+      <screen x="70" y="27" width="2490" height="1413" />
+    </state>
+    <state x="166" y="644" width="1022" height="737" key="SettingsEditor/70.27.2490.1413@70.27.2490.1413" timestamp="1575458176300" />
+    <state x="971" y="560" key="com.intellij.ide.util.TipDialog" timestamp="1575456689304">
+      <screen x="70" y="27" width="2490" height="1413" />
+    </state>
+    <state x="971" y="560" key="com.intellij.ide.util.TipDialog/70.27.2490.1413@70.27.2490.1413" timestamp="1575456689304" />
+    <state x="978" y="349" width="672" height="678" key="search.everywhere.popup" timestamp="1575458665163">
+      <screen x="70" y="27" width="2490" height="1413" />
+    </state>
+    <state x="978" y="349" width="672" height="678" key="search.everywhere.popup/70.27.2490.1413@70.27.2490.1413" timestamp="1575458665163" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/trainingDashboard$layout.coverage" NAME="layout Coverage Results" MODIFIED="1575368415917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kivyTest$layout.coverage" NAME="layout Coverage Results" MODIFIED="1573040576192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/trainingDashboard$layout.coverage" NAME="layout Coverage Results" MODIFIED="1575458989603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
