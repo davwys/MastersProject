@@ -58,7 +58,10 @@ def select_port(self, port):
 
         # Enable serial port (system dependent)
         if platform.system() is not "Windows":
-            self.ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
+            if platform.system() is not "Darwin":
+                self.ser = serial.Serial(str(self.selectedPort), 57600)  # open serial port
+            else:
+                self.ser = serial.Serial('/dev/cu.' + str(self.selectedPort), 57600)  # open serial port
         else:
             print("opening port: {}".format(self.selectedPort))
             self.ser = serial.Serial(str(self.selectedPort), 57600)  # open serial port
