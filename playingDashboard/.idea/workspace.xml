@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serial_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/serial_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../trainingDashboard/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../trainingDashboard/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -262,7 +261,8 @@
       <workItem from="1573224052155" duration="276000" />
       <workItem from="1573224368351" duration="455000" />
       <workItem from="1573316619720" duration="16000" />
-      <workItem from="1575367012618" duration="4620000" />
+      <workItem from="1575367012618" duration="4853000" />
+      <workItem from="1575456002307" duration="9000" />
     </task>
     <servers />
   </component>
