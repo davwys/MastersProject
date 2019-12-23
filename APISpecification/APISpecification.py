@@ -33,13 +33,21 @@ class MyGrid(Widget):
     # Thread kill flag (kills input thread on program end)
     stopThread = False
 
+    #TODO make it work
+    def api_name_handler(self, input):
+        self.ids.display.text = input
+
 
 # Main App definition
 class MyApp(App):
-    title = "Game Board Playing Dashboard"
+    title = "Game Board API Call Specification Dashboard"
 
     def build(self):
         return MyGrid()
+
+    def process(self):
+        text = self.root.ids.input.text
+        print(text)
 
 
 if __name__ == "__main__":

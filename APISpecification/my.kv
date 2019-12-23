@@ -123,6 +123,7 @@
                     Label:
                         text: 'Area:'
                     Label:
+                        id: area
                         text: 'Investors'
                 GridLayout:
                     padding: [10,10,10,10]
@@ -130,26 +131,32 @@
                     Label:
                         text: 'Card ID:'
                     Label:
+                        id: card
                         text: '23'
                 TextInput:
+                    id: input
                     hint_text: 'specify your API call here'
+                    on_text: root.api_name_handler(input.text)
                 GridLayout:
                     padding: [10,10,10,10]
                     cols:3
                     RoundButton:
                         text: 'Add Area'
+                        on_press: root.api_name_handler(area.text)
                     Label:
                         width: self.parent.width * 0.3
                         size_hint_x: None
                     RoundButton:
                         text: 'Add Card ID'
+                        on_press: root.api_name_handler(card.text)
                 GridLayout:
                     padding: [10,10,10,10]
                     cols:2
                     Label:
                         text: 'API Call:'
                     Label:
-                        text: 'appears here'
+                        id: display
+                        text: ''
                 BorderButton:
                     text: 'Submit'
 
