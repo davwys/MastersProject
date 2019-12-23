@@ -66,7 +66,7 @@
                 color: 0,0,0,1
                 size_hint_x: None
                 width: self.parent.width * 0.50
-                text: "PFC Playing Dashboard"
+                text: "PFC API Call Specification"
             GridLayout:
                 padding: [10,10,10,10]
                 cols: 1
@@ -86,72 +86,45 @@
         GridLayout:
             size_hint_y:None
             height: root.height * 0.45
-            cols:2
+            cols:3
+            height: root.height * 0.8
+            size_hint_y: None
             GridLayout:
-                rows:2
-                Areaname:
-                    color: 0,0,0,1
-                    text:'Actions'
-                    canvas:
-                        Color:
-                            rgba: [.7,.7,.95,.2]
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-                Label:
-                    id: actions
-                    color: 0,0,0,1
-                    text: ''
-                    canvas:
-                        Color:
-                            rgba: [.7,.7,.95,.2]
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
+                width: root.width * 0.25
+                size_hint_x: None
+                height: self.parent.height * 0.8
+                size_hint_y: None
             GridLayout:
-                rows:2
-                Areaname:
-                    color: 0,0,0,1
-                    text:'Buildings'
-                    canvas:
-                        Color:
-                            rgba: [.2,.3,.95,.2]
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-                Label:
-                    id: buildings
-                    color: 0,0,0,1
-                    text: ''
-                    canvas:
-                        Color:
-                            rgba: [.2,.3,.95,.2]
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
+                width: root.width * 0.5
+                size_hint_x: None
+                height: self.parent.height * 0.8
+                size_hint_y: None
+            GridLayout:
+                width: root.width * 0.25
+                size_hint_x: None
+                height: self.parent.height * 0.8
+                size_hint_y: None
+
         GridLayout:
-            size_hint_y:None
-            height: root.height * 0.45
-            rows:2
-            Areaname:
-                color: 0,0,0,1
-                text:'Oracle'
-                canvas:
-                    Color:
-                        rgba: [.5,.5,.95,.2]
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-            Label:
-                id: oracle
-                color: 0,0,0,1
-                text: ''
-                canvas:
-                    Color:
-                        rgba: [.5,.5,.95,.2]
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
+            cols:1
+            width: root.width
+            size_hint_x: None
+            size_hint_y: None
+            height: root.height * 0.1
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.5
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            GridLayout:
+                padding: [10,10,10,10]
+                cols: 1
+                width: self.parent.width * 0.25
+                size_hint_x: None
+                height: self.parent.height * 1
+                size_hint_y: None
+
 
 
 
