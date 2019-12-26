@@ -27,15 +27,18 @@ Window.clearcolor = (0.8, 0.8, 0.8, 1)
 class MyGrid(Widget):
 
     # load external methods
-    #from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_playing_input
-    #from data_handling import handle_playing_message
+    from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_playing_input, handle_playing_message
 
     # Thread kill flag (kills input thread on program end)
     stopThread = False
+    areaName = '[AreaName]'
+    cardId = '[CardID]'
 
     #TODO make it work
-    def api_name_handler(self, input):
-        self.ids.display.text = input
+    def api_name_handler(self, name):
+        txt = name.replace("[AreaName]", self.areaName)
+        txt = txt.replace("[CardID]", self.cardId)
+        self.ids.display.text = txt
 
 
 # Main App definition

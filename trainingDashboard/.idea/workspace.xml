@@ -1,77 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Release/macOS/dist/TrainingDashboard.app/Contents/Resources/.idea/trainingDashboard.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Release/macOS/dist/TrainingDashboard/.idea/trainingDashboard.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../playingDashboard/.idea/libraries/R_User_Library.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/appveyor.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/ci/appveyor_server_upload.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/ci/id_rsa.enc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/changelog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/compat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/control" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/copyright" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/kivy-doc.docs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/kivy-examples.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/kivy-tools.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/python3-kivy.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/rules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/changelog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/compat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/control" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/copyright" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/kivy-doc.docs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/kivy-examples.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/kivy-tools.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python-kivy-bin.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python-kivy-common.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python-kivy.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python3-kivy-bin.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python3-kivy-common.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python3-kivy.install" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/rules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/cleanup_app.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/create-osx-bundle.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/create-osx-dmg.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/MakeSymlinks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/icon.icns" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/link_duplicate.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/script" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/package_app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/DST Root CA X3.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/angle.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/common.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/README.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivy-bash.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivy.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivybash.rc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivyenv.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivywineenv.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/cython.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/easy_install.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/link_msysgit.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/make-portable-python.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/pip.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/register-python.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/glew.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/gstreamer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/sdl2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/R_User_Library.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../playingDashboard/data_handling.py" beforeDir="false" afterPath="$PROJECT_DIR$/../playingDashboard/data_handling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../playingDashboard/serial_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../playingDashboard/serial_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serial_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/serial_functions.py" afterDir="false" />
-    </list>
+    <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,6 +50,18 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Python.Training">
     <configuration default="true" type="DjangoTestsConfigurationType">
@@ -297,18 +240,6 @@
       <item itemvalue="Python.Training" />
     </list>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -370,6 +301,7 @@
       <workItem from="1575889535793" duration="644000" />
       <workItem from="1576150902071" duration="655000" />
       <workItem from="1576670597126" duration="597000" />
+      <workItem from="1577357262395" duration="20000" />
     </task>
     <servers />
   </component>
@@ -423,8 +355,8 @@
     <state x="341" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1575889031588" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/trainingDashboard$layout.coverage" NAME="layout Coverage Results" MODIFIED="1575889034617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/trainingDashboard$Training.coverage" NAME="Training Coverage Results" MODIFIED="1576159323551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/trainingDashboard$layout.coverage" NAME="layout Coverage Results" MODIFIED="1575889034617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kivyTest$layout.coverage" NAME="layout Coverage Results" MODIFIED="1573040576192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
