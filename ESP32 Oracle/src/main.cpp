@@ -30,6 +30,7 @@ Adafruit_PN532 sensor6(SCK, MISO, MOSI, SENSOR6);*/
 
 int sensorCount = 0;
 bool activeSensors[4];
+int playedCards[4];
 
 /*
 ==================
@@ -61,6 +62,11 @@ void setup() {
     activeSensors[1] = false;
     activeSensors[2] = false;
     activeSensors[3] = false;
+
+    playedCards[0] = NULL;
+    playedCards[1] = NULL;
+    playedCards[2] = NULL;
+    playedCards[3] = NULL;
 
     pinMode(LED_BUILTIN, OUTPUT);
     pinMode(LED_1, OUTPUT);
