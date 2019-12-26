@@ -1,1 +1,1 @@
-http://192.168.1.1/failure/[CardID]
+http://192.168.1.1/play_api/move={[AreaName]_[CardID]}

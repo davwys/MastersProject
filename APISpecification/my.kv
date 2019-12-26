@@ -165,7 +165,7 @@
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     padding: [10,10,10,10]
-                    cols:2
+                    rows:2
                     Label:
                         text: 'API Call Preview:'
                     Label:
@@ -177,7 +177,7 @@
                 BorderButton:
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    text: 'Submit'
+                    text: 'Save'
                     on_press: root.save_call_format(root.callFormat)
                 Label:
                     height: self.parent.height * 0.05
@@ -186,9 +186,9 @@
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     padding: [10,10,10,10]
-                    cols:2
+                    rows:2
                     Label:
-                        text: 'Current API Call:'
+                        text: 'Current API Call Format:'
                     Label:
                         id: current
                         text: root.currentCallFormat
@@ -220,6 +220,12 @@
                 size_hint_x: None
                 height: self.parent.height * 1
                 size_hint_y: None
+                BorderButton:
+                    id: restart
+                    #disabled: True
+                    text: 'Load current format'
+                    on_press:
+                        root.reset_call_format()
 
 
 

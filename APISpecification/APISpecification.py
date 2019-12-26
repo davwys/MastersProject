@@ -61,6 +61,11 @@ class MyGrid(Widget):
         print('Saved format: ' + str(text))
         self.load_current_format()
 
+    def reset_call_format(self):
+        self.load_current_format()
+        self.callFormat = self.currentCallFormat
+        self.ids.input.text = self.callFormat
+
 
 # Main App definition
 class MyApp(App):
