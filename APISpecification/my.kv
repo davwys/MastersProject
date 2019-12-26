@@ -36,12 +36,13 @@
 <Label>
     font_size: dp(20)
 <TextInput>
+    multiline: False
     background_color: (0,0,0,0)
     background_normal: ''
     font_size: dp(20)
     cursor_color: (.05, .5, 1, 1)
     #left, right
-    padding_x: [self.width*0.1,self.width*0.1]
+    padding_x: [self.width*0.05,self.width*0.05]
     #top, bottom
     padding_y: [self.height/2.0 - (self.line_height/2.0)*len(self._lines), 0]
     canvas.before:
@@ -111,13 +112,38 @@
             GridLayout:
                 width: root.width * 0.5
                 size_hint_x: None
-                height: self.parent.height * 0.8
+                height: self.parent.height * 1
                 size_hint_y: None
-                rows:7
+                rows:12
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
+                TextInput:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    id: input
+                    hint_text: 'Specify your API call here'
+                    on_text: root.api_name_handler(input.text)
                 GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [0,20,0,10]
+                    cols:3
+                    RoundButton:
+                        text: 'Add Area'
+                        on_press: root.add_to_call('[AreaName]')
+                    Label:
+                        width: self.parent.width * 0.1
+                        size_hint_x: None
+                    RoundButton:
+                        text: 'Add Card ID'
+                        on_press: root.add_to_call('[CardID]')
+                Label:
+                    height: self.parent.height * 0.05
+                    size_hint_y: None
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
                     padding: [10,10,10,10]
                     cols:2
                     Label:
@@ -126,6 +152,8 @@
                         id: area
                         text: root.areaName
                 GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
                     padding: [10,10,10,10]
                     cols:2
                     Label:
@@ -133,33 +161,40 @@
                     Label:
                         id: card
                         text: root.cardId
-                TextInput:
-                    id: input
-                    hint_text: 'specify your API call here'
-                    on_text: root.api_name_handler(input.text)
                 GridLayout:
-                    padding: [10,10,10,10]
-                    cols:3
-                    RoundButton:
-                        text: 'Add Area'
-                        on_press: root.api_name_handler(area.text)
-                    Label:
-                        width: self.parent.width * 0.3
-                        size_hint_x: None
-                    RoundButton:
-                        text: 'Add Card ID'
-                        on_press: root.api_name_handler(card.text)
-                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
                     padding: [10,10,10,10]
                     cols:2
                     Label:
-                        text: 'API Call:'
+                        text: 'API Call Preview:'
                     Label:
-                        id: display
+                        id: preview
                         text: ''
+                Label:
+                    height: self.parent.height * 0.05
+                    size_hint_y: None
                 BorderButton:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
                     text: 'Submit'
-
+                    on_press: root.save_call_format(root.callFormat)
+                Label:
+                    height: self.parent.height * 0.05
+                    size_hint_y: None
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [10,10,10,10]
+                    cols:2
+                    Label:
+                        text: 'Current API Call:'
+                    Label:
+                        id: current
+                        text: root.currentCallFormat
+                Label:
+                    height: self.parent.height * 0.05
+                    size_hint_y: None
             GridLayout:
                 width: root.width * 0.25
                 size_hint_x: None
