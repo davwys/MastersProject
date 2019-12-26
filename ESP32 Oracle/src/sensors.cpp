@@ -116,5 +116,8 @@ String readTag(Adafruit_PN532 sensor, int id, bool verbose){
       throw std::runtime_error("Error: Couldn't finish reading data");
     }
   }
+  else{
+    return "NONE";
+  }
 
 }

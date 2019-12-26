@@ -44,7 +44,7 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
       int sid = atoi(sid_char);
 
       //Get area name from mapping
-      String areaName = "TEST"; //mapping[sid-1];
+      String areaName = "Oracle_" + String(id);
 
       //Generate output: "Area='something'_CardID=123"
       String output = "Area='" + areaName + "'_"+ cid_str;
@@ -53,10 +53,33 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
       Serial.println("PLAY={" + output + "}");
       BTSerial.println("PLAY={" + output + "}");
 
-      //Flash COM LED
-      //flash_led(LED_Com);
+      //turn on LED
+      switch(id){
+        case 1:
+          digitalWrite(LED_1, HIGH);
+          break;
+        case 2:
+          digitalWrite(LED_2, HIGH);
+          break;
+        default:
+          break;
+      }
 
       //playing_ready = false; TODO add
+    }
+    else{
+      if(tmp.indexOf("NONE") >= 0){
+        switch(id){
+          case 1:
+            digitalWrite(LED_1, LOW);
+            break;
+          case 2:
+            digitalWrite(LED_2, LOW);
+            break;
+          default:
+            break;
+        }
+      }
     }
   }
   catch (std::runtime_error e){} //Catch errors for incomplete data
