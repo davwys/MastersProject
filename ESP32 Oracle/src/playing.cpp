@@ -32,6 +32,10 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
     //Tmp looks like: SensorID=1_CardID=2
     if(tmp.length() > 4){
 
+      //Save sensor as currently active
+      activeSensors[id-1] = true;
+
+
       //Extract sensor ID string & card ID string
       String sid_str = split(tmp, '_', 0);
       String cid_str = tmp.substring(tmp.indexOf("CardID="));
@@ -50,10 +54,11 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
       String output = "Area='" + areaName + "'_"+ cid_str;
 
       //Send on both bluetooth and USB
-      Serial.println("PLAY={" + output + "}");
-      BTSerial.println("PLAY={" + output + "}");
+      //Serial.println("PLAY={" + output + "}");
+      //BTSerial.println("PLAY={" + output + "}");
 
-      //turn on LED
+      Serial.println();
+      //Turn on Sensor's LED
       switch(id){
         case 1:
           digitalWrite(LED_1, HIGH);
@@ -67,8 +72,12 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
 
       //playing_ready = false; TODO add
     }
+
+    //When card is removed / no longer present
     else{
       if(tmp.indexOf("NONE") >= 0){
+
+        //Turn off Sensor's LED
         switch(id){
           case 1:
             digitalWrite(LED_1, LOW);
@@ -79,6 +88,9 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
           default:
             break;
         }
+
+        //Save sensor as currently inactive
+        activeSensors[id-1] = false;
       }
     }
   }

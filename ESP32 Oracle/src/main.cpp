@@ -29,6 +29,7 @@ Adafruit_PN532 sensor5(SCK, MISO, MOSI, SENSOR5);
 Adafruit_PN532 sensor6(SCK, MISO, MOSI, SENSOR6);*/
 
 int sensorCount = 0;
+bool activeSensors[4];
 
 /*
 ==================
@@ -55,6 +56,11 @@ String receivedData = "";
 
 //Main setup function (runs on initialization)
 void setup() {
+
+    activeSensors[0] = false;
+    activeSensors[1] = false;
+    activeSensors[2] = false;
+    activeSensors[3] = false;
 
     pinMode(LED_BUILTIN, OUTPUT);
     pinMode(LED_1, OUTPUT);

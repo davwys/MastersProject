@@ -61,6 +61,8 @@ String readTag(Adafruit_PN532 sensor, int id, bool verbose);
 
 extern int sensorCount;
 
+extern bool activeSensors[4];
+
 //Sensors defined in main.cpp
 extern Adafruit_PN532 sensor1;
 extern Adafruit_PN532 sensor2;
