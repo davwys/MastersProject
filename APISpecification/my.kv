@@ -119,6 +119,7 @@
                     height: self.parent.height * 0.1
                     size_hint_y: None
                 TextInput:
+                    unfocus_on_touch: False
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     id: input
@@ -147,8 +148,10 @@
                     padding: [10,10,10,10]
                     cols:2
                     Label:
+                        color: 0,0,0,1
                         text: 'Area:'
                     Label:
+                        color: 0,0,0,1
                         id: area
                         text: root.areaName
                 GridLayout:
@@ -157,8 +160,10 @@
                     padding: [10,10,10,10]
                     cols:2
                     Label:
+                        color: 0,0,0,1
                         text: 'Card ID:'
                     Label:
+                        color: 0,0,0,1
                         id: card
                         text: root.cardId
                 GridLayout:
@@ -167,8 +172,10 @@
                     padding: [10,10,10,10]
                     rows:2
                     Label:
+                        color: 0,0,0,1
                         text: 'API Call Preview:'
                     Label:
+                        color: 0,0,0,1
                         id: preview
                         text: ''
                 Label:
@@ -188,8 +195,10 @@
                     padding: [10,10,10,10]
                     rows:2
                     Label:
+                        color: 0,0,0,1
                         text: 'Current API Call Format:'
                     Label:
+                        color: 0,0,0,1
                         id: current
                         text: root.currentCallFormat
                 Label:
