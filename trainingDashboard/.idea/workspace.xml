@@ -1,15 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../playingDashboard/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../playingDashboard/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Release/macOS/dist/TrainingDashboard.app/Contents/Resources/.idea/trainingDashboard.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Release/macOS/dist/TrainingDashboard/.idea/trainingDashboard.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../playingDashboard/.idea/libraries/R_User_Library.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/appveyor.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/ci/appveyor_server_upload.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/ci/id_rsa.enc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/changelog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/compat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/control" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/copyright" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/kivy-doc.docs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/kivy-examples.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/kivy-tools.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/python3-kivy.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/daily/rules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/changelog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/compat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/control" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/copyright" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/kivy-doc.docs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/kivy-examples.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/kivy-tools.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python-kivy-bin.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python-kivy-common.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python-kivy.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python3-kivy-bin.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python3-kivy-common.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/python3-kivy.install" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/linux/debian/stable/rules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/cleanup_app.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/create-osx-bundle.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/create-osx-dmg.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/MakeSymlinks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/icon.icns" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/link_duplicate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/data/script" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/osx/package_app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/DST Root CA X3.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/angle.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/common.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/README.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivy-bash.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivy.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivybash.rc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivyenv.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/kivywineenv.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/cython.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/easy_install.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/link_msysgit.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/make-portable-python.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/pip.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/data/tools/register-python.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/glew.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/gstreamer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.buildozer/osx/platform/kivy-sdk-packager-master/win/sdl2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/R_User_Library.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../playingDashboard/data_handling.py" beforeDir="false" afterPath="$PROJECT_DIR$/../playingDashboard/data_handling.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../playingDashboard/serial_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../playingDashboard/serial_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serial_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/serial_functions.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-=======
-    <list default="true" id="e1445e7d-4f5b-4c1a-b2cb-a0e1207f7cb2" name="Default Changelist" comment="" />
->>>>>>> 299d9816b4fba702882cbc46a09b57459c052ce9
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,11 +116,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../playingDashboard" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.layout">
+  <component name="RunManager" selected="Python.Training">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="trainingDashboard" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -105,6 +167,28 @@
       <option name="ADDITIONAL_ARGS" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Training" type="PythonConfigurationType" factoryName="Python">
+      <module name="kivyTest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/layout.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="trainingDashboard" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -119,28 +203,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="layout" type="PythonConfigurationType" factoryName="Python">
-      <module name="kivyTest" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/bin/python3.7" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/layout.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -232,7 +294,7 @@
     </configuration>
     <list>
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.layout" />
+      <item itemvalue="Python.Training" />
     </list>
   </component>
   <component name="ServiceViewManager">
@@ -298,17 +360,16 @@
       <workItem from="1575221718582" duration="91000" />
       <workItem from="1575231184294" duration="101000" />
       <workItem from="1575297413352" duration="2431000" />
-<<<<<<< HEAD
       <workItem from="1575368408683" duration="2417000" />
-      <workItem from="1575456002466" duration="938000" />
-=======
-      <workItem from="1575368408683" duration="2266000" />
-      <workItem from="1575456688154" duration="99000" />
-      <workItem from="1575456848605" duration="163000" />
-      <workItem from="1575457141444" duration="56000" />
-      <workItem from="1575457209685" duration="1597000" />
-      <workItem from="1575458838771" duration="281000" />
->>>>>>> 299d9816b4fba702882cbc46a09b57459c052ce9
+      <workItem from="1575456002466" duration="2646000" />
+      <workItem from="1575464141313" duration="576000" />
+      <workItem from="1575469082762" duration="221000" />
+      <workItem from="1575491559070" duration="85000" />
+      <workItem from="1575573766538" duration="471000" />
+      <workItem from="1575888940107" duration="339000" />
+      <workItem from="1575889535793" duration="644000" />
+      <workItem from="1576150902071" duration="655000" />
+      <workItem from="1576670597126" duration="597000" />
     </task>
     <servers />
   </component>
@@ -332,45 +393,38 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="720" y="353" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575457276186">
-      <screen x="70" y="27" width="2490" height="1413" />
+    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575890776694">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="720" y="353" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.2490.1413@70.27.2490.1413" timestamp="1575457276186" />
-    <state x="1304" y="484" width="424" height="491" key="FileChooserDialogImpl" timestamp="1575461162457">
-      <screen x="70" y="27" width="2490" height="1413" />
+    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1575890776694" />
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1576421572113">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="1304" y="484" width="424" height="491" key="FileChooserDialogImpl/70.27.2490.1413@70.27.2490.1413" timestamp="1575461162457" />
-    <state width="894" height="192" key="GridCell.Tab.0.bottom" timestamp="1575458989613">
-      <screen x="70" y="27" width="2490" height="1413" />
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1576421572113" />
+    <state width="1878" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1576159323571" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1576421572094">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="894" height="192" key="GridCell.Tab.0.bottom/70.27.2490.1413@70.27.2490.1413" timestamp="1575458989613" />
-    <state width="894" height="192" key="GridCell.Tab.0.center" timestamp="1575458989612">
-      <screen x="70" y="27" width="2490" height="1413" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1576421572094" />
+    <state width="1878" height="295" key="GridCell.Tab.0.center/0.0.1920.1200@0.0.1920.1200" timestamp="1576159323569" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1576421572093">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="894" height="192" key="GridCell.Tab.0.center/70.27.2490.1413@70.27.2490.1413" timestamp="1575458989612" />
-    <state width="894" height="192" key="GridCell.Tab.0.left" timestamp="1575458989612">
-      <screen x="70" y="27" width="2490" height="1413" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1576421572093" />
+    <state width="1878" height="295" key="GridCell.Tab.0.left/0.0.1920.1200@0.0.1920.1200" timestamp="1576159323567" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1576421572112">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="894" height="192" key="GridCell.Tab.0.left/70.27.2490.1413@70.27.2490.1413" timestamp="1575458989612" />
-    <state width="894" height="192" key="GridCell.Tab.0.right" timestamp="1575458989613">
-      <screen x="70" y="27" width="2490" height="1413" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1576421572112" />
+    <state width="1878" height="295" key="GridCell.Tab.0.right/0.0.1920.1200@0.0.1920.1200" timestamp="1576159323570" />
+    <state x="341" y="164" key="SettingsEditor" timestamp="1575889031588">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="894" height="192" key="GridCell.Tab.0.right/70.27.2490.1413@70.27.2490.1413" timestamp="1575458989613" />
-    <state x="166" y="644" width="1022" height="737" key="SettingsEditor" timestamp="1575458176300">
-      <screen x="70" y="27" width="2490" height="1413" />
-    </state>
-    <state x="166" y="644" width="1022" height="737" key="SettingsEditor/70.27.2490.1413@70.27.2490.1413" timestamp="1575458176300" />
-    <state x="971" y="560" key="com.intellij.ide.util.TipDialog" timestamp="1575456689304">
-      <screen x="70" y="27" width="2490" height="1413" />
-    </state>
-    <state x="971" y="560" key="com.intellij.ide.util.TipDialog/70.27.2490.1413@70.27.2490.1413" timestamp="1575456689304" />
-    <state x="978" y="349" width="672" height="678" key="search.everywhere.popup" timestamp="1575458665163">
-      <screen x="70" y="27" width="2490" height="1413" />
-    </state>
-    <state x="978" y="349" width="672" height="678" key="search.everywhere.popup/70.27.2490.1413@70.27.2490.1413" timestamp="1575458665163" />
+    <state x="341" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1575889031588" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/trainingDashboard$layout.coverage" NAME="layout Coverage Results" MODIFIED="1575889034617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/trainingDashboard$Training.coverage" NAME="Training Coverage Results" MODIFIED="1576159323551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kivyTest$layout.coverage" NAME="layout Coverage Results" MODIFIED="1573040576192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/trainingDashboard$layout.coverage" NAME="layout Coverage Results" MODIFIED="1575458989603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

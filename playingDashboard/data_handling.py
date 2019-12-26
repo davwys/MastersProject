@@ -26,7 +26,7 @@ def handle_playing_message(self, msg):
 
     txt = "User played card " + str(card_id) + " on area " + area_name
     self.ids[id].text = txt
-    time.sleep(3)
+    time.sleep(1)
     self.ids[id].text = ''
 
 
