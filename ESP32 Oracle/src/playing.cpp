@@ -21,8 +21,7 @@ String split(String s, char parser, int index) {
 }
 
 
-//Determines whether a card can be played at the moment TODO add timer stuff
-bool playing_ready = true;
+//Determines whether any card position has changed since the last call was sent
 bool has_changed = false;
 
 //Checks a sensor for training input and generates correct API call from learned mapping
@@ -78,11 +77,6 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
       //Generate output: "Area='something'_CardID=123"
       String output = "Area='" + areaName + "'_"+ cid_str;
 
-      //Send on both bluetooth and USB
-      //Serial.println("PLAY={" + output + "}");
-      //BTSerial.println("PLAY={" + output + "}");
-
-      //playing_ready = false; TODO add
     }
 
     //When card is removed / no longer present
@@ -142,14 +136,8 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
 
 //Main function when in PLAYING mode
 void playing_main(){
-  if(playing_ready){
-    play_on_sensor(sensor1, 1);
-    play_on_sensor(sensor2, 2);
-    //play_on_sensor(sensor3, 3);
-    //TODO add other sensors here
-  }
-  //TODO add stuff for PLAY_OK
-  else{
-
-  }
+  play_on_sensor(sensor1, 1);
+  play_on_sensor(sensor2, 2);
+  play_on_sensor(sensor3, 3);
+  play_on_sensor(sensor4, 4);
 }

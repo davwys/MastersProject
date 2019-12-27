@@ -26,7 +26,6 @@ Adafruit_PN532 sensor3(SCK, MISO, MOSI, SENSOR3);
 Adafruit_PN532 sensor4(SCK, MISO, MOSI, SENSOR4);
 
 int sensorCount = 0;
-int maxSensors = 4;
 bool activeSensors[maxSensors];
 int playedCards[maxSensors];
 

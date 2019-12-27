@@ -33,14 +33,12 @@ Physical pin setup
 */
 
 //LED Pins
-/*
+
 extern int LED_Pwr;
-extern int LED_Sta;
-extern int LED_Com;*/
 extern int LED_1;
 extern int LED_2;
-//extern int LED_3;
-//extern int LED_4;
+extern int LED_3;
+extern int LED_4;
 
 //Bluetooth Serial object
 extern BluetoothSerial BTSerial;
@@ -48,7 +46,6 @@ extern BluetoothSerial BTSerial;
 //Core logic data
 extern Mode currentMode;
 extern String receivedData;
-
 
 /*
 ==================
@@ -60,17 +57,15 @@ void initialize_sensor(Adafruit_PN532 sensor, int id);
 String readTag(Adafruit_PN532 sensor, int id, bool verbose);
 
 extern int sensorCount;
-
-extern bool activeSensors[4];
-extern int playedCards[4];
+//Maximum number of sensors to consider
+extern int const maxSensors = 4;
+extern bool activeSensors[maxSensors];
+extern int playedCards[maxSensors];
 
 //Sensors defined in main.cpp
 extern Adafruit_PN532 sensor1;
 extern Adafruit_PN532 sensor2;
-/*extern Adafruit_PN532 sensor3;
+extern Adafruit_PN532 sensor3;
 extern Adafruit_PN532 sensor4;
-extern Adafruit_PN532 sensor5;
-extern Adafruit_PN532 sensor6;
-*/
 
 #endif
