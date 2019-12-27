@@ -128,7 +128,7 @@ WindowManager:
                     size_hint_y: None
                     id: input
                     hint_text: 'Specify your API call here'
-                    on_text: root.api_name_handler(input.text)
+                    #on_text: root.api_name_handler(input.text)
                 GridLayout:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -157,7 +157,7 @@ WindowManager:
                     Label:
                         color: 0,0,0,1
                         id: area
-                        text: root.areaName
+                        #text: root.areaName
                 GridLayout:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -169,7 +169,7 @@ WindowManager:
                     Label:
                         color: 0,0,0,1
                         id: card
-                        text: root.cardId
+                        #text: root.cardId
                 GridLayout:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -204,7 +204,7 @@ WindowManager:
                     Label:
                         color: 0,0,0,1
                         id: current
-                        text: root.currentCallFormat
+                        #text: root.currentCallFormat
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
@@ -257,7 +257,7 @@ WindowManager:
                     text: 'Oracle'
                     on_release:
                         app.root.current = "second"
-                        root.manager.transition.direction = "left"
+                        print("hi")
 
 
 
@@ -268,9 +268,7 @@ WindowManager:
 
     Button:
         text: "go back"
-        on_release:
-            app.root.current = "main"
-            root.manager.transition.direction = "right"
+        on_release: app.root.current = "main"
 
 
 

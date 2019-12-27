@@ -1,11 +1,13 @@
 import kivy
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.config import Config
 Config.set('graphics', 'resizable', 1)
 Config.set('graphics', 'width', '1000')
 Config.set('graphics', 'height', '750')
 Config.set('graphics', 'minimum_width', '1000')
 Config.set('graphics', 'minimum_height', '750')
-from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
@@ -21,11 +23,11 @@ import serial.tools.list_ports
 import threading
 import time
 
+
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
 
-class MyGrid(Widget):
-
+class MainWindow(Screen):
     # load external methods
     from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_playing_input, handle_playing_message
 
@@ -67,15 +69,26 @@ class MyGrid(Widget):
         self.ids.input.text = self.callFormat
 
 
+class SecondWindow(Screen):
+    pass
+
+
+class WindowManager(ScreenManager):
+    pass
+
+
+kv = Builder.load_file("my.kv")
+
+
 # Main App definition
-class MyApp(App):
+class MyMainApp(App):
     title = "Game Board API Call Specification Dashboard"
 
     def build(self):
-        x = MyGrid()
-        x.load_current_format()
-        return x
+        #kv = MainWindow()
+        #kv.load_current_format()
+        return kv
 
 
 if __name__ == "__main__":
-    MyApp().run()
+    MyMainApp().run()
