@@ -15,29 +15,25 @@ NFC Sensor setup
 #define SCK  (18)
 #define MOSI (23)
 #define MISO (19)
-#define SENSOR1   (4)   //Working: 4,
-#define SENSOR2   (13)
-//#define SENSOR3   (15)
-//#define SENSOR4   (13) //TODO test
-//#define SENSOR5   (25) //TODO test
-//#define SENSOR6   (26) //TODO test
+#define SENSOR1 MCP23016_PIN_GPIO0_0
+#define SENSOR2 MCP23016_PIN_GPIO0_1
+#define SENSOR3 MCP23016_PIN_GPIO0_2
+#define SENSOR4 MCP23016_PIN_GPIO0_3
 
 Adafruit_PN532 sensor1(SCK, MISO, MOSI, SENSOR1);
-Adafruit_PN532 sensor2(SCK, MISO, MOSI, SENSOR2);/*
+Adafruit_PN532 sensor2(SCK, MISO, MOSI, SENSOR2);
 Adafruit_PN532 sensor3(SCK, MISO, MOSI, SENSOR3);
 Adafruit_PN532 sensor4(SCK, MISO, MOSI, SENSOR4);
-Adafruit_PN532 sensor5(SCK, MISO, MOSI, SENSOR5);
-Adafruit_PN532 sensor6(SCK, MISO, MOSI, SENSOR6);*/
 
 int sensorCount = 0;
-bool activeSensors[4];
-int playedCards[4];
-
+int maxSensors = 4;
+bool activeSensors[maxSensors];
+int playedCards[maxSensors];
 
 /*
-==================
-I2C setup
-=================
+=======================
+I2C/GPIO expander setup
+=======================
 */
 
 #define SDA (21)
@@ -50,15 +46,18 @@ LED Pin setup
 =================
 */
 
-//int LED_Pwr = 2;
-//int LED_Sta = 22;
-//int LED_Com = 21;
-#define LED_1 MCP23016_PIN_GPIO0_0
-#define LED_2 MCP23016_PIN_GPIO0_1
-#define LED_3 MCP23016_PIN_GPIO0_2
-#define LED_4 MCP23016_PIN_GPIO0_3
+int LED_Pwr = 2;
+#define LED_1 MCP23016_PIN_GPIO0_4
+#define LED_2 MCP23016_PIN_GPIO0_5
+#define LED_3 MCP23016_PIN_GPIO0_6
+#define LED_4 MCP23016_PIN_GPIO0_7
 
-//Bluetooth serial object
+/*
+==================
+Bluetooth setup
+=================
+*/
+
 BluetoothSerial BTSerial;
 
 /*
@@ -73,35 +72,33 @@ String receivedData = "";
 //Main setup function (runs on initialization)
 void setup() {
 
-    activeSensors[0] = false;
-    activeSensors[1] = false;
-    activeSensors[2] = false;
-    activeSensors[3] = false;
-
-    playedCards[0] = NULL;
-    playedCards[1] = NULL;
-    playedCards[2] = NULL;
-    playedCards[3] = NULL;
-
-    pinMode(LED_BUILTIN, OUTPUT);
-    pinMode(LED_1, OUTPUT);
-    pinMode(LED_2, OUTPUT);
-
+    //Pre-fill card status arrays
+    for(int i = 0; i < maxSensors; i++){
+      activeSensors[i] = false;
+      playedCards[i] = NULL;
+    }
 
     //I2C setup for GPIO expander
     expander.begin(SDA, SCL);
-    //Set pin 0.0 as Output (for example)
-    expander.pinMode(MCP23016_PIN_GPIO0_0, OUTPUT);
+    //Set LED pins as output
+    pinMode(LED_BUILTIN, OUTPUT);
+    pinMode(LED_Pwr, OUTPUT);
+    expander.pinMode(LED_1, OUTPUT);
+    expander.pinMode(LED_2, OUTPUT);
+    expander.pinMode(LED_3, OUTPUT);
+    expander.pinMode(LED_4, OUTPUT);
 
+    //Turn off all LEDs, turn on power LED
+    expander.digitalWrite(LED_1, LOW);
+    expander.digitalWrite(LED_2, LOW);
+    expander.digitalWrite(LED_3, LOW);
+    expander.digitalWrite(LED_4, LOW);
+    digitalWrite(LED_Pwr, HIGH);
 
-    digitalWrite(LED_1, LOW);
-    digitalWrite(LED_2, LOW);
     //Initial serial communication (via USB)
     Serial.begin(57600);
-
     //Initial serial communication (via Bluetooth)
     BTSerial.begin("OracleBluetooth");
-
 
     //Print initialzation data
     Serial.println();
@@ -111,25 +108,17 @@ void setup() {
 
     Serial.println("Beginning sensor search...");
 
-/*
-    // TODO might be needed
-    digitalWrite(SENSOR1, HIGH);
-    digitalWrite(SENSOR2, HIGH);
-    digitalWrite(SENSOR3, HIGH);
-*/
-
     //Try initializing each sensor
     delay(1000);
     initialize_sensor(sensor1, 1);
     initialize_sensor(sensor2, 2);
-    /*initialize_sensor(sensor3, 3);
+    initialize_sensor(sensor3, 3);
     initialize_sensor(sensor4, 4);
-    initialize_sensor(sensor5, 5);
-    initialize_sensor(sensor6, 6);*/
 
     Serial.print("Sensor search complete, found "); Serial.print(sensorCount); Serial.println(" sensors.");
 
-    //digitalWrite(LED_Sta, HIGH);
+    //TODO visualize readyness state/number of found sensors?
+    //Probably turn each LED on when sensor found, then turn them off here
 
 }
 
