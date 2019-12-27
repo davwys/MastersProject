@@ -3,6 +3,7 @@
 #include <definitions.h>
 #include <behaviors.h>
 #include <Adafruit_PN532.h>
+#include <CyMCP23016.h>
 
 
 /*
@@ -32,6 +33,17 @@ int sensorCount = 0;
 bool activeSensors[4];
 int playedCards[4];
 
+
+/*
+==================
+I2C setup
+=================
+*/
+
+#define SDA (21)
+#define SCL (22)
+CyMCP23016 expander;
+
 /*
 ==================
 LED Pin setup
@@ -41,8 +53,10 @@ LED Pin setup
 //int LED_Pwr = 2;
 //int LED_Sta = 22;
 //int LED_Com = 21;
-int LED_1 = 22;
-int LED_2 = 21;
+#define LED_1 MCP23016_PIN_GPIO0_0
+#define LED_2 MCP23016_PIN_GPIO0_1
+#define LED_3 MCP23016_PIN_GPIO0_2
+#define LED_4 MCP23016_PIN_GPIO0_3
 
 //Bluetooth serial object
 BluetoothSerial BTSerial;
@@ -54,6 +68,7 @@ Mode logic setup
 */
 Mode currentMode = PLAYING;
 String receivedData = "";
+
 
 //Main setup function (runs on initialization)
 void setup() {
@@ -71,10 +86,13 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     pinMode(LED_1, OUTPUT);
     pinMode(LED_2, OUTPUT);
-    //pinMode(LED_Com, OUTPUT);
 
-    //Turn on power LED
-    //digitalWrite(LED_Pwr, HIGH);
+
+    //I2C setup for GPIO expander
+    expander.begin(SDA, SCL);
+    //Set pin 0.0 as Output (for example)
+    expander.pinMode(MCP23016_PIN_GPIO0_0, OUTPUT);
+
 
     digitalWrite(LED_1, LOW);
     digitalWrite(LED_2, LOW);
