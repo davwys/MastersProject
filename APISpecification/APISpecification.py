@@ -70,7 +70,46 @@ class MainWindow(Screen):
 
 
 class SecondWindow(Screen):
-    pass
+    # load external methods
+    from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_playing_input, \
+        handle_playing_message
+
+    # Thread kill flag (kills input thread on program end)
+    stopThread = False
+    areaName = '[AreaName]'
+    cardId = '[CardID]'
+    callFormat = ''
+
+    currentCallFormat = ''
+
+    def load_current_format(self):
+        f = open("api_config.txt", "r")
+        if f is not None:
+            self.currentCallFormat = f.read()
+            self.ids.current.text = self.currentCallFormat
+
+    # Auto-converts variables into real-time preview
+    def api_name_handler(self, name):
+        txt = name.replace("[AreaName]", self.areaName)
+        txt = txt.replace("[CardID]", self.cardId)
+        self.ids.preview.text = txt
+        self.callFormat = txt
+
+    # Adds a string to API call format input
+    def add_to_call(self, name):
+        self.ids.input.text += name
+
+    def save_call_format(self, text):
+        f = open("api_config.txt", "w+")
+        f.write(str(text))
+        f.close()
+        print('Saved format: ' + str(text))
+        self.load_current_format()
+
+    def reset_call_format(self):
+        self.load_current_format()
+        self.callFormat = self.currentCallFormat
+        self.ids.input.text = self.callFormat
 
 
 class WindowManager(ScreenManager):

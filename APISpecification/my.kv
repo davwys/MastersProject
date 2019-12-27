@@ -266,11 +266,206 @@ WindowManager:
 <SecondWindow>:
     name: "second"
 
-    Button:
-        text: "go back"
-        on_release:
-            app.root.current = "main"
-            root.manager.transition.direction = "right"
+    GridLayout:
+        cols:1
+        rows:3
+        size: root.width, root.height
+
+        GridLayout:
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,0.5
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint_y: None
+            height: root.height * 0.1
+            cols: 3
+            GridLayout:
+                cols:1
+                size_hint_x: None
+                width: self.parent.width * 0.25
+                Image:
+                    keep_ratio: True
+                    allow_stretch: True
+                    source: 'assets/uzh_logo.png'
+            Label:
+                color: 0,0,0,1
+                size_hint_x: None
+                width: self.parent.width * 0.50
+                text: "PFC API Call Specification"
+            GridLayout:
+                padding: [10,10,10,10]
+                cols: 1
+                width: self.parent.width * 0.25
+                size_hint_x: None
+                height: self.parent.height
+                size_hint_y: None
+                Spinner:
+                    id: port_dropdown
+                    text: 'Select device...'
+                    on_press:
+                        root.update_ports()
+                        self.back_color = .05, .5, 1, .5
+                    on_text:
+                        root.select_port(self.text)
+
+        GridLayout:
+            size_hint_y:None
+            height: root.height * 0.45
+            cols:3
+            height: root.height * 0.8
+            size_hint_y: None
+            GridLayout:
+                width: root.width * 0.25
+                size_hint_x: None
+                height: self.parent.height * 0.8
+                size_hint_y: None
+            GridLayout:
+                width: root.width * 0.5
+                size_hint_x: None
+                height: self.parent.height * 1
+                size_hint_y: None
+                rows:12
+                Label:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                TextInput:
+                    unfocus_on_touch: False
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    id: input
+                    hint_text: 'Specify your API call here'
+                    on_text: root.api_name_handler(input.text)
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [0,20,0,10]
+                    cols:3
+                    RoundButton:
+                        text: 'Add Area'
+                        on_press: root.add_to_call('[AreaName]')
+                    Label:
+                        width: self.parent.width * 0.1
+                        size_hint_x: None
+                    RoundButton:
+                        text: 'Add Card ID'
+                        on_press: root.add_to_call('[CardID]')
+                Label:
+                    height: self.parent.height * 0.05
+                    size_hint_y: None
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [10,10,10,10]
+                    cols:2
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Area:'
+                    Label:
+                        color: 0,0,0,1
+                        id: area
+                        text: root.areaName
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [10,10,10,10]
+                    cols:2
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Card ID:'
+                    Label:
+                        color: 0,0,0,1
+                        id: card
+                        text: root.cardId
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [10,10,10,10]
+                    rows:2
+                    Label:
+                        color: 0,0,0,1
+                        text: 'API Call Preview:'
+                    Label:
+                        color: 0,0,0,1
+                        id: preview
+                        text: ''
+                Label:
+                    height: self.parent.height * 0.05
+                    size_hint_y: None
+                BorderButton:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    text: 'Save'
+                    on_press: root.save_call_format(root.callFormat)
+                Label:
+                    height: self.parent.height * 0.05
+                    size_hint_y: None
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [10,10,10,10]
+                    rows:2
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Current API Call Format:'
+                    Label:
+                        color: 0,0,0,1
+                        id: current
+                        text: root.currentCallFormat
+                Label:
+                    height: self.parent.height * 0.05
+                    size_hint_y: None
+            GridLayout:
+                width: root.width * 0.25
+                size_hint_x: None
+                height: self.parent.height * 0.8
+                size_hint_y: None
+
+        GridLayout:
+            cols:3
+            width: root.width
+            size_hint_x: None
+            size_hint_y: None
+            height: root.height * 0.1
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.5
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            GridLayout:
+                padding: [10,10,10,10]
+                cols: 1
+                width: self.parent.width * 0.25
+                size_hint_x: None
+                height: self.parent.height * 1
+                size_hint_y: None
+                BorderButton:
+                    id: restart
+                    #disabled: True
+                    text: 'Load current format'
+                    on_press:
+                        root.reset_call_format()
+            GridLayout:
+                width: self.parent.width * 0.5
+                size_hint_x: None
+                height: self.parent.height * 1
+                size_hint_y: None
+            GridLayout:
+                padding: [10,10,10,10]
+                cols: 1
+                width: self.parent.width * 0.25
+                size_hint_x: None
+                height: self.parent.height * 1
+                size_hint_y: None
+                BorderButton:
+                    id: restart
+                    #disabled: True
+                    text: 'Areas'
+                    on_release:
+                        app.root.current = "main"
+                        root.manager.transition.direction = "right"
 
 
 
