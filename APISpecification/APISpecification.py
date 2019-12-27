@@ -70,6 +70,8 @@ class MainWindow(Screen):
 
 
 class SecondWindow(Screen):
+    array = '[Array]'
+
     # load external methods
     from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_playing_input, \
         handle_playing_message

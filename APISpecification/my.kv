@@ -85,7 +85,7 @@ WindowManager:
                 color: 0,0,0,1
                 size_hint_x: None
                 width: self.parent.width * 0.50
-                text: "PFC API Call Specification"
+                text: "PFC Area API Call Specification"
             GridLayout:
                 padding: [10,10,10,10]
                 cols: 1
@@ -293,7 +293,7 @@ WindowManager:
                 color: 0,0,0,1
                 size_hint_x: None
                 width: self.parent.width * 0.50
-                text: "PFC API Call Specification"
+                text: "PFC Oracle API Call Specification"
             GridLayout:
                 padding: [10,10,10,10]
                 cols: 1
@@ -341,16 +341,10 @@ WindowManager:
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     padding: [0,20,0,10]
-                    cols:3
+                    cols:1
                     RoundButton:
-                        text: 'Add Area'
-                        on_press: root.add_to_call('[AreaName]')
-                    Label:
-                        width: self.parent.width * 0.1
-                        size_hint_x: None
-                    RoundButton:
-                        text: 'Add Card ID'
-                        on_press: root.add_to_call('[CardID]')
+                        text: 'Add Array'
+                        on_press: root.add_to_call('[Array]')
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
@@ -361,23 +355,14 @@ WindowManager:
                     cols:2
                     Label:
                         color: 0,0,0,1
-                        text: 'Area:'
+                        text: 'Array:'
                     Label:
                         color: 0,0,0,1
-                        id: area
-                        text: root.areaName
-                GridLayout:
+                        id: array
+                        text: root.array
+                Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    padding: [10,10,10,10]
-                    cols:2
-                    Label:
-                        color: 0,0,0,1
-                        text: 'Card ID:'
-                    Label:
-                        color: 0,0,0,1
-                        id: card
-                        text: root.cardId
                 GridLayout:
                     height: self.parent.height * 0.1
                     size_hint_y: None
