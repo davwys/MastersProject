@@ -115,17 +115,22 @@ def handle_playing_message(self, msg):
         return
 
     area_name = message[message.find(s_start) + len(s_start):message.rfind(s_end)]
-    card_id_string = message[message.find(c_start) + len(c_start):len(message)]
+    card_id_string = message[message.find(c_start) + len(c_start):len(message)-8]  # Last 8 digits reserved as area type
     card_id = int(card_id_string)
+    type_string = message[len(message)-2:]
+
     # Print read data to log (disabled for now)
     print("area name: {}".format(area_name))
     print("Card ID: {}".format(card_id))
+    print("Type: {}".format(type_string))
 
     self.areaName = str(area_name)
     self.cardId = str(card_id)
+    self.type = str(type_string)
 
     self.ids['card'].text = self.cardId
     self.ids['area'].text = self.areaName
+    self.ids['type'].text = self.type
 
     self.api_name_handler(self.ids['input'].text)
 

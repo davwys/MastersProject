@@ -54,7 +54,7 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
 
         //For combinatorial, check whether the card was changed (without no-card frames in between)
         if(!regular && playedCards[id-1] != cid && playedCards[id-1] != 0){
-          String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "_CR";
+          String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "_Type=CR";
           //Send on both bluetooth and USB
           Serial.println("PLAY={" + output + "}");
           BTSerial.println("PLAY={" + output + "}");
@@ -67,7 +67,7 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
       if(change){
         playedCards[id-1] = cid;
 
-        String typeName = regular ? "RP" : "CP";
+        String typeName = regular ? "Type=RP" : "Type=CP";
         //Generate output: "Area='something'_CardID=123"
         String output = "Area='" + areaName + "'_"+ cid_str + "_" + typeName;
 
@@ -89,7 +89,7 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
           //For combinatorial, send call upon removal
           if(!regular){
 
-            String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "_CR";
+            String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "Type=_CR";
             //Send on both bluetooth and USB
             Serial.println("PLAY={" + output + "}");
             BTSerial.println("PLAY={" + output + "}");

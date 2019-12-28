@@ -118,7 +118,7 @@ WindowManager:
                 size_hint_x: None
                 height: self.parent.height * 1
                 size_hint_y: None
-                rows:12
+                rows:11
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -133,16 +133,28 @@ WindowManager:
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     padding: [0,20,0,10]
-                    cols:3
+                    cols:5
                     RoundButton:
+                        width: self.parent.width * 0.3
+                        size_hint_x: None
                         text: 'Add Area'
                         on_press: root.add_to_call('[AreaName]')
                     Label:
-                        width: self.parent.width * 0.1
+                        width: self.parent.width * 0.05
                         size_hint_x: None
                     RoundButton:
+                        width: self.parent.width * 0.3
+                        size_hint_x: None
                         text: 'Add Card ID'
                         on_press: root.add_to_call('[CardID]')
+                    Label:
+                        width: self.parent.width * 0.05
+                        size_hint_x: None
+                    RoundButton:
+                        width: self.parent.width * 0.3
+                        size_hint_x: None
+                        text: 'Add Type'
+                        on_press: root.add_to_call('[Type]')
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
@@ -174,6 +186,18 @@ WindowManager:
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     padding: [10,10,10,10]
+                    cols:2
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Type:'
+                    Label:
+                        color: 0,0,0,1
+                        id: type
+                        text: root.type
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [10,10,10,10]
                     rows:2
                     Label:
                         color: 0,0,0,1
@@ -191,13 +215,7 @@ WindowManager:
                     text: 'Save'
                     on_press: root.save_call_format(root.callFormat)
                 Label:
-                    height: self.parent.height * 0.05
-                    size_hint_y: None
-                Label:
                     height: self.parent.height * 0.1
-                    size_hint_y: None
-                Label:
-                    height: self.parent.height * 0.05
                     size_hint_y: None
             GridLayout:
                 width: root.width * 0.25

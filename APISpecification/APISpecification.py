@@ -36,6 +36,7 @@ class MainWindow(Screen):
     areaName = '[AreaName]'
     cardId = '[CardID]'
     callFormat = ''
+    type = '[Type]'
 
     currentCallFormat = ''
 
@@ -51,6 +52,7 @@ class MainWindow(Screen):
     def api_name_handler(self, name):
         txt = name.replace("[AreaName]", self.areaName)
         txt = txt.replace("[CardID]", self.cardId)
+        txt = txt.replace("[Type]", self.type)
         self.ids.preview.text = txt
         self.callFormat = txt
 

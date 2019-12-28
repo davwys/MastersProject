@@ -1,1 +1,1 @@
-http://192.168.21.1/play_api/M=[AreaName]_[CardID]
+http://192.168.21.1/play_api/M=combi_52_T=CR
