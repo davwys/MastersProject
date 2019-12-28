@@ -100,7 +100,7 @@ WindowManager:
                         root.update_ports()
                         self.back_color = .05, .5, 1, .5
                     on_text:
-                        root.select_port(self.text)
+                        root.select_port(self.text, False)
 
         GridLayout:
             size_hint_y:None
@@ -193,18 +193,9 @@ WindowManager:
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
-                GridLayout:
+                Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    padding: [10,10,10,10]
-                    rows:2
-                    Label:
-                        color: 0,0,0,1
-                        text: 'Current API Call Format:'
-                    Label:
-                        color: 0,0,0,1
-                        id: current
-                        text: root.currentCallFormat
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
@@ -308,7 +299,7 @@ WindowManager:
                         root.update_ports()
                         self.back_color = .05, .5, 1, .5
                     on_text:
-                        root.select_port(self.text)
+                        root.select_port(self.text, True)
 
         GridLayout:
             size_hint_y:None
@@ -343,8 +334,8 @@ WindowManager:
                     padding: [0,20,0,10]
                     cols:1
                     RoundButton:
-                        text: 'Add Array'
-                        on_press: root.add_to_call('[Array]')
+                        text: 'Add Card Combination'
+                        on_press: root.add_to_call('[CardCombination]')
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
@@ -355,7 +346,7 @@ WindowManager:
                     cols:2
                     Label:
                         color: 0,0,0,1
-                        text: 'Array:'
+                        text: 'Card Combination:'
                     Label:
                         color: 0,0,0,1
                         id: array
@@ -386,18 +377,9 @@ WindowManager:
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
-                GridLayout:
+                Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    padding: [10,10,10,10]
-                    rows:2
-                    Label:
-                        color: 0,0,0,1
-                        text: 'Current API Call Format:'
-                    Label:
-                        color: 0,0,0,1
-                        id: current
-                        text: root.currentCallFormat
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None

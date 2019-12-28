@@ -1,1 +1,0 @@
-http://192.168.21.1/play_api/[AreaName]/[CardID]

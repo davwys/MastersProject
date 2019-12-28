@@ -20,7 +20,7 @@ def get_serial_ports(self):
         # macOS: filter device
         if platform.system() is not "Windows":
             # Filter out ports with no product description - add all that contain "GameBoard" (for Bluetooth ports)
-            if element.product is not None or "GameBoard" in element.device:
+            if element.product is not None or "GameBoard" in element.device or "Oracle" in element.device:
                 name = str(element.device).replace('/dev/cu.', '').replace('/dev/tty.', '')
                 names.append(name)
         # Windows: get nice name for COM ports
@@ -47,7 +47,7 @@ def update_ports(self):
 
 
 # Selects a given port to connect to
-def select_port(self, port):
+def select_port(self, port, oracle):
 
     if str(port) == 'No Devices Found':
         return
@@ -66,13 +66,14 @@ def select_port(self, port):
             print("opening port: {}".format(self.selectedPort))
             self.ser = serial.Serial(str(self.selectedPort), 57600)  # open serial port
 
-        time.sleep(1)
-        # Change to playing mode
-        self.ser.write(b'CHANGE_MODE=3')
-        self.ser.flush()
+        if not oracle:
+            time.sleep(1)
+            # Change to playing mode
+            self.ser.write(b'CHANGE_MODE=3')
+            self.ser.flush()
 
         # Start serial read thread
-        thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
+        thread = threading.Thread(target=self.read_from_port, args=(self.ser, oracle))
         thread.start()
 
     except OSError:
@@ -80,11 +81,14 @@ def select_port(self, port):
 
 
 # Read and handle serial input data
-def read_from_port(self, ser):
+def read_from_port(self, ser, oracle):
     while not self.stopThread:
         reading = ser.readline().decode()
         print('Got: ' + str(reading))
-        self.handle_playing_message(reading)
+        if not oracle:
+            self.handle_playing_message(reading)
+        else:
+            self.handle_oracle_message(reading)
         # Kills the thread when stop flag is set
         if self.stopThread:
             break
@@ -120,10 +124,23 @@ def handle_playing_message(self, msg):
     self.areaName = str(area_name)
     self.cardId = str(card_id)
 
-    #txt = "User played card " + str(card_id) + " on area " + area_name
-    #self.ids[id].text = txt
-    #time.sleep(1)
     self.ids['card'].text = self.cardId
     self.ids['area'].text = self.areaName
+
+    self.api_name_handler(self.ids['input'].text)
+
+
+def handle_oracle_message(self, msg):
+
+    if "ORACLE=" not in msg:
+        return
+
+    start = "{"
+    end = "}"
+    message = msg[msg.find(start):msg.rfind(end)+1]
+    # message example: {12,52,72}
+
+    self.array = str(message)
+    self.ids['array'].text = self.array
 
     self.api_name_handler(self.ids['input'].text)

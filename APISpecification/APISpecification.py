@@ -40,10 +40,12 @@ class MainWindow(Screen):
     currentCallFormat = ''
 
     def load_current_format(self):
-        f = open("api_config.txt", "r")
-        if f is not None:
-            self.currentCallFormat = f.read()
-            self.ids.current.text = self.currentCallFormat
+        try:
+            f = open("api_area_config.txt", "r")
+            if f is not None:
+                self.currentCallFormat = f.read()
+        except FileNotFoundError:
+            print('Error: no configuration found')
 
     # Auto-converts variables into real-time preview
     def api_name_handler(self, name):
@@ -57,7 +59,7 @@ class MainWindow(Screen):
         self.ids.input.text += name
 
     def save_call_format(self, text):
-        f = open("api_config.txt", "w+")
+        f = open("api_area_config.txt", "w+")
         f.write(str(text))
         f.close()
         print('Saved format: ' + str(text))
@@ -70,30 +72,28 @@ class MainWindow(Screen):
 
 
 class SecondWindow(Screen):
-    array = '[Array]'
 
     # load external methods
-    from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_playing_input, \
-        handle_playing_message
+    from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_playing_input, handle_oracle_message
 
     # Thread kill flag (kills input thread on program end)
     stopThread = False
-    areaName = '[AreaName]'
-    cardId = '[CardID]'
+    array = '[CardCombination]'
     callFormat = ''
 
     currentCallFormat = ''
 
     def load_current_format(self):
-        f = open("api_config.txt", "r")
-        if f is not None:
-            self.currentCallFormat = f.read()
-            self.ids.current.text = self.currentCallFormat
+        try:
+            f = open("api_oracle_config.txt", "r")
+            if f is not None:
+                self.currentCallFormat = f.read()
+        except FileNotFoundError:
+            print('Error: no configuration found')
 
     # Auto-converts variables into real-time preview
     def api_name_handler(self, name):
-        txt = name.replace("[AreaName]", self.areaName)
-        txt = txt.replace("[CardID]", self.cardId)
+        txt = name.replace("[CardCombination]", self.array)
         self.ids.preview.text = txt
         self.callFormat = txt
 
@@ -102,7 +102,7 @@ class SecondWindow(Screen):
         self.ids.input.text += name
 
     def save_call_format(self, text):
-        f = open("api_config.txt", "w+")
+        f = open("api_oracle_config.txt", "w+")
         f.write(str(text))
         f.close()
         print('Saved format: ' + str(text))
