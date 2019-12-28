@@ -85,5 +85,6 @@ extern bool playedSensors[10];
 
 //The trained mapping for playing
 extern String mapping[10];
+extern bool sensorTypes[10];
 
 #endif

@@ -124,7 +124,8 @@ and start playing.'''
         # disable name input
         self.ids.area_name.disabled = True
         self.ids.area_name.text = ''
-        self.ids.submit_name.disabled = True
+        self.ids.submit_regular.disabled = True
+        self.ids.submit_combinatorial.disabled = True
 
 
 # Main App definition

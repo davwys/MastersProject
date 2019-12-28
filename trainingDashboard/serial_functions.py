@@ -112,7 +112,9 @@ def upload_training_data(self, data):
         # Extract first two values (sensor ID, area name) and area type
         dat = [value[1], value[0], value[3]]
         print('Uploading: {}'.format(dat))
-        reg = 1 if value[3] else 0
+        reg = 0
+        if str(value[3]) == 'True':
+            reg = 1
         # Format for upload (example: {1=Actions_0}
         upl = "{" + str(dat[0]) + "=" + str(dat[1]) + "_" + str(reg) + "}"
         print('Data is: {}'.format(upl))

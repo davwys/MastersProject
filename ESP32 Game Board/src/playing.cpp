@@ -45,9 +45,11 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
 
       //Get area name from mapping
       String areaName = mapping[sid-1];
+      //Get Sensor type name from mapping
+      bool regular = sensorTypes[sid-1];
 
       //Generate output: "Area='something'_CardID=123"
-      String output = "Area='" + areaName + "'_"+ cid_str;
+      String output = "Area='" + areaName + "'_"+ cid_str + "_" + String(regular);
 
       //Send on both bluetooth and USB
       Serial.println("PLAY={" + output + "}");
@@ -87,8 +89,15 @@ void read_mapping_data(){
           ++separator;
           String areaName = separator;
 
+          //Now, area name looks like ex: "Actions_0", thus we remove the sensor type
+          String t = areaName.substring(areaName.indexOf('_')+1);
+          int type = t.toInt();
+          areaName = areaName.substring(0, areaName.indexOf('_'));
+          //Serial.print("Area " + areaName + " is of type " + t);
+
           //Save values to mapping array
           mapping[sensorId-1] = areaName; //Sensor 1 gets saved to position 0
+          sensorTypes[sensorId-1] = type; //Sensor 1 gets saved to position 0
       }
       // Find the next command in input string
       command = strtok(0, "}{");
@@ -99,7 +108,13 @@ void read_mapping_data(){
 //Main function when in PLAYING mode
 void playing_main(){
   //If we haven't loaded the learned mapping yet, load it from flash
-  if(mapping[0] == NULL){
+  bool load = true;
+  for(int i = 0; i < 10; i++){
+    if(mapping[i] != NULL){
+      load = false;
+    }
+  }
+  if(load){
     read_mapping_data();
   }
   //Actual playing logic: capture sensor input (if ready) & return API calls

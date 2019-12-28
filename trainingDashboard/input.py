@@ -8,7 +8,8 @@ import platform
 def request_area_name(self):
     self.ids.area_name.disabled = False
     self.ids.area_name.text = ''
-    self.ids.submit_name.disabled = False
+    self.ids.submit_regular.disabled = False
+    self.ids.submit_combinatorial.disabled = False
     if platform.system() is not "Windows":
         self.ids.area_name.focus = True
     self.ids.area_name.hint_text = 'Enter your area name here'
@@ -31,7 +32,8 @@ def submit_area_name(self, name, regular):
         self.ids.area_name.hint_text = ''
         self.ids.area_name.disabled = True
         self.ids.area_name.text = ''
-        self.ids.submit_name.disabled = True
+        self.ids.submit_regular.disabled = True
+        self.ids.submit_combinatorial.disabled = True
 
         # Save name to temp data
         self.tempData[0] = name
@@ -46,8 +48,10 @@ def submit_area_name(self, name, regular):
         self.update_log('Area {} has been activated'.format(name))
     elif not validate_area_name(name):
         self.update_log('Invalid area name')
-        self.ids.submit_name.disabled = False
+        self.ids.submit_regular.disabled = False
+        self.ids.submit_combinatorial.disabled = False
 
     else:
         self.update_log('Error: Name too long')
-        self.ids.submit_name.disabled = False
+        self.ids.submit_regular.disabled = False
+        self.ids.submit_combinatorial.disabled = False

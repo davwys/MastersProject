@@ -61,6 +61,7 @@ int LED_Sta = 22;
 int LED_Com = 21;
 
 String mapping[10];
+bool sensorTypes[10]; //Saves sensors' types (true = regular, false = combinatorial)
 
 //Bluetooth serial object
 BluetoothSerial BTSerial;
