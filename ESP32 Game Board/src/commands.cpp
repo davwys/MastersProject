@@ -28,7 +28,7 @@ PLAY_OK					                Input
 REBOOT                          Input
 RESTART_TRAINING                Input
 TRAIN={SensorID=3_CardID=72}    Output
-PLAY={Area='Oracle'_CardID=12}  Output
+PLAY={Area='Oracle'_CardID=12_RP}  Output  --> Available types: RP = Regular, played, CP = Combinatorial, played, CR = Combinatorial, removed
 
 */
 

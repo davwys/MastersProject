@@ -87,4 +87,7 @@ extern bool playedSensors[10];
 extern String mapping[10];
 extern bool sensorTypes[10];
 
+//Names the last played cards
+extern int playedCards[10];
+
 #endif

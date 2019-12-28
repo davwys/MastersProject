@@ -29,6 +29,12 @@ bool playing_ready = true;
 void play_on_sensor(Adafruit_PN532 sensor, int id){
   try{
     String tmp = readTag(sensor, id, false);
+
+    //Get area name from mapping
+    String areaName = mapping[id-1];
+    //Get area type for this sensor from mapping (regular or combinatorial)
+    bool regular = sensorTypes[id-1];
+
     //Tmp looks like: SensorID=1_CardID=2
     if(tmp.length() > 4){
 
@@ -36,29 +42,55 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
       String sid_str = split(tmp, '_', 0);
       String cid_str = tmp.substring(tmp.indexOf("CardID="));
 
+      //Get card ID as int
+      int cid = cid_str.substring(7).toInt();
 
-      //Extract sensor ID to get name afterwards
-      sid_str.replace("SensorID=", "");
-      char sid_char[64];
-      sid_str.toCharArray(sid_char, 64);
-      int sid = atoi(sid_char);
+      //Whether this is a new card
+      bool change = false;
 
-      //Get area name from mapping
-      String areaName = mapping[sid-1];
-      //Get Sensor type name from mapping
-      bool regular = sensorTypes[sid-1];
+      //Check if this was a change
+      if(playedCards[id-1] == NULL || playedCards[id-1] != cid){
+        change = true;
+      }
 
-      //Generate output: "Area='something'_CardID=123"
-      String output = "Area='" + areaName + "'_"+ cid_str + "_" + String(regular);
+      if(change){
+        playedCards[id-1] = cid;
 
-      //Send on both bluetooth and USB
-      Serial.println("PLAY={" + output + "}");
-      BTSerial.println("PLAY={" + output + "}");
+        String typeName = regular ? "RP" : "CP";
+        //Generate output: "Area='something'_CardID=123"
+        String output = "Area='" + areaName + "'_"+ cid_str + "_" + typeName;
 
-      //Flash COM LED
-      flash_led(LED_Com);
+        //Send on both bluetooth and USB
+        Serial.println("PLAY={" + output + "}");
+        BTSerial.println("PLAY={" + output + "}");
 
+        //Flash COM LED
+        flash_led(LED_Com);
+      }
       //playing_ready = false; TODO add
+    }
+    //If card is no longer present
+    else{
+      if(tmp.indexOf("NONE") >= 0){
+
+        //Whether this was a change
+        if(playedCards[id-1] != 0){
+          //For combinatorial, send call upon removal
+          if(!regular){
+
+            String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "_CR";
+            //Send on both bluetooth and USB
+            Serial.println("PLAY={" + output + "}");
+            BTSerial.println("PLAY={" + output + "}");
+
+            //Flash COM LED
+            flash_led(LED_Com);
+          }
+
+          //Save that card was removed
+          playedCards[id-1] = 0;
+        }
+      }
     }
   }
   catch (std::runtime_error e){} //Catch errors for incomplete data
@@ -97,7 +129,7 @@ void read_mapping_data(){
 
           //Save values to mapping array
           mapping[sensorId-1] = areaName; //Sensor 1 gets saved to position 0
-          sensorTypes[sensorId-1] = type; //Sensor 1 gets saved to position 0
+          sensorTypes[sensorId-1] = type; //Area Type 1 gets saved to position 0
       }
       // Find the next command in input string
       command = strtok(0, "}{");
