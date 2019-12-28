@@ -41,7 +41,7 @@ class MyGrid(Widget):
     selectedPort = None
 
     # Temporary data storage
-    tempData = [None, None, None]
+    tempData = [None, None, None, None]
 
     # Check for restarts
     restarted = False
@@ -53,13 +53,13 @@ class MyGrid(Widget):
     # =====================
     #
     # Format:
-    # [[Area, SensorID, CardID]]
+    # [[Area, SensorID, CardID, Regular]] *Note: Regular is a boolean for area type
     #
     # Example:
     # [
-    #   [Oracle, 3, 72],
-    #   [Investor, 2, 32],
-    #   [Company, 1, 32]
+    #   [Oracle, 3, 72, False],
+    #   [Investor, 2, 32, True],
+    #   [Company, 1, 32, False]
     # ]
     trainingInput = []
 
@@ -118,7 +118,7 @@ and start playing.'''
         # Send restart command
         self.ser.write(b'RESTART_TRAINING')  # write data as bytes
         self.ids.restart.disabled = True
-        self.tempData = None
+        self.tempData = [None, None, None, None]
         self.trainingInput = []
 
         # disable name input

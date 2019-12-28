@@ -26,7 +26,7 @@ def validate_area_name(name):
 
 # Saves the area name given by the user (if length is within a valid range)
 # and sends "TRAIN_OK" message to request new training data
-def submit_area_name(self, name):
+def submit_area_name(self, name, regular):
     if 0 < len(name) < 20 and validate_area_name(name):
         self.ids.area_name.hint_text = ''
         self.ids.area_name.disabled = True
@@ -35,6 +35,8 @@ def submit_area_name(self, name):
 
         # Save name to temp data
         self.tempData[0] = name
+        # Save type to temp data
+        self.tempData[3] = regular
 
         # Confirm received training data
         self.ser.write(b'TRAIN_OK')

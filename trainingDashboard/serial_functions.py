@@ -107,14 +107,14 @@ def upload_training_data(self, data):
     # Sort by sensor ID
     data = data[np.argsort(data[:, 1])]
 
-    # For each row (example: ['AreaA', 3, 123])
+    # For each row (example: ['Actions', 3, 123, True])
     for value in data:
-        # Extract first two values (sensor ID, area name)
-        dat = [value[1], value[0]]
+        # Extract first two values (sensor ID, area name) and area type
+        dat = [value[1], value[0], value[3]]
         print('Uploading: {}'.format(dat))
-
-        # Format for upload (example: {1=AreaA}
-        upl = "{" + str(dat[0]) + "=" + str(dat[1]) + "}"
+        reg = 1 if value[3] else 0
+        # Format for upload (example: {1=Actions_0}
+        upl = "{" + str(dat[0]) + "=" + str(dat[1]) + "_" + str(reg) + "}"
         print('Data is: {}'.format(upl))
 
         # Write to serial port (encoded as bytes)

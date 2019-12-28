@@ -113,7 +113,7 @@
                 size_hint_y: None
                 width: root.width * 0.5
                 size_hint_x: None
-                rows: 7
+                rows: 8
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -127,34 +127,46 @@
                     on_press: root.start_training()
                 Label:
                     id: instructions
-                    height: self.parent.height * 0.4
+                    height: self.parent.height * 0.3
                     size_hint_y: None
                     text: 'Press "Start Training"'
                     color: (0, 0, 0, 1)
                 GridLayout:
                     padding: [0,10,0,10]
-                    cols: 3
+                    cols: 1
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     TextInput:
                         id: area_name
                         color: 1,0,0,1
                         multiline: False
-                        width: self.parent.width * 0.6
+                        width: self.parent.width * 1
                         size_hint_x: None
                         #hint_text: 'Enter your area name here'
                         disabled: True
                         #focus: True
+                GridLayout:
+                    padding: [0,10,0,10]
+                    cols: 3
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    BorderButton:
+                        id: submit_regular
+                        width: self.parent.width * 0.49
+                        size_hint_x: None
+                        text: 'Regular'
+                        disabled: True
+                        on_press: root.submit_area_name(area_name.text, True)
                     Label:
-                        width: self.parent.width * 0.1
+                        width: self.parent.width * 0.02
                         size_hint_x: None
                     BorderButton:
-                        id: submit_name
-                        width: self.parent.width * 0.3
+                        id: submit_combinatorial
+                        width: self.parent.width * 0.49
                         size_hint_x: None
-                        text: 'Submit'
+                        text: 'Combinatorial'
                         disabled: True
-                        on_press: root.submit_area_name(area_name.text)
+                        on_press: root.submit_area_name(area_name.text, False)
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None

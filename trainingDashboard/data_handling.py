@@ -25,7 +25,7 @@ def handle_training_message(self, msg):
 
     # Validate both IDs and save to temporary storage
     if sensor_id > 0 and 0 < card_id < 999:
-        self.tempData = [None, sensor_id, card_id]
+        self.tempData = [None, sensor_id, card_id, None]
         self.request_area_name()
 
 
