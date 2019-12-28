@@ -7,6 +7,16 @@
 
 
 /*
+=======================
+I2C/GPIO expander setup
+=======================
+*/
+
+#define SDA (21)
+#define SCL (22)
+CyMCP23016 expander;
+
+/*
 ==================
 NFC Sensor setup
 =================
@@ -20,24 +30,14 @@ NFC Sensor setup
 #define SENSOR3 MCP23016_PIN_GPIO0_2
 #define SENSOR4 MCP23016_PIN_GPIO0_3
 
-Adafruit_PN532 sensor1(SCK, MISO, MOSI, SENSOR1);
-Adafruit_PN532 sensor2(SCK, MISO, MOSI, SENSOR2);
-Adafruit_PN532 sensor3(SCK, MISO, MOSI, SENSOR3);
-Adafruit_PN532 sensor4(SCK, MISO, MOSI, SENSOR4);
+Adafruit_PN532 sensor1(SCK, MISO, MOSI, SENSOR1, expander);
+Adafruit_PN532 sensor2(SCK, MISO, MOSI, SENSOR2, expander);
+Adafruit_PN532 sensor3(SCK, MISO, MOSI, SENSOR3, expander);
+Adafruit_PN532 sensor4(SCK, MISO, MOSI, SENSOR4, expander);
 
 int sensorCount = 0;
 bool activeSensors[maxSensors];
 int playedCards[maxSensors];
-
-/*
-=======================
-I2C/GPIO expander setup
-=======================
-*/
-
-#define SDA (21)
-#define SCL (22)
-CyMCP23016 expander;
 
 /*
 ==================

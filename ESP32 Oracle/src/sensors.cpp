@@ -2,7 +2,7 @@
 #include <definitions.h>
 #include <Adafruit_PN532.h>
 #include <stdexcept>
-
+#include <CyMCP23016.h>
 
 /*
    Information about tags we use:
@@ -17,10 +17,10 @@
 
 //Initializes a given NFC sensor.
 //Timeout (per sensor) is set in the library's Adafruit_PN532.h file
-void initialize_sensor(Adafruit_PN532 sensor, int id){
+void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
 
     sensor.begin();
-    uint32_t versiondata = sensor.getFirmwareVersion();
+    uint32_t versiondata = sensor.getFirmwareVersion(expander);
     //If no sensor found, return
     if (!versiondata) {
       Serial.print("Didn't find Sensor #"); Serial.println(id);
@@ -32,18 +32,18 @@ void initialize_sensor(Adafruit_PN532 sensor, int id){
       Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
       Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
       //Configure sensor to read RFID tags
-      sensor.SAMConfig();
+      sensor.SAMConfig(expander);
     }
 }
 
 //Reads an NFC tag and returns data contained within as a String
 //Params: Sensor, sensor ID (number), whether to be print additional info or not)
-String readTag(Adafruit_PN532 sensor, int id, bool verbose){
+String readTag(Adafruit_PN532 sensor, int id, bool verbose, CyMCP23016 expander){
   uint8_t success;
   uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  //Buffer to store the returned UID
   uint8_t uidLength;                        //Length of the UID (4 or 7 bytes depending on ISO14443A card type)
   uint8_t pageNumber = 9; //Number of pages to read. Max is 45, we only use the first 9
-  success = sensor.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
+  success = sensor.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength, expander);
   String text;        //Final read text string
   bool valid = true;  //Whether we got all needed data
   if (success) {
@@ -55,7 +55,7 @@ String readTag(Adafruit_PN532 sensor, int id, bool verbose){
 
     for (uint8_t i = 7; i <= pageNumber; i++) //Start at 7, because we don't need non-user data / format encoding stuff
     {
-      success = sensor.ntag2xx_ReadPage(i, data);
+      success = sensor.ntag2xx_ReadPage(i, data, expander);
 
       if(success){
         //Verbose logging of card data
