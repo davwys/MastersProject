@@ -89,7 +89,7 @@ void setup() {
     Serial.begin(57600);
 
     //Initial serial communication (via Bluetooth)
-    BTSerial.begin("GameBoardBluetooth");
+    BTSerial.begin("GameBoard");
 
     //Initialize Flash storage (using EEPROM lib)
     EEPROM.begin(STORAGE_SIZE);

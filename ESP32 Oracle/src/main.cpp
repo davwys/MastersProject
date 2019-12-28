@@ -97,7 +97,7 @@ void setup() {
     //Initial serial communication (via USB)
     Serial.begin(57600);
     //Initial serial communication (via Bluetooth)
-    BTSerial.begin("OracleBluetooth");
+    BTSerial.begin("Oracle");
 
     //Print initialzation data
     Serial.println();
