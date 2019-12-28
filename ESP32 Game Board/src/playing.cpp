@@ -49,8 +49,19 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
       bool change = false;
 
       //Check if this was a change
-      if(playedCards[id-1] == NULL || playedCards[id-1] != cid){
+      if(playedCards[id-1] == 0 || playedCards[id-1] != cid){
         change = true;
+
+        //For combinatorial, check whether the card was changed (without no-card frames in between)
+        if(!regular && playedCards[id-1] != cid && playedCards[id-1] != 0){
+          String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "_CR";
+          //Send on both bluetooth and USB
+          Serial.println("PLAY={" + output + "}");
+          BTSerial.println("PLAY={" + output + "}");
+
+          //Flash COM LED
+          flash_led(LED_Com);
+        }
       }
 
       if(change){
