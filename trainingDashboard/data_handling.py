@@ -1,6 +1,5 @@
 from log import update_log
 
-
 # Handles an individual training message, checks its validity
 # and (if valid) saves the relevant values to the trainingInput array
 # Example: TRAIN={SensorID=3_CardID=52}

@@ -30,7 +30,7 @@ class MyGrid(Widget):
 
     # load external methods
     from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_training_input, upload_training_data
-    from input import request_area_name, submit_area_name
+    from input import request_area_name, submit_area_name, get_area_names
     from data_handling import save_training_data, handle_training_message, undo_training
     from log import update_log, toggle_log
 
@@ -126,7 +126,6 @@ and start playing.'''
         self.ids.area_name.text = ''
         self.ids.submit_regular.disabled = True
         self.ids.submit_combinatorial.disabled = True
-
 
 # Main App definition
 class MyApp(App):

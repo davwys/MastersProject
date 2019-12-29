@@ -4,6 +4,16 @@ import re
 import platform
 
 
+# Returns a multiline String containing all area names and updates the displayed list
+def get_area_names(self):
+    result = "Active Areas:\n"
+    for element in self.trainingInput:
+        type = "regular" if element[3] else "combinatorial"
+        result += (element[0] + " (" + type + ", S" + str(element[1]) + ")\n")
+
+    self.ids.areas.text = result
+
+
 # Enables user input for an area name after a card has been played
 def request_area_name(self):
     self.ids.area_name.disabled = False
@@ -47,6 +57,7 @@ def submit_area_name(self, name, regular):
         self.ids.upload.disabled = False
         self.update_log('Area {} has been activated'.format(name))
         self.ids.undo.disabled = False
+        self.get_area_names()
     elif not validate_area_name(name):
         self.update_log('Invalid area name')
         self.ids.submit_regular.disabled = False
