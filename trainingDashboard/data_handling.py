@@ -1,4 +1,5 @@
 from log import update_log
+from input import get_area_names
 
 # Handles an individual training message, checks its validity
 # and (if valid) saves the relevant values to the trainingInput array
@@ -52,6 +53,7 @@ def undo_training(self):
 
         # Disable undo button until more data is entered
         self.ids.undo.disabled = True
+        self.get_area_names()
     else:
         self.update_log("Can't undo anymore!")
 
