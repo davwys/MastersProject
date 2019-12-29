@@ -38,3 +38,22 @@ def save_training_data(self, data):
     # (optional) Print current training data state to log
     # self.update_log("Current training data:")
     # self.update_log(str(self.trainingInput))
+
+
+# Undoes the last training step
+def undo_training(self):
+    if len(self.trainingInput) > 0:
+        removed = self.trainingInput.pop()
+        sid = removed[1] # get sensor ID
+        msg = "TRAIN_UNDO=" + str(sid)
+
+        # Send train_undo message to main controller
+        self.ser.write(bytes(msg, 'utf-8'))
+        self.update_log('Undo successful for area ' + removed[0] + ' (Sensor ' + str(sid) + ')')
+
+        # Disable undo button until more data is entered
+        self.ids.undo.disabled = True
+    else:
+        self.update_log("Can't undo anymore!")
+
+

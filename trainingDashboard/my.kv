@@ -222,8 +222,8 @@
                     size: self.size
             GridLayout:
                 padding: [10,10,10,10]
-                cols: 1
-                width: self.parent.width * 0.25
+                cols: 2
+                width: self.parent.width * 0.4
                 size_hint_x: None
                 height: self.parent.height * 1
                 size_hint_y: None
@@ -233,5 +233,11 @@
                     text: 'Cancel Training'
                     on_press:
                         root.restart_training()
+                BorderButton:
+                    id: undo
+                    disabled: True
+                    text: 'Undo'
+                    on_press:
+                        root.undo_training()
 
 

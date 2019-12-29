@@ -32,32 +32,33 @@ PLAY={Area='Oracle'_CardID=12_RP}  Output  --> Available types: RP = Regular, pl
 
 */
 
-const char *InputCommands[5] = {
+const char *InputCommands[6] = {
   "CHANGE_MODE=",
   "TRAIN_OK",
   "PLAY_OK",
   "REBOOT",
-  "RESTART_TRAINING"
+  "RESTART_TRAINING",
+  "TRAIN_UNDO="
 };
 
 //Force the ESP32 to restart
 void hard_restart() {
   esp_task_wdt_init(1,true);
   esp_task_wdt_add(NULL);
-  while(true);
+  while(true); //Infinite loop forces ESP32 to do full reboot
 }
 
 //Flashes the selected LED for 300ms
 void flash_led(int pin) {
-    digitalWrite(pin, HIGH);   // turn LED on
+    digitalWrite(pin, HIGH);   //turn LED on
     delay(300);                //wait TODO rewrite without delay
-    digitalWrite(pin, LOW);    // turn LED off
+    digitalWrite(pin, LOW);    //turn LED off
 }
 
 
 //Validates a given command - TODO validate upload data
 bool validate_command(String command){
-  for(int i = 0; i <= 4; i++){
+  for(int i = 0; i <= 5; i++){
     if (receivedData.indexOf(InputCommands[i]) == 0)
       return true;
   }
@@ -104,6 +105,15 @@ void restart_training(){
   training_ready = true;
 }
 
+//Undoes training step on a certain sensor
+void undo_training(int sid){
+  //Apply only for valid sensor numbers
+  if(sid >= 0 && sid < 10){
+      playedSensors[sid] = false;
+      training_ready = true;;
+  }
+}
+
 // Receives and executes serial input commands.
 // "usb" argument determines whether to check for input on the USB or Bluetooth serial port.
 void receive_command(bool usb){
@@ -133,6 +143,12 @@ void receive_command(bool usb){
         //Training restart command
         else if(receivedData.indexOf("RESTART_TRAINING") >= 0 && currentMode == Mode(TRAINING)){
           restart_training();
+        }
+        //Training undo command
+        else if(receivedData.indexOf("TRAIN_UNDO=") >= 0 && currentMode == Mode(TRAINING)){
+          //Get sensor number for which to undo training
+          int sid = receivedData.substring(11).toInt();
+          undo_training(sid);
         }
         //Play_ok: flash COM LED
         else if(receivedData.indexOf("PLAY_OK") >= 0 && currentMode == Mode(PLAYING)){

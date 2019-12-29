@@ -46,12 +46,13 @@ def submit_area_name(self, name, regular):
         # Enable upload after we have at least one row of data
         self.ids.upload.disabled = False
         self.update_log('Area {} has been activated'.format(name))
+        self.ids.undo.disabled = False
     elif not validate_area_name(name):
         self.update_log('Invalid area name')
         self.ids.submit_regular.disabled = False
         self.ids.submit_combinatorial.disabled = False
 
     else:
-        self.update_log('Error: Name too long')
+        self.update_log('Error: Name too long or too short')
         self.ids.submit_regular.disabled = False
         self.ids.submit_combinatorial.disabled = False
