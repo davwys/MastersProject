@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <BluetoothSerial.h>
 #include <Adafruit_PN532.h>
+#include <CyMCP23016.h>
 
 // Main definitions
 #ifndef DEFINITIONS_H
@@ -53,14 +54,14 @@ NFC Sensor setup
 =================
 */
 
-void initialize_sensor(Adafruit_PN532 sensor, int id);
-String readTag(Adafruit_PN532 sensor, int id, bool verbose);
+void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander);
+String readTag(Adafruit_PN532 sensor, int id, bool verbose, CyMCP23016 expander);
 
 extern int sensorCount;
 //Maximum number of sensors to consider
-extern int const maxSensors = 4;
-extern bool activeSensors[maxSensors];
-extern int playedCards[maxSensors];
+//extern int const maxSensors = 4;
+extern bool activeSensors[4];
+extern int playedCards[4];
 
 //Sensors defined in main.cpp
 extern Adafruit_PN532 sensor1;

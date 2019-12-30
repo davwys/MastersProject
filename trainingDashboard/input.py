@@ -7,13 +7,16 @@ import platform
 # Returns a multiline String containing all area names and updates the displayed list
 def get_area_names(self):
     if len(self.ids.areas.text) > 0:
-        result = "Active Areas:\n"
+        result = ""
         for element in self.trainingInput:
             type = "regular" if element[3] else "combinatorial"
             result += (element[0] + "\n(" + type + ", S" + str(element[1]) + ")\n")
 
         self.ids.areas.text = result
-        return result
+        if len(result) < 1:
+            return "No areas activated yet"
+        else:
+            return result
     else:
         return ''
 
@@ -81,5 +84,5 @@ def toggle_areas(self, value):
     else:
         self.ids.areas.height = self.parent.height * 0.72
         self.ids.areas.size_hint_y = None
-        self.ids.areas.text = 'Active Areas:'
+        self.ids.areas.text = 'Loading Areas...'
         self.ids.areas.text = self.get_area_names()

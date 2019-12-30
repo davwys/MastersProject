@@ -121,6 +121,7 @@ and start playing.'''
         self.tempData = [None, None, None, None]
         self.trainingInput = []
         self.get_area_names()
+        self.ids.chk_areas.active = False
 
         # disable name input
         self.ids.area_name.disabled = True

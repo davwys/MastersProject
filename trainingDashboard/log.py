@@ -7,7 +7,7 @@ def toggle_log(self, value):
     else:
         self.ids.log.height = self.parent.height * 0.72
         self.ids.log.size_hint_y = None
-        self.ids.log.text = 'Log:\n' + self.log
+        self.ids.log.text = 'Log started\n' + self.log
 
 
 # Update the integrated log (and print to terminal)
@@ -21,4 +21,4 @@ def update_log(self, text):
 
         # Update Log text only if visible
         if self.ids.chk.active:
-            self.ids.log.text = 'Log:\n' + self.log
+            self.ids.log.text = 'Log started\n' + self.log

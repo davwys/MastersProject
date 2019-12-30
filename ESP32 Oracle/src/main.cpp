@@ -12,8 +12,8 @@ I2C/GPIO expander setup
 =======================
 */
 
-#define SDA (21)
-#define SCL (22)
+#define SDA_Pin 21
+#define SCL_Pin 22
 CyMCP23016 expander;
 
 /*
@@ -36,8 +36,8 @@ Adafruit_PN532 sensor3(SCK, MISO, MOSI, SENSOR3, expander);
 Adafruit_PN532 sensor4(SCK, MISO, MOSI, SENSOR4, expander);
 
 int sensorCount = 0;
-bool activeSensors[maxSensors];
-int playedCards[maxSensors];
+bool activeSensors[4];
+int playedCards[4];
 
 /*
 ==================
@@ -46,10 +46,10 @@ LED Pin setup
 */
 
 int LED_Pwr = 2;
-#define LED_1 MCP23016_PIN_GPIO0_4
-#define LED_2 MCP23016_PIN_GPIO0_5
-#define LED_3 MCP23016_PIN_GPIO0_6
-#define LED_4 MCP23016_PIN_GPIO0_7
+int LED_1 = MCP23016_PIN_GPIO0_6;
+int LED_2 = MCP23016_PIN_GPIO0_7;
+int LED_3 = MCP23016_PIN_GPIO0_5;
+int LED_4 = MCP23016_PIN_GPIO0_4;
 
 /*
 ==================
@@ -67,18 +67,17 @@ Mode logic setup
 Mode currentMode = PLAYING;
 String receivedData = "";
 
-
 //Main setup function (runs on initialization)
 void setup() {
 
     //Pre-fill card status arrays
-    for(int i = 0; i < maxSensors; i++){
+    for(int i = 0; i < 4; i++){
       activeSensors[i] = false;
       playedCards[i] = NULL;
     }
 
     //I2C setup for GPIO expander
-    expander.begin(SDA, SCL);
+    expander.begin(SDA_Pin, SCL_Pin);
     //Set LED pins as output
     pinMode(LED_BUILTIN, OUTPUT);
     pinMode(LED_Pwr, OUTPUT);
@@ -105,17 +104,21 @@ void setup() {
     Serial.print("Current Mode: ");
     Serial.println(currentMode);
 
+    Serial.print("Expander Status: ");
+    Serial.println(expander.detected());
+    expander.digitalWrite(LED_2, HIGH);
+
     Serial.println("Beginning sensor search...");
 
     //Try initializing each sensor
     delay(1000);
-    initialize_sensor(sensor1, 1);
-    initialize_sensor(sensor2, 2);
-    initialize_sensor(sensor3, 3);
-    initialize_sensor(sensor4, 4);
+    initialize_sensor(sensor1, 1, expander);
+    initialize_sensor(sensor2, 2, expander);
+    initialize_sensor(sensor3, 3, expander);
+    initialize_sensor(sensor4, 4, expander);
 
     Serial.print("Sensor search complete, found "); Serial.print(sensorCount); Serial.println(" sensors.");
-
+    expander.digitalWrite(LED_2, LOW);
     //TODO visualize readyness state/number of found sensors?
     //Probably turn each LED on when sensor found, then turn them off here
 
@@ -139,7 +142,7 @@ void loop() {
             //TODO?
             break;
          case PLAYING:
-            playing_main();
+            playing_main(expander);
             break;
 
          default:

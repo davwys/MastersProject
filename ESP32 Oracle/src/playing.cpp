@@ -25,9 +25,9 @@ String split(String s, char parser, int index) {
 bool has_changed = false;
 
 //Checks a sensor for training input and generates correct API call from learned mapping
-void play_on_sensor(Adafruit_PN532 sensor, int id){
+void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
   try{
-    String tmp = readTag(sensor, id, false);
+    String tmp = readTag(sensor, id, false, expander);
     //Tmp looks like: SensorID=1_CardID=2
     if(tmp.length() > 4){
 
@@ -135,9 +135,9 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
 
 
 //Main function when in PLAYING mode
-void playing_main(){
-  play_on_sensor(sensor1, 1);
-  play_on_sensor(sensor2, 2);
-  play_on_sensor(sensor3, 3);
-  play_on_sensor(sensor4, 4);
+void playing_main(CyMCP23016 expander){
+  play_on_sensor(sensor1, 1, expander);
+  play_on_sensor(sensor2, 2, expander);
+  play_on_sensor(sensor3, 3, expander);
+  play_on_sensor(sensor4, 4, expander);
 }

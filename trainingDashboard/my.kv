@@ -4,9 +4,10 @@
     back_color: (.05, .5, 1, 1) if self.disabled == False else (.05, .5, 1, 0.5)
     color: (0,0,0,1)
     on_press: self.back_color = .05, .5, 1, .5
-    on_release: self.back_color = .05, .5, 1, 1
+    #on_release: self.back_color = .05, .5, 1, 1
 <RoundButton@Button>
     border_radius: dp(18)
+    on_press: self.color = 0,0,0,0.5
     canvas.before:
         Color:
             rgba: self.back_color
@@ -25,6 +26,7 @@
             width: 1.2
 <Spinner@Button>
     on_release: self.back_color = .05, .5, 1, 1
+    on_press: self.color = .05, .5, 1, 0.5
     border_radius: dp(12)
     color: self.back_color
     canvas.before:
@@ -35,6 +37,11 @@
             width: 1.2
 <Label>
     font_size: dp(20)
+<Title@Label>
+    color: 0,0,0,1
+    text_size: self.size
+    halign: 'left'
+    valign: 'center'
 <TextInput>
     background_color: (0,0,0,0)
     background_normal: ''
@@ -111,13 +118,24 @@
                 size_hint_y: None
                 rows: 2
                 # Show/Hide areas checkbox
-                CheckBox:
+                GridLayout:
+                    padding: [10,0,0,0]
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    id: chk_areas
-                    on_press: root.toggle_areas(self.active)
-                    color: 0.5,0.5,0.5,1
+                    cols:2
+                    Title:
+                        width: self.parent.width * 0.75
+                        size_hint_x: None
+                        text: 'Active Areas'
+                    CheckBox:
+                        width: self.parent.width * 0.25
+                        size_hint_x: None
+                        id: chk_areas
+                        on_press: root.toggle_areas(self.active)
+                        color: 0.5,0.5,0.5,1
                 GridLayout:
+                    height: self.parent.height * 0.9
+                    size_hint_y: None
                     cols: 1
                     padding: [10,0,0,0]
                     ScrollView:
@@ -147,7 +165,7 @@
                     id: start_training
                     disabled: True
                     text: "Start Training"
-                    on_press: root.start_training()
+                    on_release: root.start_training()
                 Label:
                     id: instructions
                     height: self.parent.height * 0.3
@@ -179,7 +197,7 @@
                         size_hint_x: None
                         text: 'Regular'
                         disabled: True
-                        on_press: root.submit_area_name(area_name.text, True)
+                        on_release: root.submit_area_name(area_name.text, True)
                     Label:
                         width: self.parent.width * 0.02
                         size_hint_x: None
@@ -189,7 +207,7 @@
                         size_hint_x: None
                         text: 'Combinatorial'
                         disabled: True
-                        on_press: root.submit_area_name(area_name.text, False)
+                        on_release: root.submit_area_name(area_name.text, False)
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -199,7 +217,7 @@
                     disabled: True
                     id: upload
                     text: "Finish and Upload"
-                    on_press: root.upload()
+                    on_release: root.upload()
                 Label:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -210,12 +228,21 @@
                 size_hint_y: None
                 rows: 2
                 # Show/Hide Log checkbox
-                CheckBox:
+                GridLayout:
+                    padding: [10,0,0,0]
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    id: chk
-                    on_press: root.toggle_log(self.active)
-                    color: 0.5,0.5,0.5,1
+                    cols:2
+                    Title:
+                        width: self.parent.width * 0.75
+                        size_hint_x: None
+                        text: 'Log'
+                    CheckBox:
+                        width: self.parent.width * 0.25
+                        size_hint_x: None
+                        id: chk
+                        on_press: root.toggle_log(self.active)
+                        color: 0.5,0.5,0.5,1
                 GridLayout:
                     cols: 1
                     padding: [10,0,0,0]
@@ -252,7 +279,7 @@
                     id: undo
                     disabled: True
                     text: 'Undo'
-                    on_press:
+                    on_release:
                         root.undo_training()
             Label:
                 width: self.parent.width * 0.5
@@ -266,8 +293,9 @@
                     id: restart
                     disabled: True
                     text: 'Cancel Training'
-                    on_press:
+                    on_release:
                         root.restart_training()
+                        root.ids.start_training.color = 0,0,0,1
 
 
 
