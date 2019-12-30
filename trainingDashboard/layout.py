@@ -30,7 +30,7 @@ class MyGrid(Widget):
 
     # load external methods
     from serial_functions import get_serial_ports, read_from_port, update_ports, select_port, read_training_input, upload_training_data
-    from input import request_area_name, submit_area_name, get_area_names
+    from input import request_area_name, submit_area_name, get_area_names, toggle_areas
     from data_handling import save_training_data, handle_training_message, undo_training
     from log import update_log, toggle_log
 
@@ -120,6 +120,7 @@ and start playing.'''
         self.ids.restart.disabled = True
         self.tempData = [None, None, None, None]
         self.trainingInput = []
+        self.get_area_names()
 
         # disable name input
         self.ids.area_name.disabled = True

@@ -6,12 +6,16 @@ import platform
 
 # Returns a multiline String containing all area names and updates the displayed list
 def get_area_names(self):
-    result = "Active Areas:\n"
-    for element in self.trainingInput:
-        type = "regular" if element[3] else "combinatorial"
-        result += (element[0] + " (" + type + ", S" + str(element[1]) + ")\n")
+    if len(self.ids.areas.text) > 0:
+        result = "Active Areas:\n"
+        for element in self.trainingInput:
+            type = "regular" if element[3] else "combinatorial"
+            result += (element[0] + "\n(" + type + ", S" + str(element[1]) + ")\n")
 
-    self.ids.areas.text = result
+        self.ids.areas.text = result
+        return result
+    else:
+        return ''
 
 
 # Enables user input for an area name after a card has been played
@@ -67,3 +71,15 @@ def submit_area_name(self, name, regular):
         self.update_log('Error: Name too long or too short')
         self.ids.submit_regular.disabled = False
         self.ids.submit_combinatorial.disabled = False
+
+
+def toggle_areas(self, value):
+    if not value:
+        self.ids.areas.height = 0
+        self.ids.areas.size_hint_y = None
+        self.ids.areas.text = ''
+    else:
+        self.ids.areas.height = self.parent.height * 0.72
+        self.ids.areas.size_hint_y = None
+        self.ids.areas.text = 'Active Areas:'
+        self.ids.areas.text = self.get_area_names()

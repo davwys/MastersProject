@@ -98,20 +98,39 @@
                         self.back_color = .05, .5, 1, .5
                     on_text:
                         root.select_port(self.text)
-
         GridLayout:
-            cols: 3
+            width: root.width * 1
+            size_hint_x: None
             height: root.height * 0.8
             size_hint_y: None
+            cols:3
             GridLayout:
                 width: root.width * 0.25
                 size_hint_x: None
-                height: self.parent.height * 0.8
+                height: root.height * 0.8
                 size_hint_y: None
-                Label:
-                    id: areas
-                    height: self.parent.height
-                    text: "Active areas:\n-"
+                rows: 2
+                # Show/Hide areas checkbox
+                CheckBox:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    id: chk_areas
+                    on_press: root.toggle_areas(self.active)
+                    color: 0.5,0.5,0.5,1
+                GridLayout:
+                    cols: 1
+                    padding: [10,0,0,0]
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        Label:
+                            id: areas
+                            width: root.width * 0.25
+                            size_hint_x: None
+                            size_hint_y: None
+                            text_size: self.width*0.9, None
+                            height: self.texture_size[1]
+                            color: (0,0,0,0.5)
             GridLayout:
                 height: root.height * 0.8
                 size_hint_y: None
@@ -213,7 +232,7 @@
                             color: (0,0,0,0.5)
 
         GridLayout:
-            cols:1
+            cols:3
             width: root.width
             size_hint_x: None
             size_hint_y: None
@@ -227,21 +246,33 @@
             GridLayout:
                 padding: [10,10,10,10]
                 cols: 2
-                width: self.parent.width * 0.4
+                width: self.parent.width * 0.25
                 size_hint_x: None
-                height: self.parent.height * 1
-                size_hint_y: None
-                BorderButton:
-                    id: restart
-                    disabled: True
-                    text: 'Cancel Training'
-                    on_press:
-                        root.restart_training()
                 BorderButton:
                     id: undo
                     disabled: True
                     text: 'Undo'
                     on_press:
                         root.undo_training()
+            Label:
+                width: self.parent.width * 0.5
+                size_hint_x: None
+            GridLayout:
+                padding: [10,10,10,10]
+                cols: 2
+                width: self.parent.width * 0.25
+                size_hint_x: None
+                BorderButton:
+                    id: restart
+                    disabled: True
+                    text: 'Cancel Training'
+                    on_press:
+                        root.restart_training()
+
+
+
+
+
+
 
 
