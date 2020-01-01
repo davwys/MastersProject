@@ -2,6 +2,7 @@
 #include <definitions.h>
 #include <esp_int_wdt.h>
 #include <esp_task_wdt.h>
+#include <CyMCP23016.h>
 
 /*
 
@@ -53,6 +54,13 @@ void flash_led(int pin) {
     digitalWrite(pin, HIGH);   //turn LED on
     delay(300);                //wait TODO rewrite without delay
     digitalWrite(pin, LOW);    //turn LED off
+}
+
+//Flashes the selected LED for 300ms on an expander
+void flash_led(int pin, CyMCP23016 expander) {
+    expander.digitalWrite(pin, HIGH);   //turn LED on
+    delay(300);                //wait TODO rewrite without delay
+    expander.digitalWrite(pin, LOW);    //turn LED off
 }
 
 

@@ -91,18 +91,16 @@ void setup() {
     expander.pinMode(SENSOR3, OUTPUT);
     expander.pinMode(SENSOR4, OUTPUT);
 
-    //Turn off all LEDs, turn on power LED
-
+    //Turn off all LEDs
     expander.digitalWrite(LED_1, LOW);
     expander.digitalWrite(LED_2, LOW);
     expander.digitalWrite(LED_3, LOW);
     expander.digitalWrite(LED_4, LOW);
-    //Turn off all LEDs, turn on power LED
+    //Turn off all Sensors
     expander.digitalWrite(SENSOR1, HIGH);
     expander.digitalWrite(SENSOR2, HIGH);
     expander.digitalWrite(SENSOR3, HIGH);
     expander.digitalWrite(SENSOR4, HIGH);
-    //digitalWrite(LED_Pwr, HIGH);
 
     //Initial serial communication (via USB)
     Serial.begin(57600);
@@ -120,7 +118,7 @@ void setup() {
     Serial.print("Expander Status: ");
     Serial.println(expander.detected());
 
-    /*
+    /* TODO restart main controller if missing expander
     if(!expander.detected()){
       expander.begin(SDA_Pin, SCL_Pin);
     }

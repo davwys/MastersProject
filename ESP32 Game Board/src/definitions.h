@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <BluetoothSerial.h>
 #include <Adafruit_PN532.h>
+#include <CyMCP23016.h>
 
 // Main definitions
 #ifndef DEFINITIONS_H
@@ -38,6 +39,16 @@ Physical pin setup
 extern int LED_Pwr;
 extern int LED_Sta;
 extern int LED_Com;
+extern int LED_1;
+extern int LED_2;
+extern int LED_3;
+extern int LED_4;
+extern int LED_5;
+extern int LED_6;
+extern int LED_7;
+extern int LED_8;
+extern int LED_9;
+extern int LED_10;
 
 //Storage handling
 extern int currentByte;
@@ -55,8 +66,8 @@ NFC Sensor setup
 =================
 */
 
-void initialize_sensor(Adafruit_PN532 sensor, int id);
-String readTag(Adafruit_PN532 sensor, int id, bool verbose);
+void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander);
+String readTag(Adafruit_PN532 sensor, int id, bool verbose, CyMCP23016 expander);
 
 extern int sensorCount;
 
@@ -69,8 +80,8 @@ extern Adafruit_PN532 sensor5;
 extern Adafruit_PN532 sensor6;
 extern Adafruit_PN532 sensor7;
 extern Adafruit_PN532 sensor8;
-//extern Adafruit_PN532 sensor9; //TODO
-//extern Adafruit_PN532 sensor10;
+extern Adafruit_PN532 sensor9;
+extern Adafruit_PN532 sensor10;
 
 
 /*

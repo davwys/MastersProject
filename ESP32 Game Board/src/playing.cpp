@@ -1,6 +1,8 @@
 #include <behaviors.h>
 #include <definitions.h>
 #include <Arduino.h>
+#include <CyMCP23016.h>
+#include <Adafruit_PN532.h>
 #include <stdexcept>
 
 //helper function for splitting string
@@ -26,9 +28,9 @@ bool playing_ready = true;
 
 
 //Checks a sensor for training input and generates correct API call from learned mapping
-void play_on_sensor(Adafruit_PN532 sensor, int id){
+void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyMCP23016 expander_led){
   try{
-    String tmp = readTag(sensor, id, false);
+    String tmp = readTag(sensor, id, false, expander_sens);
 
     //Get area name from mapping
     String areaName = mapping[id-1];
@@ -59,6 +61,40 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
           Serial.println("PLAY={" + output + "}");
           BTSerial.println("PLAY={" + output + "}");
 
+          //Turn on corresponding LED
+          switch(id){
+            case 1:
+              expander_led.digitalWrite(LED_1, HIGH);
+              break;
+            case 2:
+              expander_led.digitalWrite(LED_2, HIGH);
+              break;
+            case 3:
+              expander_led.digitalWrite(LED_3, HIGH);
+              break;
+            case 4:
+              expander_led.digitalWrite(LED_4, HIGH);
+              break;
+            case 5:
+              expander_led.digitalWrite(LED_5, HIGH);
+              break;
+            case 6:
+              expander_led.digitalWrite(LED_6, HIGH);
+              break;
+            case 7:
+              expander_led.digitalWrite(LED_7, HIGH);
+              break;
+            case 8:
+              expander_led.digitalWrite(LED_8, HIGH);
+              break;
+            case 9:
+              expander_led.digitalWrite(LED_9, HIGH);
+              break;
+            case 10:
+              expander_led.digitalWrite(LED_10, HIGH);
+              break;
+          }
+
           //Flash COM LED
           flash_led(LED_Com);
         }
@@ -74,6 +110,42 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
         //Send on both bluetooth and USB
         Serial.println("PLAY={" + output + "}");
         BTSerial.println("PLAY={" + output + "}");
+
+        //Flash corresponding sensor's LED
+        switch(id){
+          case 1:
+            flash_led(LED_1, expander_led);
+            break;
+          case 2:
+            flash_led(LED_2, expander_led);
+            break;
+          case 3:
+            flash_led(LED_3, expander_led);
+            break;
+          case 4:
+            flash_led(LED_4, expander_led);
+            break;
+          case 5:
+            flash_led(LED_5, expander_led);
+            break;
+          case 6:
+            flash_led(LED_6, expander_led);
+            break;
+          case 7:
+            flash_led(LED_7, expander_led);
+            break;
+          case 8:
+            flash_led(LED_8, expander_led);
+            break;
+          case 9:
+            flash_led(LED_9, expander_led);
+            break;
+          case 10:
+            flash_led(LED_10, expander_led);
+            break;
+          default:
+            break;
+        }
 
         //Flash COM LED
         flash_led(LED_Com);
@@ -94,6 +166,39 @@ void play_on_sensor(Adafruit_PN532 sensor, int id){
             Serial.println("PLAY={" + output + "}");
             BTSerial.println("PLAY={" + output + "}");
 
+            //Turn off corresponding LED when card is removed
+            switch(id){
+              case 1:
+                expander_led.digitalWrite(LED_1, LOW);
+                break;
+              case 2:
+                expander_led.digitalWrite(LED_2, LOW);
+                break;
+              case 3:
+                expander_led.digitalWrite(LED_3, LOW);
+                break;
+              case 4:
+                expander_led.digitalWrite(LED_4, LOW);
+                break;
+              case 5:
+                expander_led.digitalWrite(LED_5, LOW);
+                break;
+              case 6:
+                expander_led.digitalWrite(LED_6, LOW);
+                break;
+              case 7:
+                expander_led.digitalWrite(LED_7, LOW);
+                break;
+              case 8:
+                expander_led.digitalWrite(LED_8, LOW);
+                break;
+              case 9:
+                expander_led.digitalWrite(LED_9, LOW);
+                break;
+              case 10:
+                expander_led.digitalWrite(LED_10, LOW);
+                break;
+            }
             //Flash COM LED
             flash_led(LED_Com);
           }
@@ -149,7 +254,7 @@ void read_mapping_data(){
 
 
 //Main function when in PLAYING mode
-void playing_main(){
+void playing_main(CyMCP23016 expander_sens, CyMCP23016 expander_led){
   //If we haven't loaded the learned mapping yet, load it from flash
   bool load = true;
   for(int i = 0; i < 10; i++){
@@ -163,10 +268,16 @@ void playing_main(){
   //Actual playing logic: capture sensor input (if ready) & return API calls
   else{
     if(playing_ready){
-      play_on_sensor(sensor1, 1);
-      play_on_sensor(sensor2, 2);
-      play_on_sensor(sensor3, 3);
-      //TODO add other sensors here
+      play_on_sensor(sensor1, 1, expander_sens, expander_led);
+      play_on_sensor(sensor2, 2, expander_sens, expander_led);
+      play_on_sensor(sensor3, 3, expander_sens, expander_led);
+      play_on_sensor(sensor4, 4, expander_sens, expander_led);
+      play_on_sensor(sensor5, 5, expander_sens, expander_led);
+      play_on_sensor(sensor6, 6, expander_sens, expander_led);
+      play_on_sensor(sensor7, 7, expander_sens, expander_led);
+      play_on_sensor(sensor8, 8, expander_sens, expander_led);
+      play_on_sensor(sensor9, 9, expander_sens, expander_led);
+      play_on_sensor(sensor10, 10, expander_sens, expander_led);
     }
     //TODO add stuff for PLAY_OK
     else{
