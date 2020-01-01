@@ -40,10 +40,10 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
       //Turn on Sensor's LED
       switch(id){
         case 1:
-          digitalWrite(LED_1, HIGH);
+          expander.digitalWrite(LED_1, HIGH);
           break;
         case 2:
-          digitalWrite(LED_2, HIGH);
+          expander.digitalWrite(LED_2, HIGH);
           break;
         default:
           break;
@@ -89,10 +89,10 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
         //Turn off Sensor's LED
         switch(id){
           case 1:
-            digitalWrite(LED_1, LOW);
+            expander.digitalWrite(LED_1, LOW);
             break;
           case 2:
-            digitalWrite(LED_2, LOW);
+            expander.digitalWrite(LED_2, LOW);
             break;
           default:
             break;

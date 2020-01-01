@@ -25,10 +25,10 @@ NFC Sensor setup
 #define SCK  (18)
 #define MOSI (23)
 #define MISO (19)
-#define SENSOR1 (MCP23016_PIN_GPIO0_7)
-#define SENSOR2 (MCP23016_PIN_GPIO0_6)
-#define SENSOR3 (MCP23016_PIN_GPIO0_2)
-#define SENSOR4 (MCP23016_PIN_GPIO0_3)
+#define SENSOR1 (MCP23016_PIN_GPIO0_4)
+#define SENSOR2 (MCP23016_PIN_GPIO0_5)
+#define SENSOR3 (MCP23016_PIN_GPIO0_6)
+#define SENSOR4 (MCP23016_PIN_GPIO0_7)
 
 Adafruit_PN532 sensor1(SCK, MISO, MOSI, SENSOR1, expander);
 Adafruit_PN532 sensor2(SCK, MISO, MOSI, SENSOR2, expander);
@@ -48,8 +48,8 @@ LED Pin setup
 int LED_Pwr = 2;
 int LED_1 = MCP23016_PIN_GPIO0_0;
 int LED_2 = MCP23016_PIN_GPIO0_1;
-int LED_3 = MCP23016_PIN_GPIO0_5;
-int LED_4 = MCP23016_PIN_GPIO0_4;
+int LED_3 = MCP23016_PIN_GPIO0_2;
+int LED_4 = MCP23016_PIN_GPIO0_3;
 
 /*
 ==================
@@ -78,25 +78,25 @@ void setup() {
 
     //I2C setup for GPIO expander
     expander.begin(SDA_Pin, SCL_Pin);
-    
+
     //Set LED pins as output
     pinMode(LED_BUILTIN, OUTPUT);
-    pinMode(LED_Pwr, OUTPUT);/*
+    pinMode(LED_Pwr, OUTPUT);
     expander.pinMode(LED_1, OUTPUT);
     expander.pinMode(LED_2, OUTPUT);
     expander.pinMode(LED_3, OUTPUT);
-    expander.pinMode(LED_4, OUTPUT);*/
+    expander.pinMode(LED_4, OUTPUT);
     expander.pinMode(SENSOR1, OUTPUT);
     expander.pinMode(SENSOR2, OUTPUT);
     expander.pinMode(SENSOR3, OUTPUT);
     expander.pinMode(SENSOR4, OUTPUT);
 
     //Turn off all LEDs, turn on power LED
-    /*
+
     expander.digitalWrite(LED_1, LOW);
     expander.digitalWrite(LED_2, LOW);
     expander.digitalWrite(LED_3, LOW);
-    expander.digitalWrite(LED_4, LOW);*/
+    expander.digitalWrite(LED_4, LOW);
     //Turn off all LEDs, turn on power LED
     expander.digitalWrite(SENSOR1, HIGH);
     expander.digitalWrite(SENSOR2, HIGH);
@@ -109,22 +109,6 @@ void setup() {
 
     //Initial serial communication (via Bluetooth)
     BTSerial.begin("Oracle");
-
-    /*
-
-    Serial.print("Data: ");
-    Serial.println(expander.readAllPinsForPort(0), BIN);
-    expander.digitalWrite(0, HIGH);
-    expander.digitalWrite(1, LOW);
-    expander.digitalWrite(2, HIGH);
-    expander.digitalWrite(3, LOW);
-    expander.digitalWrite(4, HIGH);
-    expander.digitalWrite(5, LOW);
-    expander.digitalWrite(6, HIGH);
-    expander.digitalWrite(7, LOW);
-    Serial.print("Data: ");
-    Serial.println(expander.readAllPinsForPort(0), BIN);
-*/
 
     //Print initialzation data
     Serial.println();
