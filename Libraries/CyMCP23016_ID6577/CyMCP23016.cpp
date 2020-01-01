@@ -11,6 +11,8 @@
   #include <avr/pgmspace.h>
 #elif defined(ESP8266)
   #include <pgmspace.h>
+#elif defined(ESP32)
+  #include <pgmspace.h>
 #endif
 #include "CyMCP23016.h"
 
@@ -81,8 +83,23 @@ void CyMCP23016::begin(uint8_t sda, uint8_t scl, uint8_t addr) {
 void CyMCP23016::begin(uint8_t sda, uint8_t scl) {
     this->begin(sda, scl, 0);
 }
-#endif
+#elif defined(ESP32)
+void CyMCP23016::begin(uint8_t sda, uint8_t scl, uint8_t addr) {
+    if (addr > 7) {
+        addr = 7;
+    }
 
+    this->_i2cAddr = addr;
+    Wire.begin(sda, scl);
+    Wire.setClock(200000);
+    this->writeRegister(MCP23016_IODIR0, 0xFF);
+    this->writeRegister(MCP23016_IODIR1, 0xFF);
+}
+
+void CyMCP23016::begin(uint8_t sda, uint8_t scl) {
+    this->begin(sda, scl, 0);
+}
+#endif
 void CyMCP23016::pinMode(uint8_t pin, uint8_t direction) {
     this->updateRegisterBit(pin, (direction == INPUT), MCP23016_IODIR0, MCP23016_IODIR1);
 }

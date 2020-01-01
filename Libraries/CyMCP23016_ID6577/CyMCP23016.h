@@ -110,6 +110,7 @@ public:
      * @param scl The GPIO pin to use for SCL.
      */
     void begin(uint8_t sda, uint8_t scl);
+    
 #endif
 
     /**

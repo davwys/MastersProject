@@ -169,8 +169,8 @@ class Adafruit_PN532{
   bool     SAMConfig(CyMCP23016 expander);
   uint32_t getFirmwareVersion(void);
   uint32_t getFirmwareVersion(CyMCP23016 expander);
-  bool     sendCommandCheckAck(uint8_t *cmd, uint8_t cmdlen, uint16_t timeout = 1000);
-  bool     sendCommandCheckAck(uint8_t *cmd, uint8_t cmdlen, uint16_t timeout = 1000, CyMCP23016 expander);
+  bool     sendCommandCheckAck(uint8_t *cmd, uint8_t cmdlen, uint16_t timeout = 500);
+  bool     sendCommandCheckAck(uint8_t *cmd, uint8_t cmdlen, CyMCP23016 expander, uint16_t timeout = 500);
   bool     writeGPIO(uint8_t pinstate);
   uint8_t  readGPIO(void);
   bool     setPassiveActivationRetries(uint8_t maxRetries);
@@ -219,11 +219,16 @@ class Adafruit_PN532{
 
   // Low level communication functions that handle both SPI and I2C.
   void readdata(uint8_t* buff, uint8_t n);
+  void readdata(uint8_t* buff, uint8_t n, CyMCP23016 expander);
   void writecommand(uint8_t* cmd, uint8_t cmdlen);
+  void writecommand(uint8_t* cmd, uint8_t cmdlen, CyMCP23016 expander);
   bool isready();
+  bool isready(CyMCP23016 expander);
   bool waitready(uint16_t timeout);
+  bool waitready(uint16_t timeout, CyMCP23016 expander);
   bool readack();
-
+  bool readack(CyMCP23016 expander);
+    
   // SPI-specific functions.
   void    spi_write(uint8_t c);
   uint8_t spi_read(void);

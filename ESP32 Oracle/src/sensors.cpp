@@ -19,7 +19,8 @@
 //Timeout (per sensor) is set in the library's Adafruit_PN532.h file
 void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
 
-    sensor.begin();
+    sensor.begin(expander);
+
     uint32_t versiondata = sensor.getFirmwareVersion(expander);
     //If no sensor found, return
     if (!versiondata) {
