@@ -27,7 +27,7 @@ I2C/GPIO expander setup
 #define SCL_Pin 22
 CyMCP23016 expander_sens;
 CyMCP23016 expander_led;
-#define I2C_SENS 0x20 //I2C address of sensor expander
+#define I2C_SENS 0x20 //I2C address of sensor expander (does not need to be used, as it is the default)
 #define I2C_LED 0x21  //I2C address of LED expander
 
 /*

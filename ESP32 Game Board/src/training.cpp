@@ -40,10 +40,16 @@ void train_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, Cy
 void training_main(CyMCP23016 expander_sens, CyMCP23016 expander_led){
   //If training dashboard is ready for new data - otherwise, we await TRAIN_OK command
   if(training_ready){
-     //TODO add other sensors
      train_on_sensor(sensor1, 1, expander_sens, expander_led);
      train_on_sensor(sensor2, 2, expander_sens, expander_led);
      train_on_sensor(sensor3, 3, expander_sens, expander_led);
+     train_on_sensor(sensor4, 4, expander_sens, expander_led);
+     train_on_sensor(sensor5, 5, expander_sens, expander_led);
+     train_on_sensor(sensor6, 6, expander_sens, expander_led);
+     train_on_sensor(sensor7, 7, expander_sens, expander_led);
+     train_on_sensor(sensor8, 8, expander_sens, expander_led);
+     train_on_sensor(sensor9, 9, expander_sens, expander_led);
+     train_on_sensor(sensor10, 10, expander_sens, expander_led);
 
   }
 }
