@@ -64,6 +64,94 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyM
           //Turn on corresponding LED
           switch(id){
             case 1:
+              expander_led.digitalWrite(LED_1, LOW);
+              break;
+            case 2:
+              expander_led.digitalWrite(LED_2, LOW);
+              break;
+            case 3:
+              expander_led.digitalWrite(LED_3, LOW);
+              break;
+            case 4:
+              expander_led.digitalWrite(LED_4, LOW);
+              break;
+            case 5:
+              expander_led.digitalWrite(LED_5, LOW);
+              break;
+            case 6:
+              expander_led.digitalWrite(LED_6, LOW);
+              break;
+            case 7:
+              expander_led.digitalWrite(LED_7, LOW);
+              break;
+            case 8:
+              expander_led.digitalWrite(LED_8, LOW);
+              break;
+            case 9:
+              expander_led.digitalWrite(LED_9, LOW);
+              break;
+            case 10:
+              expander_led.digitalWrite(LED_10, LOW);
+              break;
+          }
+
+          //Flash COM LED
+          flash_led(LED_Com);
+        }
+      }
+
+      if(change){
+        playedCards[id-1] = cid;
+
+        String typeName = regular ? "Type=RP" : "Type=CP";
+        //Generate output: "Area='something'_CardID=123"
+        String output = "Area='" + areaName + "'_"+ cid_str + "_" + typeName;
+
+        //Send on both bluetooth and USB
+        Serial.println("PLAY={" + output + "}");
+        BTSerial.println("PLAY={" + output + "}");
+
+        if(regular){
+          //Flash corresponding sensor's LED
+          switch(id){
+            case 1:
+              flash_led(LED_1, expander_led);
+              break;
+            case 2:
+              flash_led(LED_2, expander_led);
+              break;
+            case 3:
+              flash_led(LED_3, expander_led);
+              break;
+            case 4:
+              flash_led(LED_4, expander_led);
+              break;
+            case 5:
+              flash_led(LED_5, expander_led);
+              break;
+            case 6:
+              flash_led(LED_6, expander_led);
+              break;
+            case 7:
+              flash_led(LED_7, expander_led);
+              break;
+            case 8:
+              flash_led(LED_8, expander_led);
+              break;
+            case 9:
+              flash_led(LED_9, expander_led);
+              break;
+            case 10:
+              flash_led(LED_10, expander_led);
+              break;
+            default:
+              break;
+          }
+        }
+        else{
+          //Turn on corresponding LED when card is placed
+          switch(id){
+            case 1:
               expander_led.digitalWrite(LED_1, HIGH);
               break;
             case 2:
@@ -94,57 +182,6 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyM
               expander_led.digitalWrite(LED_10, HIGH);
               break;
           }
-
-          //Flash COM LED
-          flash_led(LED_Com);
-        }
-      }
-
-      if(change){
-        playedCards[id-1] = cid;
-
-        String typeName = regular ? "Type=RP" : "Type=CP";
-        //Generate output: "Area='something'_CardID=123"
-        String output = "Area='" + areaName + "'_"+ cid_str + "_" + typeName;
-
-        //Send on both bluetooth and USB
-        Serial.println("PLAY={" + output + "}");
-        BTSerial.println("PLAY={" + output + "}");
-
-        //Flash corresponding sensor's LED
-        switch(id){
-          case 1:
-            flash_led(LED_1, expander_led);
-            break;
-          case 2:
-            flash_led(LED_2, expander_led);
-            break;
-          case 3:
-            flash_led(LED_3, expander_led);
-            break;
-          case 4:
-            flash_led(LED_4, expander_led);
-            break;
-          case 5:
-            flash_led(LED_5, expander_led);
-            break;
-          case 6:
-            flash_led(LED_6, expander_led);
-            break;
-          case 7:
-            flash_led(LED_7, expander_led);
-            break;
-          case 8:
-            flash_led(LED_8, expander_led);
-            break;
-          case 9:
-            flash_led(LED_9, expander_led);
-            break;
-          case 10:
-            flash_led(LED_10, expander_led);
-            break;
-          default:
-            break;
         }
 
         //Flash COM LED
