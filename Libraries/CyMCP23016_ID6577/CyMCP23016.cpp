@@ -85,9 +85,10 @@ void CyMCP23016::begin(uint8_t sda, uint8_t scl) {
 }
 #elif defined(ESP32)
 void CyMCP23016::begin(uint8_t sda, uint8_t scl, uint8_t addr) {
+    /*
     if (addr > 7) {
         addr = 7;
-    }
+    }*/
 
     this->_i2cAddr = addr;
     Wire.begin(sda, scl);

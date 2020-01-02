@@ -2,6 +2,7 @@
 #include <definitions.h>
 #include <definitions.h>
 #include <Adafruit_PN532.h>
+#include <CyMCP23016.h>
 #include <stdexcept>
 
 /*
@@ -18,10 +19,10 @@ bool training_ready = true;
 bool playedSensors[10] = {false, false, false, false, false, false, false, false, false, false};
 
 //Checks a sensor for training input and generates training output packet
-void train_on_sensor(Adafruit_PN532 sensor, int id){
+void train_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyMCP23016 expander_led){
   if(!playedSensors[id]){
     try{
-      String tmp = readTag(sensor, id, false);
+      String tmp = readTag(sensor, id, false, expander_sens);
       if(tmp.length() > 4){
         playedSensors[id] = true;
         Serial.println("TRAIN={" + tmp + "}");
@@ -36,13 +37,13 @@ void train_on_sensor(Adafruit_PN532 sensor, int id){
 }
 
 //Main training function
-void training_main(){
+void training_main(CyMCP23016 expander_sens, CyMCP23016 expander_led){
   //If training dashboard is ready for new data - otherwise, we await TRAIN_OK command
   if(training_ready){
      //TODO add other sensors
-     train_on_sensor(sensor1, 1);
-     train_on_sensor(sensor2, 2);
-     train_on_sensor(sensor3, 3);
+     train_on_sensor(sensor1, 1, expander_sens, expander_led);
+     train_on_sensor(sensor2, 2, expander_sens, expander_led);
+     train_on_sensor(sensor3, 3, expander_sens, expander_led);
 
   }
 }

@@ -4,7 +4,7 @@
 #ifndef BEHAVIORS_H
 #define BEHAVIORS_H
 
-void training_main();
+void training_main(CyMCP23016 expander_sens, CyMCP23016 expander_led);
 void playing_main(CyMCP23016 expander_sens, CyMCP23016 expander_led);
 void upload_main();
 

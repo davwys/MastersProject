@@ -27,8 +27,8 @@ I2C/GPIO expander setup
 #define SCL_Pin 22
 CyMCP23016 expander_sens;
 CyMCP23016 expander_led;
-#define I2C_SENS 0x21 //I2C address of sensor expander
-#define I2C_LED 0x20  //I2C address of LED expander
+#define I2C_SENS 0x20 //I2C address of sensor expander
+#define I2C_LED 0x21  //I2C address of LED expander
 
 /*
 ==================
@@ -116,7 +116,7 @@ String receivedData = "";
 void setup() {
 
     //I2C setup for GPIO expanders
-    expander_sens.begin(SDA_Pin, SCL_Pin, I2C_SENS);
+    expander_sens.begin(SDA_Pin, SCL_Pin);
     expander_led.begin(SDA_Pin, SCL_Pin, I2C_LED);
 
 
@@ -175,13 +175,6 @@ void setup() {
     expander_sens.digitalWrite(SENSOR9, HIGH);
     expander_sens.digitalWrite(SENSOR10, HIGH);
 
-    //Verify Expander status
-    delay(200);
-    Serial.print("Sensor Expander Status: ");
-    Serial.println(expander_sens.detected());
-    Serial.print("LED Expander Status: ");
-    Serial.println(expander_led.detected());
-
     //Initial serial communication (via USB)
     Serial.begin(57600);
 
@@ -196,6 +189,14 @@ void setup() {
     Serial.println("Initializing ESP32 Game Board...");
     Serial.print("Current Mode: ");
     Serial.println(currentMode);
+
+    //Verify Expander status
+    delay(200);
+    Serial.print("Sensor Expander Status: ");
+    Serial.println(expander_sens.detected());
+    Serial.print("LED Expander Status: ");
+    Serial.println(expander_led.detected());
+
 
     Serial.println("Beginning sensor search...");
 
@@ -239,7 +240,7 @@ void loop() {
             //TODO?
             break;
          case TRAINING:
-            training_main();
+            training_main(expander_sens, expander_led);
             break;
          case UPLOAD:
             upload_main();
