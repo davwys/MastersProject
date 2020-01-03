@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 import requests
+import json
 
 class MainWindow(Screen):
 
@@ -41,6 +42,19 @@ kv = Builder.load_file("my.kv")
 
 
 class MyMainApp(App):
+
+    url = 'https://masterproject-3d9aa.firebaseio.com/.json'
+
+    def patch(self, input):
+        to_database = json.loads(input)
+        requests.patch(url=self.url, json=to_database)
+
+    auth_key = 'AxTJLpOrenvKeejzLPdIhtKvsi5tXJK4Kvz56E4p'
+
+    def get_data(self):
+        request = requests.get(url=self.url + '?auth=' + self.auth_key)
+        print(request.json())
+
     def build(self):
         return kv
 

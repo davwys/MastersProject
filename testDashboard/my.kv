@@ -214,8 +214,21 @@ WindowManager:
             on_release:
                 app.root.current = "second"
                 root.manager.transition.direction = 'right'
-        Label:
-            text: 'third window'
+        GridLayout:
+            rows: 5
+            TextInput:
+                id: input
+                hint_text: 'enter your data in json format'
+            Label:
+                text: 'Third Window'
+            BorderButton:
+                text: 'Save to database'
+                on_release: app.patch(input.text)
+            BorderButton:
+                text: 'Retrieve data from database'
+                on_release: app.get_data()
+            Label:
+                text: ''
         RoundButton:
             text: "Main"
             on_release:
