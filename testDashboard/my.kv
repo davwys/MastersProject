@@ -55,6 +55,7 @@
 WindowManager:
     MainWindow:
     SecondWindow:
+    ThirdWindow:
 
 <MainWindow>:
     name: "main"
@@ -118,96 +119,13 @@ WindowManager:
                 size_hint_x: None
                 height: self.parent.height * 1
                 size_hint_y: None
-                rows:12
-                Label:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
+                rows:2
                 TextInput:
-                    unfocus_on_touch: False
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
                     id: input
-                    hint_text: 'Specify your API call here'
-                    #on_text: root.api_name_handler(input.text)
-                GridLayout:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                    padding: [0,20,0,10]
-                    cols:3
-                    RoundButton:
-                        text: 'Add Area'
-                        on_press: root.add_to_call('[AreaName]')
-                    Label:
-                        width: self.parent.width * 0.1
-                        size_hint_x: None
-                    RoundButton:
-                        text: 'Add Card ID'
-                        on_press: root.add_to_call('[CardID]')
-                Label:
-                    height: self.parent.height * 0.05
-                    size_hint_y: None
-                GridLayout:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                    padding: [10,10,10,10]
-                    cols:2
-                    Label:
-                        color: 0,0,0,1
-                        text: 'Area:'
-                    Label:
-                        color: 0,0,0,1
-                        id: area
-                        #text: root.areaName
-                GridLayout:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                    padding: [10,10,10,10]
-                    cols:2
-                    Label:
-                        color: 0,0,0,1
-                        text: 'Card ID:'
-                    Label:
-                        color: 0,0,0,1
-                        id: card
-                        #text: root.cardId
-                GridLayout:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                    padding: [10,10,10,10]
-                    rows:2
-                    Label:
-                        color: 0,0,0,1
-                        text: 'API Call Preview:'
-                    Label:
-                        color: 0,0,0,1
-                        id: preview
-                        text: ''
-                Label:
-                    height: self.parent.height * 0.05
-                    size_hint_y: None
+                    hint_text: 'specify api call here'
                 BorderButton:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                    text: 'Save'
-                    on_press: root.save_call_format(root.callFormat)
-                Label:
-                    height: self.parent.height * 0.05
-                    size_hint_y: None
-                GridLayout:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                    padding: [10,10,10,10]
-                    rows:2
-                    Label:
-                        color: 0,0,0,1
-                        text: 'Current API Call Format:'
-                    Label:
-                        color: 0,0,0,1
-                        id: current
-                        #text: root.currentCallFormat
-                Label:
-                    height: self.parent.height * 0.05
-                    size_hint_y: None
+                    text: 'stage'
+                    on_release: root.stage(root.ids.input.text)
             GridLayout:
                 width: root.width * 0.25
                 size_hint_x: None
@@ -257,7 +175,7 @@ WindowManager:
                     text: 'Oracle'
                     on_release:
                         app.root.current = "second"
-                        print("hi")
+                        root.manager.transition.direction = 'left'
 
 
 
@@ -265,10 +183,46 @@ WindowManager:
 
 <SecondWindow>:
     name: "second"
+    GridLayout:
+        cols:2
+        width: root.width
+        size_hint_x: None
+        height: root.height
+        size_hint_y: None
+        RoundButton:
+            text: "Main"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = 'right'
+        RoundButton:
+            text: "Third"
+            on_release:
+                app.root.current = "third"
+                root.manager.transition.direction = 'left'
 
-    Button:
-        text: "go back"
-        on_release: app.root.current = "main"
+
+<ThirdWindow>:
+    name: "third"
+    GridLayout:
+        cols:3
+        width: root.width
+        size_hint_x: None
+        height: root.height
+        size_hint_y: None
+        RoundButton:
+            text: "Second"
+            on_release:
+                app.root.current = "second"
+                root.manager.transition.direction = 'right'
+        Label:
+            text: 'third window'
+        RoundButton:
+            text: "Main"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = 'left'
+
+
 
 
 
