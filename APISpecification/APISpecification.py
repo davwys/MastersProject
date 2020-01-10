@@ -36,46 +36,71 @@ class MainWindow(Screen):
     stopThread = False
     areaName = '[AreaName]'
     cardId = '[CardID]'
-    callFormat = ''
     type = '[Type]'
 
-    currentCallFormat = ''
     currentData = ''
 
-    # API Specification: Key
-    apiKey = ''  # TODO provide some e52f5325453fe98ad5d774d67e046505
-    apiEndpoint = ''  # TODO http://pastebin.com/api/api_post.php
+    # API Specification
+    apiEndpoint = ""  # TODO http://pastebin.com/api/api_post.php
+    apiKey = ""  # TODO provide some e52f5325453fe98ad5d774d67e046505
+    callFormat = ''
 
-    def load_current_format(self):
+    def load_current_format(self, replace):
         try:
             f = open("api_area_config.txt", "r")
             if f is not None:
-                self.currentCallFormat = f.read()
+                cnt = 0
+                line = f.readline()
+                while line:
+                    line = line.strip("\n")
+
+                    # Endpoint
+                    if cnt == 0:
+                        self.apiEndpoint = str(line)
+
+                        if replace is True or len(self.ids.endpoint.text) == 0:
+                            self.ids.endpoint.text = self.apiEndpoint
+                    # Key
+                    elif cnt == 1:
+                        self.apiKey = str(line)
+
+                        if replace is True or len( self.ids.key.text) == 0:
+                            self.ids.key.text = self.apiKey
+                    # Data Format
+                    elif cnt == 2:
+                        self.callFormat = str(line)
+                        self.ids.current.text = self.callFormat
+
+                        if replace is True or len(self.ids.input.text) == 0:
+                            self.ids.input.text = self.callFormat
+
+                    line = f.readline()
+                    cnt += 1
+
         except FileNotFoundError:
             print('Error: no configuration found')
 
-    # Auto-converts variables into real-time preview & saves
+    # Auto-converts variables into real-time data
     def api_name_handler(self, name):
         txt = name.replace("[AreaName]", self.areaName)
         txt = txt.replace("[CardID]", self.cardId)
         txt = txt.replace("[Type]", self.type)
-        self.ids.preview.text = txt
-        self.callFormat = txt
-        self.currentData = txt
-        self.apiKey = self.ids.key.text
-        self.apiEndpoint = self.ids.endpoint.text
+        return txt
 
     # Sends the current API call
     def send_api_call(self):
-        api_endpoint = self.apiEndpoint
 
-        data = {'api_dev_key': self.apiKey,
-                'api_option': 'paste',
-                'api_paste_code': self.currentData,
-                'api_paste_format': 'python'
-                }
+        if self.apiEndpoint is not None and self.apiKey is not None:
+            api_endpoint = self.apiEndpoint
 
-        self.stage(api_endpoint, data)
+            print("Sending data: " + str(self.currentData))
+            data = {'api_dev_key': self.apiKey,
+                    'api_option': 'paste',
+                    'api_paste_code': self.currentData,
+                    'api_paste_format': 'python'
+                    }
+
+            self.stage(api_endpoint, data)
 
     # Stages an API call
     def stage(self, api_endpoint, data):
@@ -88,19 +113,27 @@ class MainWindow(Screen):
     def add_to_call(self, name):
         self.ids.input.text += name
 
-    def save_call_format(self, text):
+    def save_call_format(self):
+        self.apiKey = self.ids.key.text
+        self.apiEndpoint = self.ids.endpoint.text
+        self.callFormat = self.ids.input.text
 
+        txt = str(self.apiEndpoint + "\n" + self.apiKey + "\n" + self.callFormat)
         f = open("api_area_config.txt", "w+")
-        f.write(str(text))
+        f.write(txt)
         f.close()
-        print('Saved format: ' + str(text))
-        self.load_current_format()
+        print('Saved format: ' + str(txt))
+        self.load_current_format(True)
 
     def reset_call_format(self):
-        self.load_current_format()
-        self.callFormat = self.currentCallFormat
+        self.load_current_format(True)
         self.ids.input.text = self.callFormat
 
+#
+#
+# ORACLE
+#
+#
 
 class SecondWindow(Screen):
 
@@ -137,10 +170,10 @@ class SecondWindow(Screen):
         f.write(str(text))
         f.close()
         print('Saved format: ' + str(text))
-        self.load_current_format()
+        self.load_current_format(True)
 
     def reset_call_format(self):
-        self.load_current_format()
+        self.load_current_format(True)
         self.callFormat = self.currentCallFormat
         self.ids.input.text = self.callFormat
 
@@ -157,8 +190,6 @@ class MyMainApp(App):
     title = "Game Board API Call Specification Dashboard"
 
     def build(self):
-        #kv = MainWindow()
-        #kv.load_current_format()
         return kv
 
 

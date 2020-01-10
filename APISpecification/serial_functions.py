@@ -76,6 +76,8 @@ def select_port(self, port, oracle):
         thread = threading.Thread(target=self.read_from_port, args=(self.ser, oracle))
         thread.start()
 
+        self.load_current_format(False)
+
     except OSError:
         print('Error: Could not open port')
 
@@ -133,7 +135,7 @@ def handle_playing_message(self, msg):
     self.ids['type'].text = self.type
 
     # Format preview call
-    self.api_name_handler(self.ids['input'].text)
+    self.currentData = self.api_name_handler(self.callFormat)
 
     # Send actual API call
     self.send_api_call()

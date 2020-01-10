@@ -1,1 +1,3 @@
+http://pastebin.com/api/api_post.php
+e52f5325453fe98ad5d774d67e046505
 Play={[AreaName]_[CardID]_[Type]}

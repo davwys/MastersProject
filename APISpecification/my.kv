@@ -96,7 +96,7 @@ WindowManager:
                 Spinner:
                     id: port_dropdown
                     text: 'Select device...'
-                    on_press:
+                    on_release:
                         root.update_ports()
                         self.back_color = .05, .5, 1, .5
                     on_text:
@@ -159,7 +159,7 @@ WindowManager:
                         width: self.parent.width * 0.3
                         size_hint_x: None
                         text: 'Add Area'
-                        on_press: root.add_to_call('[AreaName]')
+                        on_release: root.add_to_call('[AreaName]')
                     Label:
                         width: self.parent.width * 0.05
                         size_hint_x: None
@@ -167,7 +167,7 @@ WindowManager:
                         width: self.parent.width * 0.3
                         size_hint_x: None
                         text: 'Add Card ID'
-                        on_press: root.add_to_call('[CardID]')
+                        on_release: root.add_to_call('[CardID]')
                     Label:
                         width: self.parent.width * 0.05
                         size_hint_x: None
@@ -175,7 +175,7 @@ WindowManager:
                         width: self.parent.width * 0.3
                         size_hint_x: None
                         text: 'Add Type'
-                        on_press: root.add_to_call('[Type]')
+                        on_release: root.add_to_call('[Type]')
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
@@ -224,10 +224,10 @@ WindowManager:
                         padding: [0,80,0,0]
                         Label:
                             color: 0,0,0,1
-                            text: 'Data Preview:'
+                            text: 'Current Data Format:'
                     Label:
                         color: 0,0,0,1
-                        id: preview
+                        id: current
                         text: ''
                 Label:
                     height: self.parent.height * 0.05
@@ -236,7 +236,7 @@ WindowManager:
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     text: 'Save & Apply'
-                    on_press: root.save_call_format(root.callFormat)
+                    on_release: root.save_call_format()
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
@@ -269,7 +269,7 @@ WindowManager:
                     id: restart
                     #disabled: True
                     text: 'Load current format'
-                    on_press:
+                    on_release:
                         root.reset_call_format()
             GridLayout:
                 width: self.parent.width * 0.5
@@ -336,7 +336,7 @@ WindowManager:
                 Spinner:
                     id: port_dropdown
                     text: 'Select device...'
-                    on_press:
+                    on_release:
                         root.update_ports()
                         self.back_color = .05, .5, 1, .5
                     on_text:
@@ -376,7 +376,7 @@ WindowManager:
                     cols:1
                     RoundButton:
                         text: 'Add Card Combination'
-                        on_press: root.add_to_call('[CardCombination]')
+                        on_release: root.add_to_call('[CardCombination]')
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
@@ -414,7 +414,7 @@ WindowManager:
                     height: self.parent.height * 0.1
                     size_hint_y: None
                     text: 'Save'
-                    on_press: root.save_call_format(root.callFormat)
+                    on_release: root.save_call_format(root.callFormat)
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
@@ -453,7 +453,7 @@ WindowManager:
                     id: restart
                     #disabled: True
                     text: 'Load current format'
-                    on_press:
+                    on_release:
                         root.reset_call_format()
             GridLayout:
                 width: self.parent.width * 0.5
