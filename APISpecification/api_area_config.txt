@@ -1,1 +1,1 @@
-http://192.168.21.1/play_api/M=[AreaName]_[CardID]_[Type]
+http://pastebin.com/api/api_post.php

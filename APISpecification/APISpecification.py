@@ -22,7 +22,8 @@ import serial
 import serial.tools.list_ports
 import threading
 import time
-
+import requests
+import json
 
 Window.clearcolor = (0.8, 0.8, 0.8, 1)
 
@@ -39,6 +40,10 @@ class MainWindow(Screen):
     type = '[Type]'
 
     currentCallFormat = ''
+    currentCall = ''
+
+    # API Specification: Key
+    apiKey = 'e52f5325453fe98ad5d774d67e046505' # TODO provide some call
 
     def load_current_format(self):
         try:
@@ -55,6 +60,27 @@ class MainWindow(Screen):
         txt = txt.replace("[Type]", self.type)
         self.ids.preview.text = txt
         self.callFormat = txt
+        self.currentCall = txt
+
+    def send_api_call(self):
+        api_endpoint = self.currentCall #"http://pastebin.com/api/api_post.php"
+
+        call_data = str(self.areaName + " " + self.cardId)
+
+        data = {'api_dev_key': self.apiKey,
+                'api_option': 'paste',
+                'api_paste_code': call_data,
+                'api_paste_format': 'python'
+                }
+
+        self.stage(api_endpoint, data)
+
+    # Stages an API call
+    def stage(self, api_endpoint, data):
+        r = requests.post(url=api_endpoint, data=data)
+
+        url = r.text
+        print("The URL is: %s" % url)
 
     # Adds a string to API call format input
     def add_to_call(self, name):

@@ -132,7 +132,11 @@ def handle_playing_message(self, msg):
     self.ids['area'].text = self.areaName
     self.ids['type'].text = self.type
 
+    # Format preview call
     self.api_name_handler(self.ids['input'].text)
+
+    # Send actual API call
+    self.send_api_call()
 
 
 def handle_oracle_message(self, msg):
