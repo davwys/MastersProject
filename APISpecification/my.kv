@@ -118,17 +118,38 @@ WindowManager:
                 size_hint_x: None
                 height: self.parent.height * 1
                 size_hint_y: None
-                rows:11
+                rows:13
                 Label:
+                    height: self.parent.height * 0.05
+                    size_hint_y: None
+                GridLayout:
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                TextInput:
-                    unfocus_on_touch: False
+                    padding: [0,10,0,10]
+                    cols:1
+                    TextInput:
+                        unfocus_on_touch: False
+                        id: endpoint
+                        hint_text: 'API Endpoint'
+                GridLayout:
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    id: input
-                    hint_text: 'Specify your API call here'
-                    on_text: root.api_name_handler(input.text)
+                    padding: [0,10,0,10]
+                    cols:1
+                    TextInput:
+                        unfocus_on_touch: False
+                        id: key
+                        hint_text: 'API Key'
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [0,10,0,10]
+                    cols:1
+                    TextInput:
+                        unfocus_on_touch: False
+                        id: input
+                        hint_text: 'Data Format'
+                        on_text: root.api_name_handler(input.text)
                 GridLayout:
                     height: self.parent.height * 0.1
                     size_hint_y: None
@@ -159,7 +180,7 @@ WindowManager:
                     height: self.parent.height * 0.05
                     size_hint_y: None
                 GridLayout:
-                    height: self.parent.height * 0.1
+                    height: self.parent.height * 0.05
                     size_hint_y: None
                     padding: [10,10,10,10]
                     cols:2
@@ -171,7 +192,7 @@ WindowManager:
                         id: area
                         text: root.areaName
                 GridLayout:
-                    height: self.parent.height * 0.1
+                    height: self.parent.height * 0.05
                     size_hint_y: None
                     padding: [10,10,10,10]
                     cols:2
@@ -183,7 +204,7 @@ WindowManager:
                         id: card
                         text: root.cardId
                 GridLayout:
-                    height: self.parent.height * 0.1
+                    height: self.parent.height * 0.05
                     size_hint_y: None
                     padding: [10,10,10,10]
                     cols:2
@@ -195,13 +216,15 @@ WindowManager:
                         id: type
                         text: root.type
                 GridLayout:
-                    height: self.parent.height * 0.1
+                    height: self.parent.height * 0.15
                     size_hint_y: None
-                    padding: [10,10,10,10]
                     rows:2
-                    Label:
-                        color: 0,0,0,1
-                        text: 'API Call Preview:'
+                    GridLayout:
+                        cols:1
+                        padding: [0,80,0,0]
+                        Label:
+                            color: 0,0,0,1
+                            text: 'Data Preview:'
                     Label:
                         color: 0,0,0,1
                         id: preview
@@ -212,10 +235,10 @@ WindowManager:
                 BorderButton:
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    text: 'Save'
+                    text: 'Save & Apply'
                     on_press: root.save_call_format(root.callFormat)
                 Label:
-                    height: self.parent.height * 0.1
+                    height: self.parent.height * 0.05
                     size_hint_y: None
             GridLayout:
                 width: root.width * 0.25

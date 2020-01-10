@@ -40,10 +40,11 @@ class MainWindow(Screen):
     type = '[Type]'
 
     currentCallFormat = ''
-    currentCall = ''
+    currentData = ''
 
     # API Specification: Key
-    apiKey = 'e52f5325453fe98ad5d774d67e046505' # TODO provide some call
+    apiKey = ''  # TODO provide some e52f5325453fe98ad5d774d67e046505
+    apiEndpoint = ''  # TODO http://pastebin.com/api/api_post.php
 
     def load_current_format(self):
         try:
@@ -53,23 +54,24 @@ class MainWindow(Screen):
         except FileNotFoundError:
             print('Error: no configuration found')
 
-    # Auto-converts variables into real-time preview
+    # Auto-converts variables into real-time preview & saves
     def api_name_handler(self, name):
         txt = name.replace("[AreaName]", self.areaName)
         txt = txt.replace("[CardID]", self.cardId)
         txt = txt.replace("[Type]", self.type)
         self.ids.preview.text = txt
         self.callFormat = txt
-        self.currentCall = txt
+        self.currentData = txt
+        self.apiKey = self.ids.key.text
+        self.apiEndpoint = self.ids.endpoint.text
 
+    # Sends the current API call
     def send_api_call(self):
-        api_endpoint = self.currentCall #"http://pastebin.com/api/api_post.php"
-
-        call_data = str(self.areaName + " " + self.cardId)
+        api_endpoint = self.apiEndpoint
 
         data = {'api_dev_key': self.apiKey,
                 'api_option': 'paste',
-                'api_paste_code': call_data,
+                'api_paste_code': self.currentData,
                 'api_paste_format': 'python'
                 }
 
@@ -87,6 +89,7 @@ class MainWindow(Screen):
         self.ids.input.text += name
 
     def save_call_format(self, text):
+
         f = open("api_area_config.txt", "w+")
         f.write(str(text))
         f.close()
