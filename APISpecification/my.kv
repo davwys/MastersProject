@@ -358,30 +358,56 @@ WindowManager:
                 size_hint_x: None
                 height: self.parent.height * 1
                 size_hint_y: None
-                rows:12
-                Label:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                TextInput:
-                    unfocus_on_touch: False
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                    id: input
-                    hint_text: 'Specify your API call here'
-                    on_text: root.api_name_handler(input.text)
-                GridLayout:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
-                    padding: [0,20,0,10]
-                    cols:1
-                    RoundButton:
-                        text: 'Add Card Combination'
-                        on_release: root.add_to_call('[CardCombination]')
+                rows:11
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None
                 GridLayout:
                     height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [0,10,0,10]
+                    cols:1
+                    TextInput:
+                        unfocus_on_touch: False
+                        id: endpoint
+                        hint_text: 'API Endpoint'
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [0,10,0,10]
+                    cols:1
+                    TextInput:
+                        unfocus_on_touch: False
+                        id: key
+                        hint_text: 'API Key'
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [0,10,0,10]
+                    cols:1
+                    TextInput:
+                        unfocus_on_touch: False
+                        id: input
+                        hint_text: 'Data Format'
+                        on_text: root.api_name_handler(input.text)
+                GridLayout:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                    padding: [0,20,0,10]
+                    cols:2
+                    RoundButton:
+                        width: self.parent.width * 1
+                        size_hint_x: None
+                        text: 'Add Card Combination'
+                        on_release: root.add_to_call('[CardCombination]')
+                    Label:
+                        width: self.parent.width * 0.05
+                        size_hint_x: None
+                Label:
+                    height: self.parent.height * 0.1
+                    size_hint_y: None
+                GridLayout:
+                    height: self.parent.height * 0.05
                     size_hint_y: None
                     padding: [10,10,10,10]
                     cols:2
@@ -390,37 +416,30 @@ WindowManager:
                         text: 'Card Combination:'
                     Label:
                         color: 0,0,0,1
-                        id: array
-                        text: root.array
-                Label:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
+                        id: area
+                        text: root.cardCombination
                 GridLayout:
-                    height: self.parent.height * 0.1
+                    height: self.parent.height * 0.15
                     size_hint_y: None
-                    padding: [10,10,10,10]
                     rows:2
+                    GridLayout:
+                        cols:1
+                        padding: [0,80,0,0]
+                        Label:
+                            color: 0,0,0,1
+                            text: 'Current Data Format:'
                     Label:
                         color: 0,0,0,1
-                        text: 'API Call Preview:'
-                    Label:
-                        color: 0,0,0,1
-                        id: preview
+                        id: current
                         text: ''
                 Label:
-                    height: self.parent.height * 0.05
+                    height: self.parent.height * 0.1
                     size_hint_y: None
                 BorderButton:
                     height: self.parent.height * 0.1
                     size_hint_y: None
-                    text: 'Save'
-                    on_release: root.save_call_format(root.callFormat)
-                Label:
-                    height: self.parent.height * 0.05
-                    size_hint_y: None
-                Label:
-                    height: self.parent.height * 0.1
-                    size_hint_y: None
+                    text: 'Save & Apply'
+                    on_release: root.save_call_format()
                 Label:
                     height: self.parent.height * 0.05
                     size_hint_y: None

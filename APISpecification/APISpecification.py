@@ -143,7 +143,7 @@ class SecondWindow(Screen):
     # Thread kill flag (kills input thread on program end)
     stopThread = False
     array = '[CardCombination]'
-    callFormat = ''
+    cardCombination = '[CardCombination]'
 
     currentCallFormat = ''
 
@@ -158,7 +158,7 @@ class SecondWindow(Screen):
     # Auto-converts variables into real-time preview
     def api_name_handler(self, name):
         txt = name.replace("[CardCombination]", self.array)
-        self.ids.preview.text = txt
+        self.ids.current.text = txt
         self.callFormat = txt
 
     # Adds a string to API call format input
