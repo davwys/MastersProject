@@ -22,11 +22,6 @@ String split(String s, char parser, int index) {
   return rs;
 }
 
-
-//Determines whether a card can be played at the moment TODO add timer stuff
-bool playing_ready = true;
-
-
 //Checks a sensor for training input and generates correct API call from learned mapping
 void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyMCP23016 expander_led){
   try{
@@ -302,9 +297,8 @@ void playing_main(CyMCP23016 expander_sens, CyMCP23016 expander_led){
   if(load){
     read_mapping_data();
   }
-  //Actual playing logic: capture sensor input (if ready) & return API calls
+  //Actual playing logic: capture sensor input & return API calls
   else{
-    if(playing_ready){
       play_on_sensor(sensor1, 1, expander_sens, expander_led);
       play_on_sensor(sensor2, 2, expander_sens, expander_led);
       play_on_sensor(sensor3, 3, expander_sens, expander_led);
@@ -315,10 +309,5 @@ void playing_main(CyMCP23016 expander_sens, CyMCP23016 expander_led){
       play_on_sensor(sensor8, 8, expander_sens, expander_led);
       play_on_sensor(sensor9, 9, expander_sens, expander_led);
       play_on_sensor(sensor10, 10, expander_sens, expander_led);
-    }
-    //TODO add stuff for PLAY_OK
-    else{
-
-    }
   }
 }

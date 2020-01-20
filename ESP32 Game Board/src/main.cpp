@@ -65,7 +65,7 @@ int sensorCount = 0;
 
 /*
 ==================
-LED Pin setup
+LED setup
 =================
 */
 
@@ -83,7 +83,29 @@ int LED_8 = MCP23016_PIN_GPIO0_7;
 int LED_9 = MCP23016_PIN_GPIO1_0;
 int LED_10 = MCP23016_PIN_GPIO1_1;
 
-/*
+//Array for storing statuses to turn off LEDs
+
+//System LEDs
+int led_array[3][2]={
+  {0,-1},
+  {0,-1},
+  {0,-1},
+};
+
+//Expander LEDs
+int led_array_expander[10][2]={
+  {0,-1},
+  {0,-1},
+  {0,-1},
+  {0,-1},
+  {0,-1},
+  {0,-1},
+  {0,-1},
+  {0,-1},
+  {0,-1},
+  {0,-1},
+};
+
 /*
 ==================
 Temp storage setup
@@ -254,4 +276,7 @@ void loop() {
             currentMode = READY;
             break;
       }
+
+      //Update all LEDs
+      update_leds(expander_led);
 }

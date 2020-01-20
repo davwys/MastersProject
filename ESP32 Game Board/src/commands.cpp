@@ -49,18 +49,109 @@ void hard_restart() {
   while(true); //Infinite loop forces ESP32 to do full reboot
 }
 
-//Flashes the selected LED for 300ms
-void flash_led(int pin) {
-    digitalWrite(pin, HIGH);   //turn LED on
-    delay(300);                //wait TODO rewrite without delay
-    digitalWrite(pin, LOW);    //turn LED off
+
+//Update all LED statuses (called in loop)
+void update_leds(CyMCP23016 expander){
+
+    int currentTime = int(millis());
+
+    //Update system LEDs
+    for(int i = 0; i < 3; i++){
+      //Serial.print("checking status for LED at position ");
+      //Serial.println(i);
+
+      //If this LED has a turn-off time currently set and it's already passed
+      if(led_array[i][1] != -1 && led_array[i][1] < currentTime){
+        //Turn off LED
+        digitalWrite(led_array[i][0], LOW);
+
+        //Disable timer for this LED
+        led_array[i][0] = 0;
+        led_array[i][1] = -1;
+      }
+
+    }
+
+    //Update expander LEDs
+    for(int i = 0; i < 10; i++){
+      //If this LED has a turn-off time currently set and it's already passed
+      if(led_array_expander[i][0] != 0 && led_array_expander[i][1] != -1 && led_array_expander[i][1] < currentTime){
+        Serial.print("turning off expander LED ");
+        Serial.println(led_array_expander[i][0]);
+
+        //Turn off LED
+        expander.digitalWrite(led_array_expander[i][0], LOW);
+
+        //Disable timer for this LED
+        led_array_expander[i][0] = 0;
+        led_array_expander[i][1] = -1;
+      }
+    }
 }
+
+
+//Flashes the selected LED for 300ms
+void flash_led(int pin){
+    //Save current system time
+    unsigned long currentMillis = millis();
+    //Desired delay in ms
+    int blinkTime = 300;
+    unsigned long endMillis = currentMillis + blinkTime;
+
+    //Find free spot in LED array
+    int pos = -1;
+    for(int i = 0; i < 3; i++){
+      if((led_array[i][0] == 0 ||  led_array[i][0] == pin) && (i <= pos || pos == -1)){
+        pos = i;
+      }
+    }
+
+    if(pos >= 0){
+      led_array[pos][0] = pin;
+      led_array[pos][1] = int(endMillis);
+
+      //Turn LED on
+      digitalWrite(pin, HIGH);
+      //Call update_leds() to turn LED off after specified time
+    }
+    else{
+      Serial.print("ERROR array full; shouldnt happen");
+    }
+}
+
 
 //Flashes the selected LED for 300ms on an expander
 void flash_led(int pin, CyMCP23016 expander) {
-    expander.digitalWrite(pin, HIGH);   //turn LED on
-    delay(300);                //wait TODO rewrite without delay
-    expander.digitalWrite(pin, LOW);    //turn LED off
+    //Save current system time
+    unsigned long currentMillis = millis();
+    //Desired delay in ms
+    int blinkTime = 300;
+    unsigned long endMillis = currentMillis + blinkTime;
+
+    //Find free spot in LED array
+    int pos = -1;
+    for(int i = 0; i < 10; i++){
+      if((led_array_expander[i][0] == 0 || led_array_expander[i][0] == pin) && (i <= pos || pos == -1) ){
+        pos = i;
+      }
+    }
+
+    if(pos >= 0){
+      Serial.print("saving LED ");
+      Serial.println(pin);
+      Serial.print(" at pos");
+      Serial.println(pos);
+
+      led_array_expander[pos][0] = pin;
+      led_array_expander[pos][1] = int(endMillis);
+
+      //Turn LED on
+      expander.digitalWrite(pin, HIGH);
+      //Call update_leds() to turn LED off after specified time
+    }
+    else{
+      Serial.print("ERROR expander array full; shouldnt happen");
+    }
 }
 
 
@@ -93,6 +184,8 @@ bool apply_mode_change(String command){
           BTSerial.print("Changed to mode ");
           BTSerial.print(cmd);
         }
+
+        flash_led(LED_Com);
         return true;
       }
       else{
@@ -135,36 +228,39 @@ void receive_command(bool usb){
   //Validate command input
   if (receivedData.length() > 0 && validate_command(receivedData) == true )
   {
-      flash_led(LED_Com);
 
       //Check if this is a mode change (and apply if yes), else handle other commands
       if(!apply_mode_change(receivedData))
       {
         //Reboot command: Reboot ESP
         if(receivedData.indexOf("REBOOT") >= 0){
+          flash_led(LED_Com);
           hard_restart();
         }
         //Training OK command
         else if(receivedData.indexOf("TRAIN_OK") >= 0 && currentMode == Mode(TRAINING)){
+          flash_led(LED_Com);
           training_ready = true;
         }
         //Training restart command
         else if(receivedData.indexOf("RESTART_TRAINING") >= 0 && currentMode == Mode(TRAINING)){
+          flash_led(LED_Com);
           restart_training();
         }
         //Training undo command
         else if(receivedData.indexOf("TRAIN_UNDO=") >= 0 && currentMode == Mode(TRAINING)){
+          flash_led(LED_Com);
           //Get sensor number for which to undo training
           int sid = receivedData.substring(11).toInt();
           undo_training(sid);
         }
-        //Play_ok: flash COM LED
+        //Play_ok: only flash COM LED
         else if(receivedData.indexOf("PLAY_OK") >= 0 && currentMode == Mode(PLAYING)){
           flash_led(LED_Com);
         }
       }
     }
-    //Invalid command type: flash red LED
+    //Invalid command type
     else
     {
         if(usb)

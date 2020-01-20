@@ -12,6 +12,7 @@ void upload_main();
 void receive_command(bool usb);
 void flash_led(int pin);
 void flash_led(int pin, CyMCP23016 expander);
+void update_leds(CyMCP23016 expander);
 
 
 //Read a string from Flash memory

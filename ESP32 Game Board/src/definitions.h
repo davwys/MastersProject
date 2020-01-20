@@ -50,6 +50,9 @@ extern int LED_8;
 extern int LED_9;
 extern int LED_10;
 
+extern int led_array[3][2];
+extern int led_array_expander[10][2];
+
 //Storage handling
 extern int currentByte;
 //Bluetooth Serial object

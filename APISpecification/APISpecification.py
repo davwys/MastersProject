@@ -147,11 +147,38 @@ class SecondWindow(Screen):
 
     currentCallFormat = ''
 
-    def load_current_format(self):
+    def load_current_format(self, replace):
         try:
             f = open("api_oracle_config.txt", "r")
             if f is not None:
-                self.currentCallFormat = f.read()
+                cnt = 0
+                line = f.readline()
+                while line:
+                    line = line.strip("\n")
+
+                    # Endpoint
+                    if cnt == 0:
+                        self.apiEndpoint = str(line)
+
+                        if replace is True or len(self.ids.endpoint.text) == 0:
+                            self.ids.endpoint.text = self.apiEndpoint
+                    # Key
+                    elif cnt == 1:
+                        self.apiKey = str(line)
+
+                        if replace is True or len( self.ids.key.text) == 0:
+                            self.ids.key.text = self.apiKey
+                    # Data Format
+                    elif cnt == 2:
+                        self.callFormat = str(line)
+                        self.ids.current.text = self.callFormat
+
+                        if replace is True or len(self.ids.input.text) == 0:
+                            self.ids.input.text = self.callFormat
+
+                    line = f.readline()
+                    cnt += 1
+
         except FileNotFoundError:
             print('Error: no configuration found')
 
