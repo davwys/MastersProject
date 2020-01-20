@@ -76,9 +76,6 @@ void update_leds(CyMCP23016 expander){
     for(int i = 0; i < 10; i++){
       //If this LED has a turn-off time currently set and it's already passed
       if(led_array_expander[i][0] != 0 && led_array_expander[i][1] != -1 && led_array_expander[i][1] < currentTime){
-        Serial.print("turning off expander LED ");
-        Serial.println(led_array_expander[i][0]);
-
         //Turn off LED
         expander.digitalWrite(led_array_expander[i][0], LOW);
 
