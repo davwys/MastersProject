@@ -114,9 +114,6 @@ void flash_led(int pin){
       digitalWrite(pin, HIGH);
       //Call update_leds() to turn LED off after specified time
     }
-    else{
-      Serial.print("ERROR array full; shouldnt happen");
-    }
 }
 
 
@@ -137,20 +134,12 @@ void flash_led(int pin, CyMCP23016 expander) {
     }
 
     if(pos >= 0){
-      Serial.print("saving LED ");
-      Serial.println(pin);
-      Serial.print(" at pos");
-      Serial.println(pos);
-
       led_array_expander[pos][0] = pin;
       led_array_expander[pos][1] = int(endMillis);
 
       //Turn LED on
       expander.digitalWrite(pin, HIGH);
       //Call update_leds() to turn LED off after specified time
-    }
-    else{
-      Serial.print("ERROR expander array full; shouldnt happen");
     }
 }
 
