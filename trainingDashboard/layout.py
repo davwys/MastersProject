@@ -100,7 +100,7 @@ class MyGrid(Widget):
 
             except OSError:
                 self.ids.upload.disabled = False
-                self.update_log('Error occurred')  # TODO Error handling
+                self.update_log('Error occurred')
 
         # TODO integrate into check if upload actually worked
         self.ids.instructions.text = '''All done! 

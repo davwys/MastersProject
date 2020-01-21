@@ -112,7 +112,7 @@ def handle_playing_message(self, msg):
     s_end = "'_"
     c_start = "CardID="
     message = msg[msg.find(start) + len(start):msg.rfind(end)]
-    # message example: SensorID=1_CardID=072
+    # message example: SensorID=1_CardID=072_RP
     if "Area='" not in message or "CardID=" not in message:
         return
 

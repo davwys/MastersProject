@@ -38,7 +38,6 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyM
 
       //Tmp looks like: SensorID=1_CardID=2
       if(tmp.length() > 4){
-
         //Extract sensor ID string & card ID string
         String sid_str = split(tmp, '_', 0);
         String cid_str = tmp.substring(tmp.indexOf("CardID="));
