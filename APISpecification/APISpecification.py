@@ -41,8 +41,8 @@ class MainWindow(Screen):
     currentData = ''
 
     # API Specification
-    apiEndpoint = ""  # TODO http://pastebin.com/api/api_post.php
-    apiKey = ""  # TODO provide some e52f5325453fe98ad5d774d67e046505
+    apiEndpoint = ""
+    apiKey = ""
     callFormat = ''
 
     def load_current_format(self, replace):
@@ -145,7 +145,32 @@ class SecondWindow(Screen):
     array = '[CardCombination]'
     cardCombination = '[CardCombination]'
 
-    currentCallFormat = ''
+    currentData = ''
+    # API Specification
+    apiEndpoint = ""  # TODO http://pastebin.com/api/api_post.php
+    apiKey = ""  # TODO provide some e52f5325453fe98ad5d774d67e046505
+    callFormat = ''
+
+    # Sends the current API call
+    def send_api_call(self):
+
+        if self.apiEndpoint is not None and self.apiKey is not None:
+            api_endpoint = self.apiEndpoint
+
+            print("Sending data: " + str(self.currentData))
+            data = {'api_dev_key': self.apiKey,
+                    'api_option': 'paste',
+                    'api_paste_code': self.currentData,
+                    'api_paste_format': 'python'
+                    }
+
+            self.stage(api_endpoint, data)
+
+    # Stages an API call
+    def stage(self, api_endpoint, data):
+        r = requests.post(url=api_endpoint, data=data)
+        url = r.text
+        print("The URL is: %s" % url)
 
     def load_current_format(self, replace):
         try:
@@ -185,23 +210,25 @@ class SecondWindow(Screen):
     # Auto-converts variables into real-time preview
     def api_name_handler(self, name):
         txt = name.replace("[CardCombination]", self.array)
-        self.ids.current.text = txt
-        self.callFormat = txt
+        return txt
 
     # Adds a string to API call format input
     def add_to_call(self, name):
         self.ids.input.text += name
 
-    def save_call_format(self, text):
+    def save_call_format(self):
+        self.apiKey = self.ids.key.text
+        self.apiEndpoint = self.ids.endpoint.text
+        self.callFormat = self.ids.input.text
+        txt = str(self.apiEndpoint + "\n" + self.apiKey + "\n" + self.callFormat)
         f = open("api_oracle_config.txt", "w+")
-        f.write(str(text))
+        f.write(txt)
         f.close()
-        print('Saved format: ' + str(text))
+        print('Saved format: ' + str(txt))
         self.load_current_format(True)
 
     def reset_call_format(self):
         self.load_current_format(True)
-        self.callFormat = self.currentCallFormat
         self.ids.input.text = self.callFormat
 
 
