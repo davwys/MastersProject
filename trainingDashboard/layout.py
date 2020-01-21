@@ -102,7 +102,6 @@ class MyGrid(Widget):
                 self.ids.upload.disabled = False
                 self.update_log('Error occurred')
 
-        # TODO integrate into check if upload actually worked
         self.ids.instructions.text = '''All done! 
 You can close the dashboard
 and start playing.'''
@@ -114,7 +113,7 @@ and start playing.'''
         self.ids.upload.disabled = True
         self.ids.start_training.text = 'Start Training'
         self.ids.instructions.text = 'Press "Start Training"'
-        self.update_log('Restarting training...')  # TODO disconnect as well
+        self.update_log('Restarting training...')
         # Send restart command
         self.ser.write(b'RESTART_TRAINING')  # write data as bytes
         self.ids.restart.disabled = True

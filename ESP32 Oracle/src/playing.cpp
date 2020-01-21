@@ -44,6 +44,11 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
           break;
         case 2:
           expander.digitalWrite(LED_2, HIGH);
+        case 3:
+          expander.digitalWrite(LED_3, HIGH);
+          break;
+        case 4:
+          expander.digitalWrite(LED_4, HIGH);
           break;
         default:
           break;
@@ -71,12 +76,6 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
 
       playedCards[id-1] = cid;
 
-      //Get area name from mapping TODO determine need
-      String areaName = "Oracle_" + String(id);
-
-      //Generate output: "Area='something'_CardID=123"
-      String output = "Area='" + areaName + "'_"+ cid_str;
-
     }
 
     //When card is removed / no longer present
@@ -94,6 +93,12 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
           case 2:
             expander.digitalWrite(LED_2, LOW);
             break;
+          case 3:
+            expander.digitalWrite(LED_3, LOW);
+            break;
+          case 4:
+            expander.digitalWrite(LED_4, LOW);
+            break;
           default:
             break;
         }
@@ -110,9 +115,12 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
 
   //If this is the last sensor, send call that is a combination of all played cards
   if(has_changed){ //&& id >= sensorCount){
+
     bool any_played = false;
     String call = "ORACLE={";
-    for(int i = 0; i < sensorCount; i++){
+
+    //Check for all sensors
+    for(int i = 0; i < 4; i++){
       if(playedCards[i] != NULL){
         any_played = true;
         call += String(playedCards[i]) + '_';

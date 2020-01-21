@@ -81,6 +81,8 @@ void setup() {
 
     //Set LED pins as output
     pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, HIGH);
+
     pinMode(LED_Pwr, OUTPUT);
     expander.pinMode(LED_1, OUTPUT);
     expander.pinMode(LED_2, OUTPUT);

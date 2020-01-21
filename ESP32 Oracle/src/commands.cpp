@@ -17,7 +17,7 @@ ORACLE={...}                    Output
 
 */
 
-const char *InputCommands[5] = {
+const char *InputCommands[2] = {
   "PLAY_OK",
   "REBOOT",
 };
@@ -39,7 +39,7 @@ void flash_led(int pin) {
 
 //Validates a given command - TODO validate upload data
 bool validate_command(String command){
-  for(int i = 0; i <= 2; i++){
+  for(int i = 0; i < 2; i++){
     if (receivedData.indexOf(InputCommands[i]) == 0)
       return true;
   }
