@@ -30,6 +30,42 @@ void train_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, Cy
         training_ready = false;
         //Flash communication LED to confirm sending command
         flash_led(LED_Com);
+
+        //Flash corresponding LED
+        switch(id){
+          case 1:
+            flash_led(LED_1, expander_led);
+            break;
+          case 2:
+            flash_led(LED_2, expander_led);
+            break;
+          case 3:
+            flash_led(LED_3, expander_led);
+            break;
+          case 4:
+            flash_led(LED_4, expander_led);
+            break;
+          case 5:
+            flash_led(LED_5, expander_led);
+            break;
+          case 6:
+            flash_led(LED_6, expander_led);
+            break;
+          case 7:
+            flash_led(LED_7, expander_led);
+            break;
+          case 8:
+            flash_led(LED_8, expander_led);
+            break;
+          case 9:
+            flash_led(LED_9, expander_led);
+            break;
+          case 10:
+            flash_led(LED_10, expander_led);
+            break;
+          default:
+            break;
+        }
       }
     }
     catch (std::runtime_error e){} //Catch errors for incomplete data
