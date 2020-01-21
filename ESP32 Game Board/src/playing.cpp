@@ -29,176 +29,38 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyM
 
     //Get area name from mapping
     String areaName = mapping[id-1];
-    //Get area type for this sensor from mapping (regular or combinatorial)
-    bool regular = sensorTypes[id-1];
 
-    //Tmp looks like: SensorID=1_CardID=2
-    if(tmp.length() > 4){
 
-      //Extract sensor ID string & card ID string
-      String sid_str = split(tmp, '_', 0);
-      String cid_str = tmp.substring(tmp.indexOf("CardID="));
+    if(areaName.length() > 0){
 
-      //Get card ID as int
-      int cid = cid_str.substring(7).toInt();
+      //Get area type for this sensor from mapping (regular or combinatorial)
+      bool regular = sensorTypes[id-1];
 
-      //Whether this is a new card
-      bool change = false;
+      //Tmp looks like: SensorID=1_CardID=2
+      if(tmp.length() > 4){
 
-      //Check if this was a change
-      if(playedCards[id-1] == 0 || playedCards[id-1] != cid){
-        change = true;
+        //Extract sensor ID string & card ID string
+        String sid_str = split(tmp, '_', 0);
+        String cid_str = tmp.substring(tmp.indexOf("CardID="));
 
-        //For combinatorial, check whether the card was changed (without no-card frames in between)
-        if(!regular && playedCards[id-1] != cid && playedCards[id-1] != 0){
-          String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "_Type=CR";
-          //Send on both bluetooth and USB
-          Serial.println("PLAY={" + output + "}");
-          BTSerial.println("PLAY={" + output + "}");
+        //Get card ID as int
+        int cid = cid_str.substring(7).toInt();
 
-          //Turn on corresponding LED
-          switch(id){
-            case 1:
-              expander_led.digitalWrite(LED_1, LOW);
-              break;
-            case 2:
-              expander_led.digitalWrite(LED_2, LOW);
-              break;
-            case 3:
-              expander_led.digitalWrite(LED_3, LOW);
-              break;
-            case 4:
-              expander_led.digitalWrite(LED_4, LOW);
-              break;
-            case 5:
-              expander_led.digitalWrite(LED_5, LOW);
-              break;
-            case 6:
-              expander_led.digitalWrite(LED_6, LOW);
-              break;
-            case 7:
-              expander_led.digitalWrite(LED_7, LOW);
-              break;
-            case 8:
-              expander_led.digitalWrite(LED_8, LOW);
-              break;
-            case 9:
-              expander_led.digitalWrite(LED_9, LOW);
-              break;
-            case 10:
-              expander_led.digitalWrite(LED_10, LOW);
-              break;
-          }
+        //Whether this is a new card
+        bool change = false;
 
-          //Flash COM LED
-          flash_led(LED_Com);
-        }
-      }
+        //Check if this was a change
+        if(playedCards[id-1] == 0 || playedCards[id-1] != cid){
+          change = true;
 
-      if(change){
-        playedCards[id-1] = cid;
-
-        String typeName = regular ? "Type=RP" : "Type=CP";
-        //Generate output: "Area='something'_CardID=123"
-        String output = "Area='" + areaName + "'_"+ cid_str + "_" + typeName;
-
-        //Send on both bluetooth and USB
-        Serial.println("PLAY={" + output + "}");
-        BTSerial.println("PLAY={" + output + "}");
-
-        if(regular){
-          //Flash corresponding sensor's LED
-          switch(id){
-            case 1:
-              flash_led(LED_1, expander_led);
-              break;
-            case 2:
-              flash_led(LED_2, expander_led);
-              break;
-            case 3:
-              flash_led(LED_3, expander_led);
-              break;
-            case 4:
-              flash_led(LED_4, expander_led);
-              break;
-            case 5:
-              flash_led(LED_5, expander_led);
-              break;
-            case 6:
-              flash_led(LED_6, expander_led);
-              break;
-            case 7:
-              flash_led(LED_7, expander_led);
-              break;
-            case 8:
-              flash_led(LED_8, expander_led);
-              break;
-            case 9:
-              flash_led(LED_9, expander_led);
-              break;
-            case 10:
-              flash_led(LED_10, expander_led);
-              break;
-            default:
-              break;
-          }
-        }
-        else{
-          //Turn on corresponding LED when card is placed
-          switch(id){
-            case 1:
-              expander_led.digitalWrite(LED_1, HIGH);
-              break;
-            case 2:
-              expander_led.digitalWrite(LED_2, HIGH);
-              break;
-            case 3:
-              expander_led.digitalWrite(LED_3, HIGH);
-              break;
-            case 4:
-              expander_led.digitalWrite(LED_4, HIGH);
-              break;
-            case 5:
-              expander_led.digitalWrite(LED_5, HIGH);
-              break;
-            case 6:
-              expander_led.digitalWrite(LED_6, HIGH);
-              break;
-            case 7:
-              expander_led.digitalWrite(LED_7, HIGH);
-              break;
-            case 8:
-              expander_led.digitalWrite(LED_8, HIGH);
-              break;
-            case 9:
-              expander_led.digitalWrite(LED_9, HIGH);
-              break;
-            case 10:
-              expander_led.digitalWrite(LED_10, HIGH);
-              break;
-          }
-        }
-
-        //Flash COM LED
-        flash_led(LED_Com);
-      }
-      //playing_ready = false; TODO add
-    }
-    //If card is no longer present
-    else{
-      if(tmp.indexOf("NONE") >= 0){
-
-        //Whether this was a change
-        if(playedCards[id-1] != 0){
-          //For combinatorial, send call upon removal
-          if(!regular){
-
-            String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "Type=_CR";
+          //For combinatorial, check whether the card was changed (without no-card frames in between)
+          if(!regular && playedCards[id-1] != cid && playedCards[id-1] != 0){
+            String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "_Type=CR";
             //Send on both bluetooth and USB
             Serial.println("PLAY={" + output + "}");
             BTSerial.println("PLAY={" + output + "}");
 
-            //Turn off corresponding LED when card is removed
+            //Turn on corresponding LED
             switch(id){
               case 1:
                 expander_led.digitalWrite(LED_1, LOW);
@@ -231,12 +93,155 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyM
                 expander_led.digitalWrite(LED_10, LOW);
                 break;
             }
+
             //Flash COM LED
             flash_led(LED_Com);
           }
+        }
 
-          //Save that card was removed
-          playedCards[id-1] = 0;
+        if(change){
+          playedCards[id-1] = cid;
+
+          String typeName = regular ? "Type=RP" : "Type=CP";
+          //Generate output: "Area='something'_CardID=123"
+          String output = "Area='" + areaName + "'_"+ cid_str + "_" + typeName;
+
+          //Send on both bluetooth and USB
+          Serial.println("PLAY={" + output + "}");
+          BTSerial.println("PLAY={" + output + "}");
+
+          if(regular){
+            //Flash corresponding sensor's LED
+            switch(id){
+              case 1:
+                flash_led(LED_1, expander_led);
+                break;
+              case 2:
+                flash_led(LED_2, expander_led);
+                break;
+              case 3:
+                flash_led(LED_3, expander_led);
+                break;
+              case 4:
+                flash_led(LED_4, expander_led);
+                break;
+              case 5:
+                flash_led(LED_5, expander_led);
+                break;
+              case 6:
+                flash_led(LED_6, expander_led);
+                break;
+              case 7:
+                flash_led(LED_7, expander_led);
+                break;
+              case 8:
+                flash_led(LED_8, expander_led);
+                break;
+              case 9:
+                flash_led(LED_9, expander_led);
+                break;
+              case 10:
+                flash_led(LED_10, expander_led);
+                break;
+              default:
+                break;
+            }
+          }
+          else{
+            //Turn on corresponding LED when card is placed
+            switch(id){
+              case 1:
+                expander_led.digitalWrite(LED_1, HIGH);
+                break;
+              case 2:
+                expander_led.digitalWrite(LED_2, HIGH);
+                break;
+              case 3:
+                expander_led.digitalWrite(LED_3, HIGH);
+                break;
+              case 4:
+                expander_led.digitalWrite(LED_4, HIGH);
+                break;
+              case 5:
+                expander_led.digitalWrite(LED_5, HIGH);
+                break;
+              case 6:
+                expander_led.digitalWrite(LED_6, HIGH);
+                break;
+              case 7:
+                expander_led.digitalWrite(LED_7, HIGH);
+                break;
+              case 8:
+                expander_led.digitalWrite(LED_8, HIGH);
+                break;
+              case 9:
+                expander_led.digitalWrite(LED_9, HIGH);
+                break;
+              case 10:
+                expander_led.digitalWrite(LED_10, HIGH);
+                break;
+            }
+          }
+
+          //Flash COM LED
+          flash_led(LED_Com);
+        }
+        //playing_ready = false; TODO add
+      }
+      //If card is no longer present
+      else{
+        if(tmp.indexOf("NONE") >= 0){
+
+          //Whether this was a change
+          if(playedCards[id-1] != 0){
+            //For combinatorial, send call upon removal
+            if(!regular){
+
+              String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "Type=_CR";
+              //Send on both bluetooth and USB
+              Serial.println("PLAY={" + output + "}");
+              BTSerial.println("PLAY={" + output + "}");
+
+              //Turn off corresponding LED when card is removed
+              switch(id){
+                case 1:
+                  expander_led.digitalWrite(LED_1, LOW);
+                  break;
+                case 2:
+                  expander_led.digitalWrite(LED_2, LOW);
+                  break;
+                case 3:
+                  expander_led.digitalWrite(LED_3, LOW);
+                  break;
+                case 4:
+                  expander_led.digitalWrite(LED_4, LOW);
+                  break;
+                case 5:
+                  expander_led.digitalWrite(LED_5, LOW);
+                  break;
+                case 6:
+                  expander_led.digitalWrite(LED_6, LOW);
+                  break;
+                case 7:
+                  expander_led.digitalWrite(LED_7, LOW);
+                  break;
+                case 8:
+                  expander_led.digitalWrite(LED_8, LOW);
+                  break;
+                case 9:
+                  expander_led.digitalWrite(LED_9, LOW);
+                  break;
+                case 10:
+                  expander_led.digitalWrite(LED_10, LOW);
+                  break;
+              }
+              //Flash COM LED
+              flash_led(LED_Com);
+            }
+
+            //Save that card was removed
+            playedCards[id-1] = 0;
+          }
         }
       }
     }
