@@ -21,11 +21,6 @@ UPLOAD      = ready to upload new training data (after training is finished)
 PLAYING     = actively playing the game (outputs API calls for game logic)
 */
 
-typedef enum  {
-    READY,
-    PLAYING
-}Mode;
-
 
 /*
 ==================
@@ -45,7 +40,6 @@ extern int LED_4;
 extern BluetoothSerial BTSerial;
 
 //Core logic data
-extern Mode currentMode;
 extern String receivedData;
 
 /*

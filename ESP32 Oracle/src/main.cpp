@@ -61,10 +61,10 @@ BluetoothSerial BTSerial;
 
 /*
 ==================
-Mode logic setup
+Input setup
 =================
 */
-Mode currentMode = PLAYING;
+
 String receivedData = "";
 
 //Main setup function (runs on initialization)
@@ -111,8 +111,6 @@ void setup() {
     //Print initialzation data
     Serial.println();
     Serial.println("Initializing ESP32 Oracle Board...");
-    Serial.print("Current Mode: ");
-    Serial.println(currentMode);
 
     delay(200);
     Serial.print("Expander Status: ");
@@ -153,19 +151,6 @@ void loop() {
      {
        receive_command(false);
      }
-    //Main Behavior loop
-    switch (currentMode)
-      {
-         case READY:
-            //TODO?
-            break;
-         case PLAYING:
-            playing_main(expander);
-            break;
-
-         default:
-            //default case: Reset to ready (should never happen)
-            currentMode = READY;
-            break;
-      }
+    //Main Behavior
+    playing_main(expander);
 }
