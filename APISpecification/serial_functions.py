@@ -74,6 +74,7 @@ def select_port(self, port, oracle):
 
         # Start serial read thread
         thread = threading.Thread(target=self.read_from_port, args=(self.ser, oracle))
+        thread.daemon = True
         thread.start()
 
         self.load_current_format(False)

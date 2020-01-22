@@ -77,6 +77,7 @@ class MyGrid(Widget):
         # Start training TODO kill after completion
         if not self.restarted:
             thread = threading.Thread(target=self.read_from_port, args=(self.ser,))
+            thread.daemon = True
             thread.start()
 
     # Upload new training data
@@ -132,16 +133,9 @@ and start playing.'''
 # Main App definition
 class MyApp(App):
     title = "Game Board Training Dashboard"
-    content = None
-
-    def on_quit(self, *args):
-        self.content.stopThread = True
 
     def build(self):
-        Window.bind(on_request_close=self.on_quit)
-        self.content = MyGrid()
-        return self.content
-
+        return MyGrid()
 
 
 if __name__ == "__main__":
