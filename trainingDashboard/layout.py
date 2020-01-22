@@ -128,12 +128,20 @@ and start playing.'''
         self.ids.submit_regular.disabled = True
         self.ids.submit_combinatorial.disabled = True
 
+
 # Main App definition
 class MyApp(App):
     title = "Game Board Training Dashboard"
+    content = None
+
+    def on_quit(self, *args):
+        self.content.stopThread = True
 
     def build(self):
-        return MyGrid()
+        Window.bind(on_request_close=self.on_quit)
+        self.content = MyGrid()
+        return self.content
+
 
 
 if __name__ == "__main__":
