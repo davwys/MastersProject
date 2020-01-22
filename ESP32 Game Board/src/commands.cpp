@@ -169,6 +169,13 @@ bool apply_mode_change(String command){
           Serial.print(cmd);
           BTSerial.print("Changed to mode ");
           BTSerial.print(cmd);
+
+          //Upon entering training mode, clear data
+          if(cmd == 1){
+            for(int i = 0; i < 10; i++){
+              playedSensors[i] = false;
+            }
+          }
         }
 
         flash_led(LED_Com);
