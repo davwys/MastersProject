@@ -141,6 +141,10 @@ def handle_playing_message(self, msg):
     # Send actual API call
     self.send_api_call()
 
+    # Send PLAY_OK message
+    self.ser.write(b'PLAY_OK')
+    self.ser.flush()
+
 
 def handle_oracle_message(self, msg):
 
@@ -160,3 +164,7 @@ def handle_oracle_message(self, msg):
 
     # Send actual API call
     self.send_api_call()
+
+    # Send PLAY_OK message
+    self.ser.write(b'PLAY_OK')
+    self.ser.flush()
