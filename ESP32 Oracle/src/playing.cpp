@@ -44,6 +44,7 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
           break;
         case 2:
           expander.digitalWrite(LED_2, HIGH);
+          break;
         case 3:
           expander.digitalWrite(LED_3, HIGH);
           break;
