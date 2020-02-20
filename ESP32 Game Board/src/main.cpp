@@ -71,7 +71,7 @@ LED setup
 
 int LED_Pwr = 2;
 int LED_Sta = 15;
-int LED_Com = 16;
+int LED_Com = 4;
 int LED_1 = MCP23016_PIN_GPIO0_0;
 int LED_2 = MCP23016_PIN_GPIO0_1;
 int LED_3 = MCP23016_PIN_GPIO0_2;

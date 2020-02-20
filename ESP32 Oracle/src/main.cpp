@@ -25,10 +25,10 @@ NFC Sensor setup
 #define SCK  (18)
 #define MOSI (23)
 #define MISO (19)
-#define SENSOR1 (MCP23016_PIN_GPIO0_4)
-#define SENSOR2 (MCP23016_PIN_GPIO0_5)
-#define SENSOR3 (MCP23016_PIN_GPIO0_6)
-#define SENSOR4 (MCP23016_PIN_GPIO0_7)
+#define SENSOR1 (MCP23016_PIN_GPIO0_0)
+#define SENSOR2 (MCP23016_PIN_GPIO0_1)
+#define SENSOR3 (MCP23016_PIN_GPIO0_2)
+#define SENSOR4 (MCP23016_PIN_GPIO0_3)
 
 Adafruit_PN532 sensor1(SCK, MISO, MOSI, SENSOR1, expander);
 Adafruit_PN532 sensor2(SCK, MISO, MOSI, SENSOR2, expander);
@@ -46,10 +46,12 @@ LED Pin setup
 */
 
 int LED_Pwr = 2;
-int LED_1 = MCP23016_PIN_GPIO0_0;
-int LED_2 = MCP23016_PIN_GPIO0_1;
-int LED_3 = MCP23016_PIN_GPIO0_2;
-int LED_4 = MCP23016_PIN_GPIO0_3;
+int LED_Sta = 15;
+int LED_Com = 4;
+int LED_1 = MCP23016_PIN_GPIO0_4;
+int LED_2 = MCP23016_PIN_GPIO0_5;
+int LED_3 = MCP23016_PIN_GPIO0_6;
+int LED_4 = MCP23016_PIN_GPIO0_7;
 
 /*
 ==================
@@ -81,9 +83,11 @@ void setup() {
 
     //Set LED pins as output
     pinMode(LED_BUILTIN, OUTPUT);
-    digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(LED_BUILTIN, LOW);
 
     pinMode(LED_Pwr, OUTPUT);
+    pinMode(LED_Sta, OUTPUT);
+    pinMode(LED_Com, OUTPUT);
     expander.pinMode(LED_1, OUTPUT);
     expander.pinMode(LED_2, OUTPUT);
     expander.pinMode(LED_3, OUTPUT);
@@ -118,13 +122,13 @@ void setup() {
     Serial.print("Expander Status: ");
     Serial.println(expander.detected());
 
+    digitalWrite(LED_Pwr, HIGH);
+
     /* TODO restart main controller if missing expander
     if(!expander.detected()){
       expander.begin(SDA_Pin, SCL_Pin);
     }
     */
-
-    expander.digitalWrite(LED_2, HIGH);
 
     Serial.println("Beginning sensor search...");
 
@@ -136,9 +140,34 @@ void setup() {
     initialize_sensor(sensor4, 4, expander);
 
     Serial.print("Sensor search complete, found "); Serial.print(sensorCount); Serial.println(" sensors.");
-    //expander.digitalWrite(LED_2, LOW);
-    //TODO visualize readyness state/number of found sensors?
-    //Probably turn each LED on when sensor found, then turn them off here
+
+    delay(500);
+
+    //Turn off all sensor LEDs
+    expander.digitalWrite(LED_1, LOW);
+    expander.digitalWrite(LED_2, LOW);
+    expander.digitalWrite(LED_3, LOW);
+    expander.digitalWrite(LED_4, LOW);
+
+    //If all sensors found, blink all LEDs
+    if(sensorCount >= 4){
+      delay(400);
+
+      expander.digitalWrite(LED_1, HIGH);
+      expander.digitalWrite(LED_2, HIGH);
+      expander.digitalWrite(LED_3, HIGH);
+      expander.digitalWrite(LED_4, HIGH);
+
+      delay(400);
+
+      expander.digitalWrite(LED_1, LOW);
+      expander.digitalWrite(LED_2, LOW);
+      expander.digitalWrite(LED_3, LOW);
+      expander.digitalWrite(LED_4, LOW);
+    }
+
+    //Turn on Status LED (to indicate Ready state)
+    digitalWrite(LED_Sta, HIGH);
 
 }
 

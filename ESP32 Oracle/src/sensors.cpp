@@ -34,6 +34,23 @@ void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
       Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
       //Configure sensor to read RFID tags
       sensor.SAMConfig(expander);
+
+      //turn on sensor's LED to signal successful initialization (until all are initialized)
+      switch(id){
+        case 1:
+          expander.digitalWrite(LED_1, HIGH);
+          break;
+        case 2:
+          expander.digitalWrite(LED_2, HIGH);
+          break;
+        case 3:
+          expander.digitalWrite(LED_3, HIGH);
+          break;
+        case 4:
+          expander.digitalWrite(LED_4, HIGH);
+          break;
+
+      }
     }
 }
 
