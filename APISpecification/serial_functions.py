@@ -157,10 +157,11 @@ def handle_oracle_message(self, msg):
     # message example: {12,52,72}
 
     self.array = str(message)
-    self.ids['array'].text = self.array
+    #self.ids['current'].text = self.array
 
     # Format preview call
     self.currentData = self.api_name_handler(self.callFormat)
+    self.ids['current'].text = self.currentData;
 
     # Send actual API call
     self.send_api_call()

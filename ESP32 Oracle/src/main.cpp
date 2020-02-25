@@ -82,12 +82,10 @@ void setup() {
     expander.begin(SDA_Pin, SCL_Pin);
 
     //Set LED pins as output
-    pinMode(LED_BUILTIN, OUTPUT);
-    digitalWrite(LED_BUILTIN, LOW);
-
     pinMode(LED_Pwr, OUTPUT);
     pinMode(LED_Sta, OUTPUT);
     pinMode(LED_Com, OUTPUT);
+    pinMode(LED_BUILTIN, OUTPUT);
     expander.pinMode(LED_1, OUTPUT);
     expander.pinMode(LED_2, OUTPUT);
     expander.pinMode(LED_3, OUTPUT);
