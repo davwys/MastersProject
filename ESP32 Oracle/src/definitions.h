@@ -31,10 +31,13 @@ Physical pin setup
 //LED Pins
 
 extern int LED_Pwr;
+extern int LED_Com;
 extern int LED_1;
 extern int LED_2;
 extern int LED_3;
 extern int LED_4;
+
+extern int com_timer;
 
 //Bluetooth Serial object
 extern BluetoothSerial BTSerial;

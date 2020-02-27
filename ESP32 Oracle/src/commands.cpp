@@ -29,12 +29,39 @@ void hard_restart() {
   while(true);
 }
 
-//Flashes the selected LED for 300ms
-void flash_led(int pin) {
-    digitalWrite(pin, HIGH);   // turn LED on
-    delay(300);                //wait TODO rewrite without delay
-    digitalWrite(pin, LOW);    // turn LED off
+
+//Update all LED statuses (called in loop)
+void update_leds(){
+
+    int currentTime = int(millis());
+
+    //Update COM LED
+    if(com_timer != -1 && com_timer < currentTime){
+      //Turn off LED
+      digitalWrite(LED_Com, LOW);
+
+      //Disable timer for this LED
+      com_timer = -1;
+    }
 }
+
+
+//Flashes the selected LED for 300ms
+void flash_led(int pin){
+    //Save current system time
+    unsigned long currentMillis = millis();
+    //Desired delay in ms
+    int blinkTime = 300;
+    unsigned long endMillis = currentMillis + blinkTime;
+
+    com_timer = int(endMillis);
+
+    //Turn LED on
+    digitalWrite(pin, HIGH);
+    //Call update_leds() to turn LED off after specified time
+}
+
+
 
 
 //Validates a given command - TODO validate upload data
@@ -59,14 +86,14 @@ void receive_command(bool usb){
   //Validate command input
   if (receivedData.length() > 0 && validate_command(receivedData) == true )
   {
-      flash_led(LED_1); //TODO correct LED
+      flash_led(LED_Com);
       //Reboot command: Reboot ESP
       if(receivedData.indexOf("REBOOT") >= 0){
         hard_restart();
       }
       //Play_ok: flash COM LED
       else if(receivedData.indexOf("PLAY_OK") >= 0){
-        flash_led(LED_1); //TODO correct LED
+        //Maybe do something
       }
 
     }

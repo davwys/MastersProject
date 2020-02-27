@@ -133,11 +133,16 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
       Serial.println(call);
       BTSerial.println(call);
 
+      //Flash COM LED
+      flash_led(LED_Com);
+      
       has_changed = false;
     }
     else{
       Serial.println("ORACLE={}");
       BTSerial.println("ORACLE={}");
+      //Flash COM LED
+      flash_led(LED_Com);
     }
   }
 }

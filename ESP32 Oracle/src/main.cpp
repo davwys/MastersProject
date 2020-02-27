@@ -53,6 +53,8 @@ int LED_2 = MCP23016_PIN_GPIO0_5;
 int LED_3 = MCP23016_PIN_GPIO0_6;
 int LED_4 = MCP23016_PIN_GPIO0_7;
 
+int com_timer = -1; //Timer of the com LED (for blinking)
+
 /*
 ==================
 Bluetooth setup
@@ -209,4 +211,7 @@ void loop() {
      }
     //Main Behavior
     playing_main(expander);
+
+    //Update LEDs
+    update_leds();
 }

@@ -8,5 +8,6 @@ void playing_main(CyMCP23016 expander);
 //Helper commands
 void receive_command(bool usb);
 void flash_led(int pin);
+void update_leds();
 
 #endif
