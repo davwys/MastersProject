@@ -147,8 +147,35 @@ void setup() {
     expander.digitalWrite(LED_3, LOW);
     expander.digitalWrite(LED_4, LOW);
 
-    //If all sensors found, blink all LEDs
+    //If all sensors found, blink all LEDs three times
     if(sensorCount >= 4){
+      delay(400);
+
+      expander.digitalWrite(LED_1, HIGH);
+      expander.digitalWrite(LED_2, HIGH);
+      expander.digitalWrite(LED_3, HIGH);
+      expander.digitalWrite(LED_4, HIGH);
+
+      delay(400);
+
+      expander.digitalWrite(LED_1, LOW);
+      expander.digitalWrite(LED_2, LOW);
+      expander.digitalWrite(LED_3, LOW);
+      expander.digitalWrite(LED_4, LOW);
+      delay(400);
+
+      expander.digitalWrite(LED_1, HIGH);
+      expander.digitalWrite(LED_2, HIGH);
+      expander.digitalWrite(LED_3, HIGH);
+      expander.digitalWrite(LED_4, HIGH);
+
+      delay(400);
+
+      expander.digitalWrite(LED_1, LOW);
+      expander.digitalWrite(LED_2, LOW);
+      expander.digitalWrite(LED_3, LOW);
+      expander.digitalWrite(LED_4, LOW);
+
       delay(400);
 
       expander.digitalWrite(LED_1, HIGH);
