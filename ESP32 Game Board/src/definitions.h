@@ -69,7 +69,7 @@ NFC Sensor setup
 =================
 */
 
-void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander);
+void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander, CyMCP23016 expander_led);
 String readTag(Adafruit_PN532 sensor, int id, bool verbose, CyMCP23016 expander);
 
 extern int sensorCount;

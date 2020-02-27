@@ -17,7 +17,7 @@
 
 //Initializes a given NFC sensor.
 //Timeout (per sensor) is set in the library's Adafruit_PN532.h file
-void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
+void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander, CyMCP23016 expander_led){
 
     sensor.begin(expander);
 
@@ -34,6 +34,40 @@ void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
       Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
       //Configure sensor to read RFID tags
       sensor.SAMConfig(expander);
+
+      //Turn on corresponding sensor LED
+      switch(id){
+        case 1:
+          expander_led.digitalWrite(LED_1, HIGH);
+          break;
+        case 2:
+          expander_led.digitalWrite(LED_2, HIGH);
+          break;
+        case 3:
+          expander_led.digitalWrite(LED_3, HIGH);
+          break;
+        case 4:
+          expander_led.digitalWrite(LED_4, HIGH);
+          break;
+        case 5:
+          expander_led.digitalWrite(LED_5, HIGH);
+          break;
+        case 6:
+          expander_led.digitalWrite(LED_6, HIGH);
+          break;
+        case 7:
+          expander_led.digitalWrite(LED_7, HIGH);
+          break;
+        case 8:
+          expander_led.digitalWrite(LED_8, HIGH);
+          break;
+        case 9:
+          expander_led.digitalWrite(LED_9, HIGH);
+          break;
+        case 10:
+          expander_led.digitalWrite(LED_10, HIGH);
+          break;
+      }
     }
 }
 
