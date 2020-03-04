@@ -21,6 +21,8 @@ void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander, CyMCP
 
     sensor.begin(expander);
 
+    delay(100);
+
     uint32_t versiondata = sensor.getFirmwareVersion(expander);
     //If no sensor found, return
     if (!versiondata) {

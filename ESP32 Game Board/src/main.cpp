@@ -219,7 +219,6 @@ void setup() {
     Serial.print("LED Expander Status: ");
     Serial.println(expander_led.detected());
 
-
     Serial.println("Beginning sensor search...");
 
     //Try initializing each sensor
