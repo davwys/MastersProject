@@ -62,6 +62,11 @@ extern BluetoothSerial BTSerial;
 extern Mode currentMode;
 extern String receivedData;
 
+extern CyMCP23016 expander_led;
+
+//LED functions
+void flash_all_leds(int loops);
+
 
 /*
 ==================

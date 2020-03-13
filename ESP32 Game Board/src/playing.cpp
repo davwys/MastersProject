@@ -54,7 +54,7 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyM
 
           //For combinatorial, check whether the card was changed (without no-card frames in between)
           if(!regular && playedCards[id-1] != cid && playedCards[id-1] != 0){
-            String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "_Type=CR";
+            String output = "Area='" + areaName + "'_"+ cid_str + "_Type=CR";
             //Send on both bluetooth and USB
             Serial.println("PLAY={" + output + "}");
             BTSerial.println("PLAY={" + output + "}");
@@ -196,7 +196,11 @@ void play_on_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander_sens, CyM
             //For combinatorial, send call upon removal
             if(!regular){
 
-              String output = "Area='" + areaName + "'_CardID="+ String(playedCards[id-1]) + "Type=_CR";
+              String cid = String(playedCards[id-1]);
+              String add = cid.length() == 1 ? "00" : cid.length() == 2? "0" : "";
+              String cid_str = "CardID=" + add + cid;
+
+              String output = "Area='" + areaName + "'_"+ cid_str+ "_Type=CR";
               //Send on both bluetooth and USB
               Serial.println("PLAY={" + output + "}");
               BTSerial.println("PLAY={" + output + "}");

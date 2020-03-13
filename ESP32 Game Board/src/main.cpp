@@ -223,6 +223,7 @@ void setup() {
 
     //Try initializing each sensor
     delay(1000);
+    /*
     initialize_sensor(sensor1, 1, expander_sens, expander_led);
     initialize_sensor(sensor2, 2, expander_sens, expander_led);
     initialize_sensor(sensor3, 3, expander_sens, expander_led);
@@ -231,75 +232,14 @@ void setup() {
     initialize_sensor(sensor6, 6, expander_sens, expander_led);
     initialize_sensor(sensor7, 7, expander_sens, expander_led);
     initialize_sensor(sensor8, 8, expander_sens, expander_led);
-    initialize_sensor(sensor9, 9, expander_sens, expander_led);
+    initialize_sensor(sensor9, 9, expander_sens, expander_led);*/
     initialize_sensor(sensor10, 10, expander_sens, expander_led);
+    delay(500);
 
     Serial.print("Sensor search complete, found "); Serial.print(sensorCount); Serial.println(" sensors.");
 
-    //Blink all sensor LEDs
-    expander_led.digitalWrite(LED_1, LOW);
-    expander_led.digitalWrite(LED_2, LOW);
-    expander_led.digitalWrite(LED_3, LOW);
-    expander_led.digitalWrite(LED_4, LOW);
-    expander_led.digitalWrite(LED_5, LOW);
-    expander_led.digitalWrite(LED_6, LOW);
-    expander_led.digitalWrite(LED_7, LOW);
-    expander_led.digitalWrite(LED_8, LOW);
-    expander_led.digitalWrite(LED_9, LOW);
-    expander_led.digitalWrite(LED_10, LOW);
-
-    delay(400);
-
-    expander_led.digitalWrite(LED_1, HIGH);
-    expander_led.digitalWrite(LED_2, HIGH);
-    expander_led.digitalWrite(LED_3, HIGH);
-    expander_led.digitalWrite(LED_4, HIGH);
-    expander_led.digitalWrite(LED_5, HIGH);
-    expander_led.digitalWrite(LED_6, HIGH);
-    expander_led.digitalWrite(LED_7, HIGH);
-    expander_led.digitalWrite(LED_8, HIGH);
-    expander_led.digitalWrite(LED_9, HIGH);
-    expander_led.digitalWrite(LED_10, HIGH);
-
-    delay(400);
-
-    expander_led.digitalWrite(LED_1, LOW);
-    expander_led.digitalWrite(LED_2, LOW);
-    expander_led.digitalWrite(LED_3, LOW);
-    expander_led.digitalWrite(LED_4, LOW);
-    expander_led.digitalWrite(LED_5, LOW);
-    expander_led.digitalWrite(LED_6, LOW);
-    expander_led.digitalWrite(LED_7, LOW);
-    expander_led.digitalWrite(LED_8, LOW);
-    expander_led.digitalWrite(LED_9, LOW);
-    expander_led.digitalWrite(LED_10, LOW);
-
-    delay(400);
-
-    expander_led.digitalWrite(LED_1, HIGH);
-    expander_led.digitalWrite(LED_2, HIGH);
-    expander_led.digitalWrite(LED_3, HIGH);
-    expander_led.digitalWrite(LED_4, HIGH);
-    expander_led.digitalWrite(LED_5, HIGH);
-    expander_led.digitalWrite(LED_6, HIGH);
-    expander_led.digitalWrite(LED_7, HIGH);
-    expander_led.digitalWrite(LED_8, HIGH);
-    expander_led.digitalWrite(LED_9, HIGH);
-    expander_led.digitalWrite(LED_10, HIGH);
-
-    delay(400);
-
-    expander_led.digitalWrite(LED_1, LOW);
-    expander_led.digitalWrite(LED_2, LOW);
-    expander_led.digitalWrite(LED_3, LOW);
-    expander_led.digitalWrite(LED_4, LOW);
-    expander_led.digitalWrite(LED_5, LOW);
-    expander_led.digitalWrite(LED_6, LOW);
-    expander_led.digitalWrite(LED_7, LOW);
-    expander_led.digitalWrite(LED_8, LOW);
-    expander_led.digitalWrite(LED_9, LOW);
-    expander_led.digitalWrite(LED_10, LOW);
-
+    //Flash all sensor LEDs
+    flash_all_leds(3);
 
     //Turn on status LED
     digitalWrite(LED_Sta, HIGH);
