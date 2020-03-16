@@ -137,6 +137,7 @@ def handle_playing_message(self, msg):
 
     # Format preview call
     self.currentData = self.api_name_handler(self.callFormat)
+    self.ids['current'].text = self.currentData
 
     # Send actual API call
     self.send_api_call()
@@ -161,7 +162,7 @@ def handle_oracle_message(self, msg):
 
     # Format preview call
     self.currentData = self.api_name_handler(self.callFormat)
-    self.ids['current'].text = self.currentData;
+    self.ids['current'].text = self.currentData
 
     # Send actual API call
     self.send_api_call()
