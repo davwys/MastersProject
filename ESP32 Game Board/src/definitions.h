@@ -62,7 +62,8 @@ extern BluetoothSerial BTSerial;
 extern Mode currentMode;
 extern String receivedData;
 
-extern CyMCP23016 expander_led;
+extern CyMCP23016 expander_1;
+extern CyMCP23016 expander_2;
 
 //LED functions
 void flash_all_leds(int loops);
@@ -74,7 +75,7 @@ NFC Sensor setup
 =================
 */
 
-void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander, CyMCP23016 expander_led);
+void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander);
 String readTag(Adafruit_PN532 sensor, int id, bool verbose, CyMCP23016 expander);
 
 extern int sensorCount;

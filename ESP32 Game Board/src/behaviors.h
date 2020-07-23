@@ -4,8 +4,8 @@
 #ifndef BEHAVIORS_H
 #define BEHAVIORS_H
 
-void training_main(CyMCP23016 expander_sens, CyMCP23016 expander_led);
-void playing_main(CyMCP23016 expander_sens, CyMCP23016 expander_led);
+void training_main(CyMCP23016 expander_1, CyMCP23016 expander_2);
+void playing_main(CyMCP23016 expander_1, CyMCP23016 expander_2);
 void upload_main();
 
 //Helper commands

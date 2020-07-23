@@ -17,7 +17,7 @@
 
 //Initializes a given NFC sensor.
 //Timeout (per sensor) is set in the library's Adafruit_PN532.h file
-void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander, CyMCP23016 expander_led){
+void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander){
 
     sensor.begin(expander);
 
@@ -27,47 +27,67 @@ void initialize_sensor(Adafruit_PN532 sensor, int id, CyMCP23016 expander, CyMCP
     //If no sensor found, return
     if (!versiondata) {
       Serial.print("Didn't find Sensor #"); Serial.println(id);
+      BTSerial.print("Didn't find Sensor #"); BTSerial.println(id);
     }
     else{
       //Sensor Found
       sensorCount++;
+
+      Serial.println(versiondata, HEX);
+
       Serial.print("Found chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX);
+      BTSerial.print("Found chip PN5"); BTSerial.println((versiondata>>24) & 0xFF, HEX);
+
       Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
+      BTSerial.print("Firmware ver. "); BTSerial.print((versiondata>>16) & 0xFF, DEC);
+
       Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
+      BTSerial.print('.'); BTSerial.println((versiondata>>8) & 0xFF, DEC);
+
       //Configure sensor to read RFID tags
-      sensor.SAMConfig(expander);
+      bool configStatus = sensor.SAMConfig(expander);
+      Serial.print("Config status: "); Serial.println(configStatus);
+
+      //Retry setup
+      /*
+      if(!configStatus){
+        Serial.print("Retrying setup for sensor "); Serial.println(id);
+        initialize_sensor(sensor, id, expander);
+        return;
+      }
+      */
 
       //Turn on corresponding sensor LED
       switch(id){
         case 1:
-          expander_led.digitalWrite(LED_1, HIGH);
+          expander.digitalWrite(LED_1, HIGH);
           break;
         case 2:
-          expander_led.digitalWrite(LED_2, HIGH);
+          expander.digitalWrite(LED_2, HIGH);
           break;
         case 3:
-          expander_led.digitalWrite(LED_3, HIGH);
+          expander.digitalWrite(LED_3, HIGH);
           break;
         case 4:
-          expander_led.digitalWrite(LED_4, HIGH);
+          expander.digitalWrite(LED_4, HIGH);
           break;
         case 5:
-          expander_led.digitalWrite(LED_5, HIGH);
+          expander.digitalWrite(LED_5, HIGH);
           break;
         case 6:
-          expander_led.digitalWrite(LED_6, HIGH);
+          expander.digitalWrite(LED_6, HIGH);
           break;
         case 7:
-          expander_led.digitalWrite(LED_7, HIGH);
+          expander.digitalWrite(LED_7, HIGH);
           break;
         case 8:
-          expander_led.digitalWrite(LED_8, HIGH);
+          expander.digitalWrite(LED_8, HIGH);
           break;
         case 9:
-          expander_led.digitalWrite(LED_9, HIGH);
+          expander.digitalWrite(LED_9, HIGH);
           break;
         case 10:
-          expander_led.digitalWrite(LED_10, HIGH);
+          expander.digitalWrite(LED_10, HIGH);
           break;
       }
     }
@@ -88,6 +108,7 @@ String readTag(Adafruit_PN532 sensor, int id, bool verbose, CyMCP23016 expander)
     //Print card UID if any is found
     if(verbose){
         Serial.print("Found card with UID "); sensor.PrintHex(uid, uidLength);
+        BTSerial.print("Found card with UID "); sensor.PrintHex(uid, uidLength);
     }
     uint8_t data[32];
 
@@ -100,16 +121,21 @@ String readTag(Adafruit_PN532 sensor, int id, bool verbose, CyMCP23016 expander)
         if(verbose){
           // Display the current page number
           Serial.print("PAGE ");
+          BTSerial.print("PAGE ");
           if (i < 10)
           {
             Serial.print("0");
             Serial.print(i);
+            BTSerial.print("0");
+            BTSerial.print(i);
           }
           else
           {
             Serial.print(i);
+            BTSerial.print(i);
           }
           Serial.print(": ");
+          BTSerial.print(": ");
 
           // Display the results, depending on 'success'
           if (success)
@@ -120,6 +146,7 @@ String readTag(Adafruit_PN532 sensor, int id, bool verbose, CyMCP23016 expander)
           else
           {
             Serial.println("Unable to read the requested page!");
+            BTSerial.println("Unable to read the requested page!");
           }
         }
         //Read 4 bytes from the data we just read

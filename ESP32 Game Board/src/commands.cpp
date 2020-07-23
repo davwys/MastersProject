@@ -116,43 +116,43 @@ void flash_led(int pin){
 void flash_all_leds(int loops){
 
   for(int i = 0; i < loops; i++){
-    expander_led.digitalWrite(LED_1, LOW);
-    expander_led.digitalWrite(LED_2, LOW);
-    expander_led.digitalWrite(LED_3, LOW);
-    expander_led.digitalWrite(LED_4, LOW);
-    expander_led.digitalWrite(LED_5, LOW);
-    expander_led.digitalWrite(LED_6, LOW);
-    expander_led.digitalWrite(LED_7, LOW);
-    expander_led.digitalWrite(LED_8, LOW);
-    expander_led.digitalWrite(LED_9, LOW);
-    expander_led.digitalWrite(LED_10, LOW);
+    expander_1.digitalWrite(LED_1, LOW);
+    expander_1.digitalWrite(LED_2, LOW);
+    expander_1.digitalWrite(LED_3, LOW);
+    expander_1.digitalWrite(LED_4, LOW);
+    expander_1.digitalWrite(LED_5, LOW);
+    expander_2.digitalWrite(LED_6, LOW);
+    expander_2.digitalWrite(LED_7, LOW);
+    expander_2.digitalWrite(LED_8, LOW);
+    expander_2.digitalWrite(LED_9, LOW);
+    expander_2.digitalWrite(LED_10, LOW);
 
     delay(400);
 
-    expander_led.digitalWrite(LED_1, HIGH);
-    expander_led.digitalWrite(LED_2, HIGH);
-    expander_led.digitalWrite(LED_3, HIGH);
-    expander_led.digitalWrite(LED_4, HIGH);
-    expander_led.digitalWrite(LED_5, HIGH);
-    expander_led.digitalWrite(LED_6, HIGH);
-    expander_led.digitalWrite(LED_7, HIGH);
-    expander_led.digitalWrite(LED_8, HIGH);
-    expander_led.digitalWrite(LED_9, HIGH);
-    expander_led.digitalWrite(LED_10, HIGH);
+    expander_1.digitalWrite(LED_1, HIGH);
+    expander_1.digitalWrite(LED_2, HIGH);
+    expander_1.digitalWrite(LED_3, HIGH);
+    expander_1.digitalWrite(LED_4, HIGH);
+    expander_1.digitalWrite(LED_5, HIGH);
+    expander_2.digitalWrite(LED_6, HIGH);
+    expander_2.digitalWrite(LED_7, HIGH);
+    expander_2.digitalWrite(LED_8, HIGH);
+    expander_2.digitalWrite(LED_9, HIGH);
+    expander_2.digitalWrite(LED_10, HIGH);
 
     delay(400);
   }
 
-  expander_led.digitalWrite(LED_1, LOW);
-  expander_led.digitalWrite(LED_2, LOW);
-  expander_led.digitalWrite(LED_3, LOW);
-  expander_led.digitalWrite(LED_4, LOW);
-  expander_led.digitalWrite(LED_5, LOW);
-  expander_led.digitalWrite(LED_6, LOW);
-  expander_led.digitalWrite(LED_7, LOW);
-  expander_led.digitalWrite(LED_8, LOW);
-  expander_led.digitalWrite(LED_9, LOW);
-  expander_led.digitalWrite(LED_10, LOW);
+  expander_1.digitalWrite(LED_1, LOW);
+  expander_1.digitalWrite(LED_2, LOW);
+  expander_1.digitalWrite(LED_3, LOW);
+  expander_1.digitalWrite(LED_4, LOW);
+  expander_1.digitalWrite(LED_5, LOW);
+  expander_2.digitalWrite(LED_6, LOW);
+  expander_2.digitalWrite(LED_7, LOW);
+  expander_2.digitalWrite(LED_8, LOW);
+  expander_2.digitalWrite(LED_9, LOW);
+  expander_2.digitalWrite(LED_10, LOW);
 }
 
 //Flashes the selected LED for 300ms on an expander
